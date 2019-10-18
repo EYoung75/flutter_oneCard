@@ -11,9 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'OneCard',
       theme: ThemeData(
           primarySwatch: Colors.indigo, accentColor: Colors.deepOrange),
-      routes: {
-        "/" : (ctx) => Home()
-      },
+      routes: {"/": (ctx) => Home()},
     );
   }
 }
@@ -25,8 +23,22 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text("OneCard"),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Theme.of(context).primaryColor.withOpacity(.6),
+              Theme.of(context).primaryColor
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Column(
+          children: <Widget>[],
+        ),
       ),
     );
   }
