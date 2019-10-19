@@ -48,7 +48,7 @@ class _TabScreenState extends State<TabScreen> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: const EdgeInsets.all(35.0),
             child: Column(
               children: <Widget>[
                 ListTile(
@@ -61,7 +61,7 @@ class _TabScreenState extends State<TabScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 30, top: 15),
                   child: ListTile(
                     leading: Icon(Icons.settings),
                     title: Text(
@@ -71,7 +71,7 @@ class _TabScreenState extends State<TabScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 30),
                   child: ListTile(
                     leading: Icon(Icons.question_answer),
                     title: Text(
@@ -81,7 +81,7 @@ class _TabScreenState extends State<TabScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 30),
                   child: ListTile(
                     leading: Icon(Icons.live_help),
                     title: Text(

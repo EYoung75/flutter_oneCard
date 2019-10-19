@@ -1,7 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MainMap extends StatefulWidget {
   @override
@@ -10,6 +11,20 @@ class MainMap extends StatefulWidget {
 
 class MainMapState extends State<MainMap> {
   Completer<GoogleMapController> _controller = Completer();
+  Position _currentPosition;
+  final Geolocator geolocator = Geolocator();
+
+  @override
+  void initState() {
+    super.initState();
+    geolocator.getCurrentPosition().then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+    }).catchError(
+      (e) => print(e),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +32,7 @@ class MainMapState extends State<MainMap> {
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
-            BoxShadow(
-              color: Colors.black38,
-              blurRadius: 40,
-              spreadRadius: 10
-            )
+            BoxShadow(color: Colors.black38, blurRadius: 40, spreadRadius: 10)
           ],
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(
@@ -67,15 +78,21 @@ class MainMapState extends State<MainMap> {
                 child: TextField(
                   autocorrect: true,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(5),
-                      labelText: "Search:",
-                      hasFloatingPlaceholder: false,
-                      icon: Icon(
-                        Icons.location_on,
-                        color: Colors.red,
-                      )),
+                    contentPadding: EdgeInsets.all(5),
+                    labelText: "Search:",
+                    hasFloatingPlaceholder: false,
+                    icon: Icon(
+                      Icons.location_on,
+                      color: Colors.red,
+                    ),
+                  ),
                 ),
               ),
+              Container(
+                child: Text(
+                    "${_currentPosition.latitude} + ${_currentPosition.longitude}"),
+                color: Colors.red,
+              )
             ],
           ),
         ),
