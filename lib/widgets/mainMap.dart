@@ -10,17 +10,17 @@ class MainMap extends StatefulWidget {
 }
 
 class MainMapState extends State<MainMap> {
-  Completer<GoogleMapController> _controller = Completer();
+  Completer<GoogleMapController> _mapController = Completer();
   Position _currentPosition;
   final Geolocator geolocator = Geolocator();
 
   @override
   void initState() {
     super.initState();
-    userLocation();
+    setUserLocation();
   }
 
-  Future<Position> userLocation() async {
+  Future<Position> setUserLocation() async {
     await geolocator.getCurrentPosition().then((Position position) {
       setState(() {
         print(position);
@@ -64,14 +64,16 @@ class MainMapState extends State<MainMap> {
                 child: Stack(
                   children: <Widget>[
                     GoogleMap(
+                      myLocationEnabled: true,
+                      myLocationButtonEnabled: true,
                       mapType: MapType.normal,
                       initialCameraPosition: CameraPosition(
                         target: LatLng(_currentPosition.latitude,
                             _currentPosition.longitude),
-                        zoom: 14.4746,
+                        zoom: 14,
                       ),
                       onMapCreated: (GoogleMapController controller) {
-                        _controller.complete(controller);
+                        _mapController.complete(controller);
                       },
                     ),
                     Container(
