@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "../widgets/mainCard.dart";
 
+
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,8 @@ class Home extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             Theme.of(context).primaryColor.withOpacity(.6),
-            Theme.of(context).primaryColor
+            Theme.of(context).primaryColor,
+            
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
