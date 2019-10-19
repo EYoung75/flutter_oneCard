@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         accentColor: Colors.deepOrange,
+        fontFamily: "Roboto",
       ),
       routes: {
         "/": (ctx) => TabScreen(),
