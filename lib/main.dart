@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import "./widgets/mainCard.dart";
+import "./screens/tabScreen.dart";
+
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,38 +13,11 @@ class MyApp extends StatelessWidget {
       title: 'OneCard',
       theme: ThemeData(
           primarySwatch: Colors.indigo, accentColor: Colors.deepOrange),
-      routes: {"/": (ctx) => Home()},
+      routes: {
+        "/": (ctx) => TabScreen(),
+      },
     );
   }
 }
 
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("OneCard"),
-      ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).primaryColor.withOpacity(.6),
-              Theme.of(context).primaryColor
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            MainCard()
-          ],
-        ),
-      ),
-    );
-  }
-}
+
