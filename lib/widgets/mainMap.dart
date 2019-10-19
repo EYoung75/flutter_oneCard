@@ -36,15 +36,38 @@ class MainMapState extends State<MainMap> {
               25,
             ),
           ),
-          child: GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(37.42796133580664, -122.085749655962),
-              zoom: 14.4746,
-            ),
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
+          child: Stack(
+            children: <Widget>[
+              GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(37.42796133580664, -122.085749655962),
+                  zoom: 14.4746,
+                ),
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.black, width: .5),
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                height: 35,
+                width: double.infinity,
+                child: TextField(
+                  autocorrect: true,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(5),
+                    labelText: "Search:",
+                    hasFloatingPlaceholder: false,
+                    icon: Icon(Icons.location_on, color: Colors.red,)
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

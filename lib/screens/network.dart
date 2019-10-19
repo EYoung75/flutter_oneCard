@@ -24,7 +24,21 @@ class Network extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           MainMap(),
-          RaisedButton(child: Text("hmu"), onPressed: () {},),
+          RaisedButton(
+            child: Text("hmu"),
+            onPressed: () {},
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 40),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Nearby:",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+              ),
+            ),
+          ),
           NetWorkList()
         ],
       ),

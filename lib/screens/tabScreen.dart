@@ -37,7 +37,9 @@ class _TabScreenState extends State<TabScreen> {
         title: Text(_pages[_selectedPageIndex]["title"]),
       ),
       body: _pages[_selectedPageIndex]["page"],
+      resizeToAvoidBottomInset: true,
       bottomNavigationBar: BottomNavigationBar(
+        
         elevation: 20,
         backgroundColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.white54,
