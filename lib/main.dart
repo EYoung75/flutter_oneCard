@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import "./screens/tabScreen.dart";
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -12,12 +11,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'OneCard',
       theme: ThemeData(
-          primarySwatch: Colors.indigo, accentColor: Colors.deepOrange),
+        primarySwatch: Colors.indigo,
+        accentColor: Colors.deepOrange,
+      ),
       routes: {
         "/": (ctx) => TabScreen(),
       },
     );
   }
 }
-
-

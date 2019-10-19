@@ -46,7 +46,7 @@ class _TabScreenState extends State<TabScreen> {
         currentIndex: _selectedPageIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
+            icon: Icon(Icons.near_me),
             title: Text("Network"),
           ),
           BottomNavigationBarItem(

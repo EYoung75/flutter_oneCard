@@ -1,15 +1,3 @@
-// import "package:flutter/material.dart";
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-// class Map extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-
-//     );
-//   }
-// }
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -27,20 +15,39 @@ class MainMapState extends State<MainMap> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 250,
-        width: double.infinity,
-        child: GoogleMap(
-          mapType: MapType.hybrid,
-          initialCameraPosition: CameraPosition(
-            target: LatLng(37.42796133580664, -122.085749655962),
-            zoom: 14.4746,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(
+              30,
+            ),
+            bottomRight: Radius.circular(
+              30,
+            ),
           ),
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
+        ),
+        height: 400,
+        width: double.infinity,
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(
+              25,
+            ),
+            bottomRight: Radius.circular(
+              25,
+            ),
+          ),
+          child: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(37.42796133580664, -122.085749655962),
+              zoom: 14.4746,
+            ),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
         ),
       ),
     );
   }
-
 }

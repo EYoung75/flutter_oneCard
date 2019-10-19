@@ -16,7 +16,7 @@ class MainCard extends StatelessWidget {
       direction: FlipDirection.HORIZONTAL,
       front: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
           color: Colors.white70,
         ),
         height: 375,
@@ -28,9 +28,11 @@ class MainCard extends StatelessWidget {
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
               child: Image.network(
-                "https://previews.123rf.com/images/pandavector/pandavector1709/pandavector170907388/86380886-person-single-icon-in-outline-style-person-vector-symbol-stock-illustration-web-.jpg",
+                "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
                 fit: BoxFit.cover,
               ),
             ),
@@ -41,7 +43,7 @@ class MainCard extends StatelessWidget {
       ),
       back: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
           color: Colors.white70,
         ),
         height: 375,
@@ -51,13 +53,20 @@ class MainCard extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(25),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: QrImage(
-                  data: "1234567890",
-                  version: QrVersions.auto,
-                  constrainErrorBounds: false,
-                  backgroundColor: Colors.white,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Theme.of(context).primaryColor, width: 2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: QrImage(
+                    data: "1234567890",
+                    version: QrVersions.auto,
+                    constrainErrorBounds: false,
+                    backgroundColor: Colors.white,
+                  ),
                 ),
               ),
             ),
