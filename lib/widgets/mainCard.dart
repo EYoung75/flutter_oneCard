@@ -49,13 +49,16 @@ class MainCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: QrImage(
-                data: "1234567890",
-                version: QrVersions.auto,
-                size: 200.0,
-                backgroundColor: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(25),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: QrImage(
+                  data: "1234567890",
+                  version: QrVersions.auto,
+                  constrainErrorBounds: false,
+                  backgroundColor: Colors.white,
+                ),
               ),
             ),
           ],

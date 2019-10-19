@@ -18,9 +18,9 @@ class _TabScreenState extends State<TabScreen> {
   void initState() {
     super.initState();
     _pages = [
-      {"page": Wallet(), "title": "Wallet"},
+      {"page": Network(), "title": "Network"},
       {"page": Home(), "title": "OneCard"},
-      {"page": Network(), "title": "Network"}
+      {"page": Wallet(), "title": "Wallet"},
     ];
   }
 
@@ -33,10 +33,12 @@ class _TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 15,
         title: Text(_pages[_selectedPageIndex]["title"]),
       ),
       body: _pages[_selectedPageIndex]["page"],
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 20,
         backgroundColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.white54,
         selectedItemColor: Colors.white,
@@ -44,16 +46,16 @@ class _TabScreenState extends State<TabScreen> {
         currentIndex: _selectedPageIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.payment),
-            title: Text("Wallet"),
+            icon: Icon(Icons.person_outline),
+            title: Text("Network"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             title: Text("Home"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            title: Text("Network"),
+            icon: Icon(Icons.payment),
+            title: Text("Wallet"),
           ),
         ],
       ),
