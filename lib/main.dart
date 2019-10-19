@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import "./widgets/mainCard.dart";
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -37,7 +39,10 @@ class Home extends StatelessWidget {
           ),
         ),
         child: Column(
-          children: <Widget>[],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            MainCard()
+          ],
         ),
       ),
     );
