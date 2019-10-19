@@ -14,12 +14,13 @@ class NetWorkList extends StatelessWidget {
             topRight: Radius.circular(10),
           ),
         ),
-        height: 200,
+        height: 175,
         child: ListView(
           padding: EdgeInsets.all(15),
           children: <Widget>[
             ListTile(
               leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
                 child: Icon(Icons.person_outline),
               ),
               title: Text("Whats upppp"),
@@ -27,44 +28,81 @@ class NetWorkList extends StatelessWidget {
             Divider(
               color: Colors.black,
             ),
-            ListTile(
+           ListTile(
               leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
                 child: Icon(Icons.person_outline),
               ),
               title: Text("Whats upppp"),
             ),
             Divider(
               color: Colors.black,
-            ),
-            ListTile(
+            ),ListTile(
               leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
                 child: Icon(Icons.person_outline),
               ),
               title: Text("Whats upppp"),
             ),
             Divider(
               color: Colors.black,
-            ),
-            ListTile(
+            ),ListTile(
               leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
                 child: Icon(Icons.person_outline),
               ),
               title: Text("Whats upppp"),
             ),
             Divider(
               color: Colors.black,
-            ),
-            ListTile(
+            ),ListTile(
               leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
                 child: Icon(Icons.person_outline),
               ),
               title: Text("Whats upppp"),
             ),
             Divider(
               color: Colors.black,
-            ),
-            ListTile(
+            ),ListTile(
               leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
+                child: Icon(Icons.person_outline),
+              ),
+              title: Text("Whats upppp"),
+            ),
+            Divider(
+              color: Colors.black,
+            ),ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
+                child: Icon(Icons.person_outline),
+              ),
+              title: Text("Whats upppp"),
+            ),
+            Divider(
+              color: Colors.black,
+            ),ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
+                child: Icon(Icons.person_outline),
+              ),
+              title: Text("Whats upppp"),
+            ),
+            Divider(
+              color: Colors.black,
+            ),ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
+                child: Icon(Icons.person_outline),
+              ),
+              title: Text("Whats upppp"),
+            ),
+            Divider(
+              color: Colors.black,
+            ),ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor.withOpacity(.7),
                 child: Icon(Icons.person_outline),
               ),
               title: Text("Whats upppp"),

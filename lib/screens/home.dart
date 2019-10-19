@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).primaryColor.withOpacity(.6),
+            Theme.of(context).primaryColor.withOpacity(.4),
             Theme.of(context).primaryColor,
           ],
           begin: Alignment.topCenter,
@@ -22,12 +22,16 @@ class Home extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           MainCard(),
-          SizedBox(height: 25,),
+          SizedBox(
+            height: 60,
+          ),
           FloatingActionButton.extended(
             onPressed: () {},
             elevation: 15,
             icon: Icon(Icons.camera_alt),
-            label: Text("Scan"),
+            label: Text(
+              "Scan",
+            ),
           )
         ],
       ),

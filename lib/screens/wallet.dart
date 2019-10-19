@@ -9,7 +9,8 @@ class Wallet extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).primaryColor.withOpacity(.6),
+            Theme.of(context).primaryColor.withOpacity(.3),
+            Theme.of(context).primaryColor.withOpacity(.7),
             Theme.of(context).primaryColor,
           ],
           begin: Alignment.topCenter,

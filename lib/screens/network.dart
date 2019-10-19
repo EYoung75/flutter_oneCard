@@ -24,10 +24,20 @@ class Network extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           MainMap(),
-          RaisedButton(
-            child: Text("hmu"),
-            onPressed: () {},
-          ),
+          // Container(
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(10),
+          //   ),
+          //   child: RaisedButton(
+          //     color: Theme.of(context).accentColor,
+          //     elevation: 20,
+          //     child: Text(
+          //       "Find",
+          //       style: TextStyle(color: Colors.black, fontSize: 20),
+          //     ),
+          //     onPressed: () {},
+          //   ),
+          // ),
           Container(
             margin: EdgeInsets.only(left: 40),
             alignment: Alignment.centerLeft,

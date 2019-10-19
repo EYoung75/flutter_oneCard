@@ -16,6 +16,14 @@ class MainCard extends StatelessWidget {
       direction: FlipDirection.HORIZONTAL,
       front: Container(
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 30,
+              spreadRadius: 10,
+              offset: Offset(5, 5)
+            )
+          ],
           borderRadius: BorderRadius.circular(10),
           color: Colors.white70,
         ),
@@ -43,6 +51,14 @@ class MainCard extends StatelessWidget {
       ),
       back: Container(
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 30,
+              spreadRadius: 10,
+              offset: Offset(5, 5)
+            )
+          ],
           borderRadius: BorderRadius.circular(10),
           color: Colors.white70,
         ),

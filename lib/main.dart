@@ -8,11 +8,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       debugShowCheckedModeBanner: false,
       title: 'OneCard',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        accentColor: Colors.deepOrange,
+        primaryColor: Color.fromRGBO(47, 95, 114, 1),
+        accentColor: Color.fromRGBO(255, 233, 214, 1),
         fontFamily: "Roboto",
       ),
       routes: {

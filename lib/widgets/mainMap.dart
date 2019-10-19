@@ -16,6 +16,13 @@ class MainMapState extends State<MainMap> {
     return Center(
       child: Container(
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 40,
+              spreadRadius: 10
+            )
+          ],
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(
               30,
@@ -25,7 +32,7 @@ class MainMapState extends State<MainMap> {
             ),
           ),
         ),
-        height: 400,
+        height: 300,
         width: double.infinity,
         child: ClipRRect(
           borderRadius: BorderRadius.only(
@@ -60,11 +67,13 @@ class MainMapState extends State<MainMap> {
                 child: TextField(
                   autocorrect: true,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(5),
-                    labelText: "Search:",
-                    hasFloatingPlaceholder: false,
-                    icon: Icon(Icons.location_on, color: Colors.red,)
-                  ),
+                      contentPadding: EdgeInsets.all(5),
+                      labelText: "Search:",
+                      hasFloatingPlaceholder: false,
+                      icon: Icon(
+                        Icons.location_on,
+                        color: Colors.red,
+                      )),
                 ),
               ),
             ],
