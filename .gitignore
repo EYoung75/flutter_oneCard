@@ -9,6 +9,7 @@
 .history
 .svn/
 
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -64,6 +65,7 @@
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**ios/Runner/AppDelegate.swift
 
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3
