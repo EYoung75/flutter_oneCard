@@ -12,7 +12,9 @@ class MainMap extends StatefulWidget {
 class MainMapState extends State<MainMap> {
   Completer<GoogleMapController> _mapController = Completer();
   Position _currentPosition;
+  TextEditingController _searchController = TextEditingController();
   final Geolocator geolocator = Geolocator();
+  String _searchValue = "";
 
   @override
   void initState() {
@@ -20,7 +22,7 @@ class MainMapState extends State<MainMap> {
     setUserLocation();
   }
 
-  Future<Position> setUserLocation() async {
+  void setUserLocation() async {
     await geolocator.getCurrentPosition().then((Position position) {
       setState(() {
         print(position);
@@ -30,6 +32,7 @@ class MainMapState extends State<MainMap> {
       (e) => print(e),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +67,7 @@ class MainMapState extends State<MainMap> {
                 child: Stack(
                   children: <Widget>[
                     GoogleMap(
+                      rotateGesturesEnabled: true,
                       myLocationEnabled: true,
                       myLocationButtonEnabled: true,
                       mapType: MapType.normal,
@@ -84,14 +88,13 @@ class MainMapState extends State<MainMap> {
                       ),
                       margin:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                      height: 35,
+                      height: 37,
                       width: double.infinity,
-                      child: TextField(
+                      child: TextField(  
+                        controller: _searchController,                   
                         autocorrect: true,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(5),
                           labelText: "Search:",
-                          hasFloatingPlaceholder: false,
                           icon: Icon(
                             Icons.location_on,
                             color: Colors.red,
