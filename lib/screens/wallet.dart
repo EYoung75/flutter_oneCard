@@ -1,6 +1,16 @@
 import "package:flutter/material.dart";
 
 class Wallet extends StatelessWidget {
+  final List<Map<String, String>> cardList = [
+    {"title": "Person 1", "imageUrl": ""},
+    {"title": "Person 2", "imageUrl": ""},
+    {"title": "Person 3", "imageUrl": ""},
+    {"title": "Person 4", "imageUrl": ""},
+    {"title": "Person 5", "imageUrl": ""},
+    {"title": "Person 6", "imageUrl": ""},
+    {"title": "Person 7", "imageUrl": ""},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,10 +27,13 @@ class Wallet extends StatelessWidget {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[],
-      ),
+      child: ListView.builder(
+          itemCount: cardList.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(cardList[index]["title"]),
+            );
+          }),
     );
   }
 }

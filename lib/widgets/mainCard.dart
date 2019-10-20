@@ -78,7 +78,7 @@ class MainCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: QrImage(
-                    data: "1234567890",
+                    data: profile.toString(),
                     version: QrVersions.auto,
                     constrainErrorBounds: false,
                     backgroundColor: Colors.white,
