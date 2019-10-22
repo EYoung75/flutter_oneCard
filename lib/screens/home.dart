@@ -62,9 +62,7 @@ class _HomeState extends State<Home> {
           SizedBox(
             height: 60,
           ),
-          Container(
-            child: Text(result),
-          ),
+          
           FloatingActionButton.extended(
             onPressed: _scanQR,
             elevation: 15,

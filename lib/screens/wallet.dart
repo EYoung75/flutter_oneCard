@@ -33,7 +33,7 @@ class Wallet extends StatelessWidget {
             return ListTile(
               title: Text(cardList[index]["title"]),
             );
-          }),
+          }),   
     );
   }
 }
