@@ -22,6 +22,12 @@ class MainMapState extends State<MainMap> {
     setUserLocation();
   }
 
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   void setUserLocation() async {
     await geolocator.getCurrentPosition().then((Position position) {
       setState(() {
