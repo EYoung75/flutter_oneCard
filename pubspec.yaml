@@ -23,7 +23,11 @@ dependencies:
   qr_flutter: ^3.0.1
   google_maps_flutter: ^0.5.21+8
   geolocator: ^5.1.4+2
-  barcode_scan: 
+  barcode_scan:
+  provider: 3.0.0
+  intl: ^0.16.0
+  http: ^0.12.0+2
+  shared_preferences: ^0.5.4+3
 
 
 
