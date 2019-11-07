@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import "../providers/placeList.dart";
+import "package:provider/provider.dart";
 
 class MainMap extends StatefulWidget {
   @override
@@ -39,9 +41,10 @@ class MainMapState extends State<MainMap> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final placeList = Provider.of<PlaceList>(context);
+    
     return _currentPosition != null
         ? Center(
             child: Container(
@@ -80,33 +83,11 @@ class MainMapState extends State<MainMap> {
                       initialCameraPosition: CameraPosition(
                         target: LatLng(_currentPosition.latitude,
                             _currentPosition.longitude),
-                        zoom: 14,
+                        zoom: 18,
                       ),
                       onMapCreated: (GoogleMapController controller) {
                         _mapController.complete(controller);
                       },
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: Colors.black, width: .5),
-                      ),
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                      height: 37,
-                      width: double.infinity,
-                      child: TextField(  
-                        controller: _searchController,                   
-                        autocorrect: true,
-                        decoration: InputDecoration(
-                          labelText: "Search:",
-                          icon: Icon(
-                            Icons.location_on,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),

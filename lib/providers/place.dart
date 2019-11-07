@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import "package:http/http.dart" as http;
 
-class Place {
+class Place with ChangeNotifier{
   String address;
   String placeId;
   LatLng location;
   String name;
-  Map categories;
+  List categories;
   int distance;
 
   Place({
@@ -16,4 +18,5 @@ class Place {
     this.categories,
     this.distance,
   });
+
 }

@@ -14,7 +14,7 @@ class NetWorkList extends StatelessWidget {
             topRight: Radius.circular(10),
           ),
         ),
-        height: 175,
+        height: 275,
         child: ListView(
           padding: EdgeInsets.all(15),
           children: <Widget>[
