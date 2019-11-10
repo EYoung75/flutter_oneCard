@@ -16,7 +16,7 @@ class MainMapState extends State<MainMap> {
   Position _currentPosition;
   TextEditingController _searchController = TextEditingController();
   final Geolocator geolocator = Geolocator();
-  String _searchValue = "";
+  String _searchValue = "";   
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class MainMapState extends State<MainMap> {
 
   @override
   Widget build(BuildContext context) {
-    final placeList = Provider.of<PlaceList>(context);
+    // final placeList = Provider.of<PlaceList>(context);
     
     return _currentPosition != null
         ? Center(
