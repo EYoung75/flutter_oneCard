@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import "../widgets/mainMap.dart";
+import "../widgets/networkList.dart";
 
 class Network extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _NetworkState extends State<Network> {
           children: <Widget>[
             MainMap(),
             Spacer(),
-            // NetWorkList()
+            NetWorkList()
           ],
         ),
       ),

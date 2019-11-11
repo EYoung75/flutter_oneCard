@@ -7,10 +7,10 @@ import "dart:convert";
 import "../utils/util.dart" as util;
 
 class Places with ChangeNotifier {
-  List _places = [];
+  List<Place> _places = [];
 
-  List get places {
-    return [...places];
+  List<Place> get places {
+    return [..._places];
   }
 
   Future<void> fetchNearby(String searchTerm, Position position) async {
@@ -18,8 +18,20 @@ class Places with ChangeNotifier {
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${util.googleMap}&location=${position.latitude},${position.longitude}&rankby=distance&name=$searchTerm";
     final res = await http.get(url);
     final resData = await json.decode(res.body)["results"];
-    _places = resData;
+    // print(resData);
+    final List<Place> loadedPlaces = [];
+    await resData.forEach((place) => loadedPlaces.add(
+          Place(
+            name: place["name"],
+            placeId: place["id"].toString(),
+            address: place["vicinity"],
+            location: LatLng(place["geometry"]["location"]["lat"],
+                place["geometry"]["location"]["lng"]),
+          ),
+        ),);
+    _places = loadedPlaces;
     print(_places);
+    notifyListeners();
   }
 }
 
