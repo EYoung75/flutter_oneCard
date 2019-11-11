@@ -4,7 +4,7 @@ import "package:http/http.dart" as http;
 import "dart:convert";
 import "../utils/util.dart" as util;
 
-import './place.dart';
+import './placesProvider.dart';
 
 class PlaceList with ChangeNotifier {
   List<Map> nearbyList;
@@ -12,8 +12,8 @@ class PlaceList with ChangeNotifier {
   PlaceList(this.nearbyList);
 
   Future searchNearby(LatLng currentLocation, String searchTerm) async {
-    final url =
-        "https://maps.googleapis.com/maps/api/place/textsearch/json?query=coffee&key=${util.googleMap}&location=${currentLocation.latitude},${currentLocation.longitude}&rankby=distance";
+    final url = "";
+        // "https://maps.googleapis.com/maps/api/place/textsearch/json?query=coffee&key=${util.googleMap}&location=${currentLocation.latitude},${currentLocation.longitude}&rankby=distance";
     final res = await http.get(url);
     final resData = await json.decode(res.body);
     print(resData);

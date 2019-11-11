@@ -1,9 +1,14 @@
 import "package:flutter/material.dart";
 
 import "../widgets/mainMap.dart";
-import "../widgets/networkList.dart";
 
-class Network extends StatelessWidget {
+class Network extends StatefulWidget {
+  @override
+  _NetworkState createState() => _NetworkState();
+}
+
+class _NetworkState extends State<Network> {
+  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,49 +30,8 @@ class Network extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             MainMap(),
-            // Container(
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(10),
-            //   ),
-            //   child: RaisedButton(
-            //     color: Theme.of(context).accentColor,
-            //     elevation: 20,
-            //     child: Text(
-            //       "Find",
-            //       style: TextStyle(color: Colors.black, fontSize: 20),
-            //     ),
-            //     onPressed: () {},
-            //   ),
-            // ),
-            Container(
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(225, 225, 225, .9),
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Colors.black, width: .5),
-              ),
-              margin: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-              height: 37,
-              width: double.infinity,
-              child: TextField(
-                autocorrect: true,
-                decoration: InputDecoration(
-                  labelText: "Search:",
-                  icon: Icon(
-                    Icons.location_on,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              height: 30,
-              child: RaisedButton(
-                child: Text("Find"),
-                onPressed: () {},
-              ),
-            ),
             Spacer(),
-            NetWorkList()
+            // NetWorkList()
           ],
         ),
       ),
