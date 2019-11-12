@@ -8,22 +8,20 @@ class NetWorkList extends StatelessWidget {
   Widget build(BuildContext context) {
     final placeList = Provider.of<Places>(context).places;
     return placeList.length <= 0
-        ? Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
-              margin: EdgeInsets.all(25),
-              padding: EdgeInsets.all(10),
-              child: Text(
-                "Search for a place above to check in and see who's around",
-                textAlign: TextAlign.center,
-              ),
+        ? Container(
+            height: 350,
+            alignment: Alignment.center,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+            margin: EdgeInsets.all(50),
+            padding: EdgeInsets.all(10),
+            child: Text(
+              "Search for a place above to check in and see who's around",
+              textAlign: TextAlign.center,
             ),
           )
         : Container(
-            margin: EdgeInsets.symmetric(horizontal: 15),
             decoration: BoxDecoration(
               color: Color.fromRGBO(255, 255, 255, .8),
               boxShadow: [
@@ -32,14 +30,14 @@ class NetWorkList extends StatelessWidget {
               ],
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(
-                  30,
+                  20,
                 ),
                 topRight: Radius.circular(
-                  30,
+                  20,
                 ),
               ),
             ),
-            height: 250,
+            height: 450,
             child: ListView.builder(
               itemCount: placeList.length,
               itemBuilder: (ctx, i) => InkWell(

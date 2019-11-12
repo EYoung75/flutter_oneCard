@@ -8,7 +8,56 @@ import "../utils/util.dart" as util;
 import "package:geolocator/geolocator.dart";
 
 class Places with ChangeNotifier {
-  List<Place> _places = [];
+  List<Place> _places = [
+    Place(
+        name: "Place",
+        address: "124 main street",
+        location: LatLng(42, 42),
+        placeId: "vf",
+        icon: ""),
+    Place(
+        name: "Place",
+        address: "124 main street",
+        location: LatLng(42, 42),
+        placeId: "vf",
+        icon: ""),
+    Place(
+        name: "Place",
+        address: "124 main street",
+        location: LatLng(42, 42),
+        placeId: "vf",
+        icon: ""),
+    Place(
+        name: "Place",
+        address: "124 main street",
+        location: LatLng(42, 42),
+        placeId: "vf",
+        icon: ""),
+    Place(
+        name: "Place",
+        address: "124 main street",
+        location: LatLng(42, 42),
+        placeId: "vf",
+        icon: ""),
+    Place(
+        name: "Place",
+        address: "124 main street",
+        location: LatLng(42, 42),
+        placeId: "vf",
+        icon: ""),
+    Place(
+        name: "Place",
+        address: "124 main street",
+        location: LatLng(42, 42),
+        placeId: "vf",
+        icon: ""),
+    Place(
+        name: "Place",
+        address: "124 main street",
+        location: LatLng(42, 42),
+        placeId: "vf",
+        icon: "")
+  ];
 
   List<Place> get places {
     return [..._places];

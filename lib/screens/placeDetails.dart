@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:one_card_revisited/widgets/mainMap.dart';
 import "../providers/placesProvider.dart";
 
 class PlaceDetails extends StatelessWidget {
@@ -27,17 +28,8 @@ class PlaceDetails extends StatelessWidget {
           ),
         ),
         child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                height: 300,
-                color: Colors.white,
-              ),
-              SizedBox(height: 25),
-              Text(selectedPlace.name)
-            ],
-          ),
+          height: 150,
+          child: MainMap(selectedPlace),
         ),
       ),
     );
