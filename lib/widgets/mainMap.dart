@@ -12,16 +12,21 @@ class MainMap extends StatefulWidget {
 }
 
 class MainMapState extends State<MainMap> {
-  Completer<GoogleMapController> _mapController = Completer();
-  Position _currentPosition;
-  TextEditingController _searchController = TextEditingController();
-  final Geolocator geolocator = Geolocator();
   String _searchValue = "";
+  Completer<GoogleMapController> _mapController = Completer();
+  TextEditingController _searchController = TextEditingController();
+  final geolocator = Geolocator();
+  Position currentPosition;
 
-  @override
-  void initState() {
-    super.initState();
-    setUserLocation();
+  Future<void> setUserLocation() async {
+    await geolocator.getCurrentPosition().then((Position position) {
+      setState(() {
+        print(position);
+        currentPosition = position;
+      });
+    }).catchError(
+      (e) => print(e),
+    );
   }
 
   @override
@@ -30,22 +35,17 @@ class MainMapState extends State<MainMap> {
     super.dispose();
   }
 
-  void setUserLocation() async {
-    await geolocator.getCurrentPosition().then((Position position) {
-      setState(() {
-        print(position);
-        _currentPosition = position;
-      });
-    }).catchError(
-      (e) => print(e),
-    );
+  @override
+  void initState() {
+    super.initState();
+    setUserLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-    // final placeList = Provider.of<PlaceList>(context);
+    final place = Provider.of<Places>(context);
 
-    return _currentPosition != null
+    return currentPosition != null
         ? Center(
             child: Column(
               children: <Widget>[
@@ -80,14 +80,23 @@ class MainMapState extends State<MainMap> {
                     child: Stack(
                       children: <Widget>[
                         GoogleMap(
+                          compassEnabled: true,
+                          markers: {
+                            Marker(
+                              markerId: MarkerId(""),
+                              position: LatLng(currentPosition.latitude,
+                                  currentPosition.longitude),
+                              infoWindow: InfoWindow(title: "Your position"),
+                            ),
+                          },
                           rotateGesturesEnabled: true,
                           myLocationEnabled: true,
                           myLocationButtonEnabled: true,
                           mapType: MapType.normal,
                           initialCameraPosition: CameraPosition(
-                            target: LatLng(_currentPosition.latitude,
-                                _currentPosition.longitude),
-                            zoom: 18,
+                            target: LatLng(currentPosition.latitude,
+                                currentPosition.longitude),
+                            zoom: 16,
                           ),
                           onMapCreated: (GoogleMapController controller) {
                             _mapController.complete(controller);
@@ -110,7 +119,7 @@ class MainMapState extends State<MainMap> {
                     controller: _searchController,
                     autocorrect: true,
                     decoration: InputDecoration(
-                     hintText: "Search:",
+                      hintText: "Search:",
                       icon: Icon(
                         Icons.location_on,
                         color: Colors.red,
@@ -127,11 +136,11 @@ class MainMapState extends State<MainMap> {
                     elevation: 20,
                     child: Text(
                       "Find",
-                      style: TextStyle(color: Colors.black, fontSize: 20),
+                      style: TextStyle(color: Colors.black, fontSize: 16),
                     ),
                     onPressed: () {
-                      Provider.of<Places>(context, listen: false).fetchNearby(
-                          _searchController.text, _currentPosition);
+                      Provider.of<Places>(context, listen: false)
+                          .fetchNearby(_searchController.text, currentPosition);
                     },
                   ),
                 ),

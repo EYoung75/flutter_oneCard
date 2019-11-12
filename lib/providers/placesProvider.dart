@@ -5,6 +5,7 @@ import "package:http/http.dart" as http;
 import "package:google_maps_flutter/google_maps_flutter.dart";
 import "dart:convert";
 import "../utils/util.dart" as util;
+import "package:geolocator/geolocator.dart";
 
 class Places with ChangeNotifier {
   List<Place> _places = [
