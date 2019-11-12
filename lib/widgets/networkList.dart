@@ -9,12 +9,44 @@ class NetWorkList extends StatelessWidget {
     return placeList.length <= 0
         ? Container()
         : Container(
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(255, 255, 255, .8),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black38, blurRadius: 40, spreadRadius: 10)
+              ],
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(
+                  30,
+                ),
+                topRight: Radius.circular(
+                  30,
+                ),
+              ),
+            ),
             height: 250,
-            color: Colors.white,
             child: ListView.builder(
               itemCount: placeList.length,
-              itemBuilder: (ctx, i) => ListTile(
-                leading: Text(placeList[i].name),
+              itemBuilder: (ctx, i) => InkWell(
+                onTap: () {},
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(placeList[i].icon),
+                        ),
+                        title: Text(placeList[i].name),
+                        subtitle: Text(placeList[i].address),
+                        trailing: Icon(Icons.arrow_right),
+                      ),
+                    ),
+                    Divider(
+                      thickness: 2,
+                    )
+                  ],
+                ),
               ),
             ),
           );

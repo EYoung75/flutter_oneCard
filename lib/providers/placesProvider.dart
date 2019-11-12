@@ -7,7 +7,50 @@ import "dart:convert";
 import "../utils/util.dart" as util;
 
 class Places with ChangeNotifier {
-  List<Place> _places = [];
+  List<Place> _places = [
+    Place(
+        name: "STOREEEE",
+        placeId: "ID",
+        address: "1234 main Street",
+        location: LatLng(42, 42),
+        icon:
+            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
+    Place(
+        name: "STOREEEE",
+        placeId: "ID",
+        address: "1234 main Street",
+        location: LatLng(42, 42),
+        icon:
+            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
+    Place(
+        name: "STOREEEE",
+        placeId: "ID",
+        address: "1234 main Street",
+        location: LatLng(42, 42),
+        icon:
+            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
+    Place(
+        name: "STOREEEE",
+        placeId: "ID",
+        address: "1234 main Street",
+        location: LatLng(42, 42),
+        icon:
+            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
+    Place(
+        name: "STOREEEE",
+        placeId: "ID",
+        address: "1234 main Street",
+        location: LatLng(42, 42),
+        icon:
+            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
+    Place(
+        name: "STOREEEE",
+        placeId: "ID",
+        address: "1234 main Street",
+        location: LatLng(42, 42),
+        icon:
+            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png")
+  ];
 
   List<Place> get places {
     return [..._places];
@@ -20,15 +63,19 @@ class Places with ChangeNotifier {
     final resData = await json.decode(res.body)["results"];
     // print(resData);
     final List<Place> loadedPlaces = [];
-    await resData.forEach((place) => loadedPlaces.add(
-          Place(
+    await resData.forEach(
+      (place) => loadedPlaces.add(
+        Place(
             name: place["name"],
             placeId: place["id"].toString(),
             address: place["vicinity"],
-            location: LatLng(place["geometry"]["location"]["lat"],
-                place["geometry"]["location"]["lng"]),
-          ),
-        ),);
+            location: LatLng(
+              place["geometry"]["location"]["lat"],
+              place["geometry"]["location"]["lng"],
+            ),
+            icon: place["icon"]),
+      ),
+    );
     _places = loadedPlaces;
     print(_places);
     notifyListeners();
@@ -48,11 +95,7 @@ class Place {
   final String placeId;
   final LatLng location;
   final String name;
+  final String icon;
 
-  Place({
-    this.address,
-    this.placeId,
-    this.location,
-    this.name,
-  });
+  Place({this.address, this.placeId, this.location, this.name, this.icon});
 }
