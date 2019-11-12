@@ -45,6 +45,8 @@ class _NetworkState extends State<Network> {
   void toggleSearching() {
     setState(() {
       searching = !searching;
+      _searchValue = "";
+      _searchController.clear();
     });
   }
 
