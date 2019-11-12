@@ -1,8 +1,4 @@
 import "package:flutter/material.dart";
-import "dart:async";
-import "package:barcode_scan/barcode_scan.dart";
-import "package:flutter/services.dart";
-
 import "../widgets/mainCard.dart";
 
 class Home extends StatefulWidget {
@@ -11,35 +7,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String result = "";
-  bool showScan = false;
-
-  Future _scanQR() async {
-    try {
-      String qrResult = await BarcodeScanner.scan();
-      setState(() {
-        result = qrResult;
-        showScan = true;
-      });
-    } on PlatformException catch (ex) {
-      if (ex.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          result = "Camera access was denied";
-        });
-      } else {
-        setState(() {
-          result = "Unknown Error $ex";
-        });
-      }
-    } on FormatException {
-      setState(() {
-        result = "Camera was not used to scan anything";
-      });
-    } catch (ex) {
-      result = "Unknown error code: $ex";
-    }
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,15 +30,6 @@ class _HomeState extends State<Home> {
           SizedBox(
             height: 60,
           ),
-          
-          FloatingActionButton.extended(
-            onPressed: _scanQR,
-            elevation: 15,
-            icon: Icon(Icons.camera_alt),
-            label: Text(
-              "Scan",
-            ),
-          )
         ],
       ),
     );

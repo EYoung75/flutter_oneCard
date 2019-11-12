@@ -8,7 +8,20 @@ class NetWorkList extends StatelessWidget {
   Widget build(BuildContext context) {
     final placeList = Provider.of<Places>(context).places;
     return placeList.length <= 0
-        ? Container()
+        ? Expanded(
+            child: Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+              margin: EdgeInsets.all(25),
+              padding: EdgeInsets.all(10),
+              child: Text(
+                "Search for a place above to check in and see who's around",
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
         : Container(
             margin: EdgeInsets.symmetric(horizontal: 15),
             decoration: BoxDecoration(
@@ -42,8 +55,12 @@ class NetWorkList extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: ListTile(
-                        leading: Image.network(placeList[i].icon, fit: BoxFit.contain, height: 35,),
-                        // leading: CircleAvatar(      
+                        leading: Image.network(
+                          placeList[i].icon,
+                          fit: BoxFit.contain,
+                          height: 35,
+                        ),
+                        // leading: CircleAvatar(
                         //   backgroundColor: Theme.of(context).accentColor,
                         //   backgroundImage: NetworkImage(placeList[i].icon),
                         // ),

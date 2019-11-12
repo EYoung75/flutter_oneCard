@@ -8,50 +8,7 @@ import "../utils/util.dart" as util;
 import "package:geolocator/geolocator.dart";
 
 class Places with ChangeNotifier {
-  List<Place> _places = [
-    Place(
-        name: "STOREEEE",
-        placeId: "ID",
-        address: "1234 main Street",
-        location: LatLng(42, 42),
-        icon:
-            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
-    Place(
-        name: "STOREEEE",
-        placeId: "ID",
-        address: "1234 main Street",
-        location: LatLng(42, 42),
-        icon:
-            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
-    Place(
-        name: "STOREEEE",
-        placeId: "ID",
-        address: "1234 main Street",
-        location: LatLng(42, 42),
-        icon:
-            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
-    Place(
-        name: "STOREEEE",
-        placeId: "ID",
-        address: "1234 main Street",
-        location: LatLng(42, 42),
-        icon:
-            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
-    Place(
-        name: "STOREEEE",
-        placeId: "ID",
-        address: "1234 main Street",
-        location: LatLng(42, 42),
-        icon:
-            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"),
-    Place(
-        name: "STOREEEE",
-        placeId: "ID",
-        address: "1234 main Street",
-        location: LatLng(42, 42),
-        icon:
-            "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png")
-  ];
+  List<Place> _places = [];
 
   List<Place> get places {
     return [..._places];
@@ -64,6 +21,7 @@ class Places with ChangeNotifier {
   }
 
   Future<void> fetchNearby(String searchTerm, Position position) async {
+    Set<Marker> newNearby = {};
     final url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${util.googleMap}&location=${position.latitude},${position.longitude}&rankby=distance&name=$searchTerm";
     final res = await http.get(url);
@@ -73,26 +31,27 @@ class Places with ChangeNotifier {
     await resData.forEach(
       (place) => loadedPlaces.add(
         Place(
-            name: place["name"],
-            placeId: place["id"].toString(),
-            address: place["vicinity"],
-            location: LatLng(
-              place["geometry"]["location"]["lat"],
-              place["geometry"]["location"]["lng"],
-            ),
-            icon: place["icon"]),
+          name: place["name"],
+          placeId: place["id"].toString(),
+          address: place["vicinity"],
+          location: LatLng(
+            place["geometry"]["location"]["lat"],
+            place["geometry"]["location"]["lng"],
+          ),
+          icon: place["icon"],
+        ),
       ),
     );
     _places = loadedPlaces;
     _places.forEach(
-      (place) => nearbyPlaces.add(
+      (place) => newNearby.add(
         Marker(
-          markerId: MarkerId(place.placeId),
-          position: place.location,
-          infoWindow: InfoWindow(title: place.name)
-        ),
+            markerId: MarkerId(place.placeId),
+            position: place.location,
+            infoWindow: InfoWindow(title: place.name)),
       ),
     );
+    nearbyPlaces = newNearby;
 
     print(_places);
     notifyListeners();

@@ -120,7 +120,7 @@ class MainMapState extends State<MainMap> {
                     controller: _searchController,
                     autocorrect: true,
                     decoration: InputDecoration(
-                      hintText: "Search:",
+                      hintText: "Find:",
                       icon: Icon(
                         Icons.location_on,
                         color: Colors.red,

@@ -1,5 +1,7 @@
+import "dart:async";
+import "package:barcode_scan/barcode_scan.dart";
 import "package:flutter/material.dart";
-
+import "package:flutter/services.dart";
 import "../screens/home.dart";
 import "../screens/network.dart";
 import "../screens/wallet.dart";
@@ -13,6 +15,36 @@ class _TabScreenState extends State<TabScreen> {
   List<Map<String, Object>> _pages;
 
   int _selectedPageIndex = 1;
+
+   String result = "";
+  bool showScan = false;
+
+  Future _scanQR() async {
+    try {
+      String qrResult = await BarcodeScanner.scan();
+      setState(() {
+        result = qrResult;
+        showScan = true;
+      });
+    } on PlatformException catch (ex) {
+      if (ex.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          result = "Camera access was denied";
+        });
+      } else {
+        setState(() {
+          result = "Unknown Error $ex";
+        });
+      }
+    } on FormatException {
+      setState(() {
+        result = "Camera was not used to scan anything";
+      });
+    } catch (ex) {
+      result = "Unknown error code: $ex";
+    }
+  }
+
 
   @override
   void initState() {
@@ -96,6 +128,12 @@ class _TabScreenState extends State<TabScreen> {
         ),
       ),
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.camera),
+            onPressed: _scanQR,
+          )
+        ],
         elevation: 20,
         title: Text(_pages[_selectedPageIndex]["title"]),
       ),
