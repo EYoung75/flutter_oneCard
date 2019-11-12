@@ -81,14 +81,15 @@ class MainMapState extends State<MainMap> {
                       children: <Widget>[
                         GoogleMap(
                           compassEnabled: true,
-                          markers: {
-                            Marker(
-                              markerId: MarkerId(""),
-                              position: LatLng(currentPosition.latitude,
-                                  currentPosition.longitude),
-                              infoWindow: InfoWindow(title: "Your position"),
-                            ),
-                          },
+                          markers: place.nearbyPlaces,
+                          // markers: {
+                          //   Marker(
+                          //     markerId: MarkerId(""),
+                          //     position: LatLng(currentPosition.latitude,
+                          //         currentPosition.longitude),
+                          //     infoWindow: InfoWindow(title: "Your position"),
+                          //   ),
+                          // },
                           rotateGesturesEnabled: true,
                           myLocationEnabled: true,
                           myLocationButtonEnabled: true,

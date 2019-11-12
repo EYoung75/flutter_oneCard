@@ -57,6 +57,12 @@ class Places with ChangeNotifier {
     return [..._places];
   }
 
+  Set<Marker> nearbyPlaces = {};
+
+  Set<Marker> get nearbyMarkers {
+    return nearbyPlaces;
+  }
+
   Future<void> fetchNearby(String searchTerm, Position position) async {
     final url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${util.googleMap}&location=${position.latitude},${position.longitude}&rankby=distance&name=$searchTerm";
@@ -78,6 +84,16 @@ class Places with ChangeNotifier {
       ),
     );
     _places = loadedPlaces;
+    _places.forEach(
+      (place) => nearbyPlaces.add(
+        Marker(
+          markerId: MarkerId(place.placeId),
+          position: place.location,
+          infoWindow: InfoWindow(title: place.name)
+        ),
+      ),
+    );
+
     print(_places);
     notifyListeners();
   }
