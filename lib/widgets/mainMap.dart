@@ -36,7 +36,7 @@ class MainMapState extends State<MainMap> {
                 ),
               ),
             ),
-            height: 250,
+            height: 300,
             width: double.infinity,
             child: ClipRRect(
               borderRadius: BorderRadius.only(
@@ -65,7 +65,7 @@ class MainMapState extends State<MainMap> {
                 initialCameraPosition: CameraPosition(
                   target: LatLng(widget.selectedPlace.location.latitude,
                       widget.selectedPlace.location.longitude),
-                  zoom: 16,
+                  zoom: 17,
                 ),
                 onMapCreated: (GoogleMapController controller) {
                   _mapController.complete(controller);

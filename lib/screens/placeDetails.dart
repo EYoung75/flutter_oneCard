@@ -27,9 +27,38 @@ class PlaceDetails extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Container(
-          height: 150,
-          child: MainMap(selectedPlace),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 350,
+              child: MainMap(selectedPlace),
+            ),
+            Text(selectedPlace.name),
+            Text(selectedPlace.address),
+            SizedBox(
+              height: 20,
+            ),
+            RaisedButton.icon(
+              icon: Icon(Icons.group),
+              label: Text("Check In"),
+              onPressed: () {
+                // Navigator.of(context).popAndPushNamed("/checked_in");
+              },
+            ),
+            // Spacer(),
+            // Text("Currently here:"),
+            // Container(
+            //   color: Color.fromRGBO(255, 255, 255, .8),
+            //   width: double.infinity,
+            //   height: 250,
+            //   child: ListView.builder(
+            //     itemCount: 15,
+            //     itemBuilder: (ctx, i) => ListTile(
+            //       title: Text("Person"),
+            //     ),
+            //   ),
+            // )
+          ],
         ),
       ),
     );

@@ -27,13 +27,7 @@ class Wallet extends StatelessWidget {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: ListView.builder(
-          itemCount: cardList.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(cardList[index]["title"]),
-            );
-          }),   
+       
     );
   }
 }
