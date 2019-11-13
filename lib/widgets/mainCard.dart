@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flip_card/flip_card.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-import "../providers/profile.dart";
+import "../models/profile.dart";
 
 class MainCard extends StatelessWidget {
   final Profile profile = Profile(

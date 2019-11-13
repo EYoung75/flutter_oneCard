@@ -1,4 +1,3 @@
-import "package:flutter/foundation.dart";
 
 class Profile {
   String name;
@@ -6,8 +5,8 @@ class Profile {
   String imageUrl;
 
   Profile({
-    @required this.name,
-    @required this.title,
+    this.name,
+    this.title,
     this.imageUrl,
   });
 }
