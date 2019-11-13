@@ -64,12 +64,7 @@ class _AuthCardState extends State<AuthCard> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _passwordController.dispose();
-    _controller.dispose();
-  }
+
 
   Future<void> _submit() async {
     if(!_formKey.currentState.validate()) {

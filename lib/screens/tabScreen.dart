@@ -5,6 +5,8 @@ import "package:flutter/services.dart";
 import "../screens/home.dart";
 import "../screens/network.dart";
 import "../screens/wallet.dart";
+import "package:provider/provider.dart";
+import "../providers/auth.dart";
 
 class TabScreen extends StatefulWidget {
   @override
@@ -16,7 +18,7 @@ class _TabScreenState extends State<TabScreen> {
 
   int _selectedPageIndex = 1;
 
-   String result = "";
+  String result = "";
   bool showScan = false;
 
   Future _scanQR() async {
@@ -44,7 +46,6 @@ class _TabScreenState extends State<TabScreen> {
       result = "Unknown error code: $ex";
     }
   }
-
 
   @override
   void initState() {
@@ -121,7 +122,22 @@ class _TabScreenState extends State<TabScreen> {
                       style: TextStyle(fontSize: 20, fontFamily: "Dosis"),
                     ),
                   ),
-                )
+                ),
+                InkWell(
+                  onTap: () {
+                    Provider.of<Auth>(context).logout();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: ListTile(
+                      leading: Icon(Icons.exit_to_app),
+                      title: Text(
+                        "Logout",
+                        style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
