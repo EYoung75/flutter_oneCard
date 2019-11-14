@@ -2,6 +2,8 @@ import "dart:async";
 import "dart:convert";
 import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
+import "../models/profile.dart";
+import "../models/httpException.dart";
 
 class Auth with ChangeNotifier {
   String _token;
@@ -40,6 +42,9 @@ class Auth with ChangeNotifier {
       );
       final resData = json.decode(res.body);
       print(resData);
+       if(resData["error"] != null) {
+        throw HttpException(resData["error"]["message"]);
+      }
       _token = resData["idToken"];
       _userId = resData["localId"];
       _expiryDate = DateTime.now().add(
@@ -49,13 +54,14 @@ class Auth with ChangeNotifier {
       );
       notifyListeners();
       // final prefs = await SharedPreferences.getInstance();
-      final userData = json.encode(
-        {
-          "token": _token,
-          "userId": _userId,
-          "expiryDate": _expiryDate.toIso8601String()
-        },
-      );
+      // final userData = json.encode(
+
+      //   {
+      //     "token": _token,
+      //     "userId": _userId,
+      //     "expiryDate": _expiryDate.toIso8601String()
+      //   },
+      // );
       // prefs.setString("userData", userData);
     } catch (err) {
       throw (err);
@@ -64,15 +70,39 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=APIKEY";
 
     return _authenicate(email, password, url);
   }
 
   Future<void> signUp(String email, String password) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=APIKEY";
 
-    return _authenicate(email, password, url);
+    await _authenicate(email, password, url);
+
+    final createUserUrl = "https://onecard-a0072.firebaseio.com/users/$_userId.json?";
+    final res = await http.post(
+      createUserUrl,
+      body: json.encode(
+        {
+          "userId": _userId,
+          "email": email,
+          "password": password,
+        },
+      ),
+    );
+    print(json.decode(res.body));
+  }
+
+  Future<void> logout() async {
+    _token = null;
+    _userId = null;
+    _expiryDate = null;
+    if (_authTimer != null) {
+      _authTimer.cancel();
+      _authTimer = null;
+    }
+    notifyListeners();
   }
 }

@@ -68,6 +68,7 @@ class _AuthCardState extends State<AuthCard> {
     super.initState();
   }
 
+
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -76,7 +77,7 @@ class _AuthCardState extends State<AuthCard> {
         content: Text(message),
         actions: <Widget>[
           FlatButton(
-            child: Text("Okay"),
+            child: Text("Okay", style: TextStyle(color: Colors.red),),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -113,7 +114,7 @@ class _AuthCardState extends State<AuthCard> {
       } else if(err.toString().contains("INVALID_PASSWORD")) {
         errorMessage = "Invalid Password";
       } else if(err.toString().contains("EMAIL_NOT_FOUND")) {
-        errorMessage = "This email does not exist";
+        errorMessage = "An account with this email could not be found.";
       }
       print("MESSAGE $errorMessage");
       _showErrorDialog(errorMessage);
@@ -185,7 +186,9 @@ class _AuthCardState extends State<AuthCard> {
                         : null,
                   )
                 : Container(),
-            SizedBox(
+           _isLoading ? 
+            CircularProgressIndicator(backgroundColor: Colors.blueGrey,)
+           : SizedBox(
               height: 25,
             ),
             RaisedButton(
