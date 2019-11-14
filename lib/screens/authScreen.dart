@@ -1,13 +1,17 @@
+import 'dart:io';
+
 import "package:flutter/material.dart";
 import "dart:math";
 
 import "../providers/auth.dart";
 import "package:provider/provider.dart";
+import "../models/httpException.dart";
 
 enum AuthMode { Signup, Login }
 
 class AuthScreen extends StatelessWidget {
-  static const routeName = "auth";
+  static const routeName = "/auth";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,10 +68,26 @@ class _AuthCardState extends State<AuthCard> {
     super.initState();
   }
 
-
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text("Oops..."),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Okay"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
 
   Future<void> _submit() async {
-    if(!_formKey.currentState.validate()) {
+    if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
@@ -75,13 +95,30 @@ class _AuthCardState extends State<AuthCard> {
       _isLoading = true;
     });
     try {
-      if(_authMode == AuthMode.Login) {
-        await Provider.of<Auth>(context, listen: false).login(_authData["email"], _authData["password"]);
+      if (_authMode == AuthMode.Login) {
+        await Provider.of<Auth>(context, listen: false)
+            .login(_authData["email"], _authData["password"]);
       } else {
-        await Provider.of<Auth>(context, listen: false).signUp(_authData["email"], _authData["password"]);
+        await Provider.of<Auth>(context, listen: false)
+            .signUp(_authData["email"], _authData["password"]);
       }
-    } catch(err) {
-      throw(err);
+    } on HttpException catch (err) {
+      var errorMessage = "Authentication failed";
+      if (err.toString().contains("EMAIL_EXISTS")) {
+        errorMessage = "This email address already exists";
+      } else if (err.toString().contains("INVALID_EMAIL")) {
+        errorMessage = "Invalid email";
+      } else if (err.toString().contains("WEAK_PASSWORD")) {
+        errorMessage = "Password too weak";
+      } else if(err.toString().contains("INVALID_PASSWORD")) {
+        errorMessage = "Invalid Password";
+      } else if(err.toString().contains("EMAIL_NOT_FOUND")) {
+        errorMessage = "This email does not exist";
+      }
+      print("MESSAGE $errorMessage");
+      _showErrorDialog(errorMessage);
+    } catch (err) {
+      
     }
 
     setState(() {
@@ -134,8 +171,9 @@ class _AuthCardState extends State<AuthCard> {
                 _authData["password"] = value;
               },
             ),
-            _authMode == AuthMode.Signup ? TextFormField(
-              enabled:  _authMode == AuthMode.Signup,
+            _authMode == AuthMode.Signup
+                ? TextFormField(
+                    enabled: _authMode == AuthMode.Signup,
                     decoration: InputDecoration(labelText: "Confirm Password:"),
                     obscureText: true,
                     validator: _authMode == AuthMode.Signup
@@ -145,7 +183,8 @@ class _AuthCardState extends State<AuthCard> {
                             }
                           }
                         : null,
-                  ) : Container(),
+                  )
+                : Container(),
             SizedBox(
               height: 25,
             ),
