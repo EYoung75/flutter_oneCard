@@ -81,7 +81,7 @@ class Auth with ChangeNotifier {
 
     await _authenicate(email, password, url);
 
-    final createUserUrl = "https://onecard-a0072.firebaseio.com/users/$_userId.json?";
+    final createUserUrl = "https://onecard-a0072.firebaseio.com/users.json?";
     final res = await http.post(
       createUserUrl,
       body: json.encode(

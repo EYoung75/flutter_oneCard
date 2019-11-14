@@ -51,7 +51,6 @@ class AuthCard extends StatefulWidget {
 
 class _AuthCardState extends State<AuthCard> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-
   AuthMode _authMode = AuthMode.Login;
   Map<String, String> _authData = {
     "email": "",
@@ -59,15 +58,7 @@ class _AuthCardState extends State<AuthCard> {
   };
   var _isLoading = false;
   final _passwordController = TextEditingController();
-  AnimationController _controller;
-  Animation<double> _opacityAnim;
-  Animation<Offset> _slideAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+ 
 
   void _showErrorDialog(String message) {
     showDialog(
