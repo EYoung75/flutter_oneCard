@@ -1,8 +1,10 @@
+import 'dart:io';
 
 class Profile {
   String name;
   String title;
-  String imageUrl;
+  File imageUrl;
+  String email;
 
   Profile({
     this.name,
