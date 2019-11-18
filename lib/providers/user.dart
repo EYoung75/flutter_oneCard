@@ -4,15 +4,14 @@ import "package:http/http.dart" as http;
 import "package:flutter/material.dart";
 import "dart:convert";
 
-class User {
-  final String authToken;
-  final String userId;
-  // final profile = Profile();
+class User with ChangeNotifier {
+  String authToken;
+  String userId;
+  Profile profile;
 
-  User(
-    this.authToken,
-    this.userId,
-  );
+  Profile get userProfile {
+    return userProfile;
+  }
 
   Future<void> fetchUserProfile() async {
     final url =

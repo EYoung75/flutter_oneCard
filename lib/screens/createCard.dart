@@ -13,11 +13,22 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
         title: Text("Welcome to OneCard"),
       ),
       body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Theme.of(context).primaryColor.withOpacity(.3),
+              Theme.of(context).primaryColor.withOpacity(.7),
+              Theme.of(context).primaryColor,
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: Form(
           child: Column(
-            children: <Widget>[
-              TextFormField()
-            ],
+            children: <Widget>[TextFormField()],
           ),
         ),
       ),
