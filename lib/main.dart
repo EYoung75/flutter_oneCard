@@ -27,22 +27,23 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'OneCard',
-            theme: ThemeData(
-              primaryColor: Color.fromRGBO(47, 95, 114, 1),
-              accentColor: Color.fromRGBO(255, 233, 214, 1),
-              fontFamily: "Roboto",
-            ),
-            // routes: {
-            //   "/home": (ctx) => TabScreen(),
-            // },
-            home: !auth.isAuth
-                ? AuthScreen()
-                : Consumer<User>(
-                    builder: (ctx, user, _) =>
-                        user.profile != null ? TabScreen() : CreateCardScreen(),
-                  )),
+          debugShowCheckedModeBanner: false,
+          title: 'OneCard',
+          theme: ThemeData(
+            primaryColor: Color.fromRGBO(47, 95, 114, 1),
+            accentColor: Color.fromRGBO(255, 233, 214, 1),
+            fontFamily: "Roboto",
+          ),
+          // routes: {
+          //   "/home": (ctx) => TabScreen(),
+          // },
+          home: auth.isAuth
+              ? AuthScreen()
+              : Consumer<User>(
+                  builder: (ctx, user, _) =>
+                      user.profile != null ? TabScreen() : CreateCardScreen(),
+                ),
+        ),
       ),
     );
   }
