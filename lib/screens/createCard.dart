@@ -14,15 +14,18 @@ class CreateCardScreen extends StatefulWidget {
 
 class _CreateCardScreenState extends State<CreateCardScreen> {
   File _pickedImage;
-  TextEditingController nameController;
-  TextEditingController titleController;
+  String name;
+  String title;
 
   Future<void> _selectImage() async {
     final imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _pickedImage = imageFile;
+    final appDir = await syspaths.getApplicationDocumentsDirectory();
+    final fileName = path.basename(imageFile.path);
+    final savedImage = await imageFile.copy("${appDir.path}/${fileName}");
+     setState(() {
+      _pickedImage = savedImage;
     });
-    //store file path in variable
+    print(_pickedImage);
   }
 
   @override
@@ -54,11 +57,15 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                 Text("Start by creating your first virtual business card"),
                 Divider(),
                 TextFormField(
-                  controller: nameController,
+                  onChanged: (value) {
+                    name = value;
+                  },
                   decoration: InputDecoration(labelText: "Full Name:"),
                 ),
                 TextFormField(
-                  controller: titleController,
+                  onChanged: (value) {
+                    title = value;
+                  },
                   decoration: InputDecoration(labelText: "Job Title"),
                 ),
                 Container(
@@ -82,7 +89,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                 RaisedButton(
                   child: Text("Create"),
                   onPressed: () {
-                    user.createUserProfile(nameController.value);
+                    user.createUserProfile(name, title, _pickedImage);
                   },
                 )
               ],

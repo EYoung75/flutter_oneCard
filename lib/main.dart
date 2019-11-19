@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
           // routes: {
           //   "/home": (ctx) => TabScreen(),
           // },
-          home: auth.isAuth
+          home: !auth.isAuth
               ? AuthScreen()
               : Consumer<User>(
                   builder: (ctx, user, _) =>

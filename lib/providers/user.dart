@@ -20,28 +20,36 @@ class User with ChangeNotifier {
     final resData = await json.decode(res.body);
   }
 
-  Future<void> createUserProfile(String name) async {
+  Future<void> createUserProfile(String name, String title, File image) async {
+    final Card userCard = Card(name, title, image.toString(), email);
+    // userCard.name = name;
+    // userCard.image = image.toString();
+    // userCard.title = title;
+    // userCard.email = email;
+    // final jsonData = jsonEncode(userCard);
     final url =
         "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
     final res = await http.put(
       url,
       body: json.encode(
         {
-          "userId": userId,
           "name": userCard.name,
           "title": userCard.title,
-          "email": email,
-          "image": userCard.image,
-        },
+          "email": userCard.email,
+          "image": userCard.image
+        }
       ),
     );
+    print("USER CARD: $userCard");
     print(res.body);
   }
 }
 
 class Card {
   String name;
-  File image;
+  String image;
   String title;
   String email;
+
+  Card(this.name, this.image, this.title, this.email);
 }
