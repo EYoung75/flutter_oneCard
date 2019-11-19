@@ -21,9 +21,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Places(),
         ),
-        ChangeNotifierProvider.value(
-          value: User(),
+        ChangeNotifierProxyProvider<Auth, User>(
+          builder: (ctx, auth, initData) => User(
+            auth.email,
+            auth.userId,
+            auth.token,
+          ),
         )
+        // ChangeNotifierProvider.value(
+        //   value: User(),
+        // )
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
@@ -41,7 +48,7 @@ class MyApp extends StatelessWidget {
               ? AuthScreen()
               : Consumer<User>(
                   builder: (ctx, user, _) =>
-                      user.profile != null ? TabScreen() : CreateCardScreen(),
+                      user.userCard != null ? TabScreen() : CreateCardScreen(),
                 ),
         ),
       ),

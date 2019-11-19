@@ -1,17 +1,17 @@
-import "../models/profile.dart";
+import 'dart:io';
+
 import "dart:async";
 import "package:http/http.dart" as http;
 import "package:flutter/material.dart";
 import "dart:convert";
 
 class User with ChangeNotifier {
-  String authToken;
+  String email;
   String userId;
-  Profile profile;
+  String authToken;
+  Card userCard;
 
-  Profile get userProfile {
-    return userProfile;
-  }
+  User(this.email, this.userId, this.authToken);
 
   Future<void> fetchUserProfile() async {
     final url =
@@ -20,15 +20,28 @@ class User with ChangeNotifier {
     final resData = await json.decode(res.body);
   }
 
-  Future<void> createUserProfile(Profile profile) async {
+  Future<void> createUserProfile(String name) async {
     final url =
         "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
     final res = await http.put(
       url,
       body: json.encode(
-        {""},
+        {
+          "userId": userId,
+          "name": userCard.name,
+          "title": userCard.title,
+          "email": email,
+          "image": userCard.image,
+        },
       ),
     );
     print(res.body);
   }
+}
+
+class Card {
+  String name;
+  File image;
+  String title;
+  String email;
 }

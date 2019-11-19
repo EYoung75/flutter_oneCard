@@ -2,13 +2,9 @@ import "package:flutter/material.dart";
 import 'package:flip_card/flip_card.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-import "../models/profile.dart";
+
 
 class MainCard extends StatelessWidget {
-  final Profile profile = Profile(
-    name: "Evan Young",
-    title: "Software Engineer",
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +51,11 @@ class MainCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    profile.name,
+                    "Evan Young",
                     style: TextStyle(fontSize: 25, fontFamily: "Dosis"),
                   ),
                   Text(
-                    profile.title,
+                    "Software Engineer",
                     style: TextStyle(fontSize: 20, fontFamily: "Dosis"),
                   ),
                 ],
@@ -123,7 +119,7 @@ class MainCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: QrImage(
-                    data: profile.toString(),
+                    data: "Profile",
                     version: QrVersions.auto,
                     constrainErrorBounds: false,
                     backgroundColor: Colors.white,

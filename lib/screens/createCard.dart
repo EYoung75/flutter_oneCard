@@ -4,6 +4,8 @@ import "dart:io";
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import "package:path_provider/path_provider.dart" as syspaths;
+import "package:provider/provider.dart";
+import "../providers/user.dart";
 
 class CreateCardScreen extends StatefulWidget {
   @override
@@ -12,6 +14,8 @@ class CreateCardScreen extends StatefulWidget {
 
 class _CreateCardScreenState extends State<CreateCardScreen> {
   File _pickedImage;
+  TextEditingController nameController;
+  TextEditingController titleController;
 
   Future<void> _selectImage() async {
     final imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -23,6 +27,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome to OneCard"),
@@ -49,9 +54,11 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                 Text("Start by creating your first virtual business card"),
                 Divider(),
                 TextFormField(
+                  controller: nameController,
                   decoration: InputDecoration(labelText: "Full Name:"),
                 ),
                 TextFormField(
+                  controller: titleController,
                   decoration: InputDecoration(labelText: "Job Title"),
                 ),
                 Container(
@@ -74,7 +81,9 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                 ),
                 RaisedButton(
                   child: Text("Create"),
-                  onPressed: () {},
+                  onPressed: () {
+                    user.createUserProfile(nameController.value);
+                  },
                 )
               ],
             ),
