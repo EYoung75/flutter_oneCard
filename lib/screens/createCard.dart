@@ -90,6 +90,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                   child: Text("Create"),
                   onPressed: () {
                     user.createUserProfile(name, title, _pickedImage);
+                    
                   },
                 )
               ],
