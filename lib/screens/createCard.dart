@@ -23,9 +23,8 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
     final fileName = path.basename(imageFile.path);
     final savedImage = await imageFile.copy("${appDir.path}/${fileName}");
      setState(() {
-      _pickedImage = savedImage;
+      _pickedImage = imageFile;
     });
-    print(_pickedImage);
   }
 
  
@@ -90,8 +89,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                 RaisedButton(
                   child: Text("Create"),
                   onPressed: () {
-                    user.createUserProfile(name, title, _pickedImage.toString());
-                    
+                    user.createUserProfile(name, title, _pickedImage); 
                   },
                 )
               ],

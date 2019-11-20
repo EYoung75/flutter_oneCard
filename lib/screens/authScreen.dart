@@ -58,7 +58,6 @@ class _AuthCardState extends State<AuthCard> {
   };
   var _isLoading = false;
   final _passwordController = TextEditingController();
- 
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -68,7 +67,10 @@ class _AuthCardState extends State<AuthCard> {
         content: Text(message),
         actions: <Widget>[
           FlatButton(
-            child: Text("Okay", style: TextStyle(color: Colors.red),),
+            child: Text(
+              "Okay",
+              style: TextStyle(color: Colors.red),
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -102,16 +104,14 @@ class _AuthCardState extends State<AuthCard> {
         errorMessage = "Invalid email";
       } else if (err.toString().contains("WEAK_PASSWORD")) {
         errorMessage = "Password too weak";
-      } else if(err.toString().contains("INVALID_PASSWORD")) {
+      } else if (err.toString().contains("INVALID_PASSWORD")) {
         errorMessage = "Invalid Password";
-      } else if(err.toString().contains("EMAIL_NOT_FOUND")) {
+      } else if (err.toString().contains("EMAIL_NOT_FOUND")) {
         errorMessage = "An account with this email could not be found.";
       }
       print("MESSAGE $errorMessage");
       _showErrorDialog(errorMessage);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
 
     setState(() {
       _isLoading = false;
@@ -136,8 +136,10 @@ class _AuthCardState extends State<AuthCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Color.fromRGBO(255, 255, 255, .8),
-          borderRadius: BorderRadius.circular(7)),
+        color: Color.fromRGBO(255, 255, 255, .8),
+        borderRadius: BorderRadius.circular(7),
+        border: Border.all(color: Colors.blueGrey, width: 2),
+      ),
       padding: EdgeInsets.symmetric(horizontal: 50),
       margin: EdgeInsets.all(40),
       height: 350,
@@ -177,11 +179,13 @@ class _AuthCardState extends State<AuthCard> {
                         : null,
                   )
                 : Container(),
-           _isLoading ? 
-            CircularProgressIndicator(backgroundColor: Colors.blueGrey,)
-           : SizedBox(
-              height: 25,
-            ),
+            _isLoading
+                ? CircularProgressIndicator(
+                    backgroundColor: Colors.blueGrey,
+                  )
+                : SizedBox(
+                    height: 25,
+                  ),
             RaisedButton(
               child: Text("Submit"),
               onPressed: _submit,

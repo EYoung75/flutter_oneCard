@@ -4,6 +4,8 @@ import "dart:async";
 import "package:http/http.dart" as http;
 import "package:flutter/material.dart";
 import "dart:convert";
+import "package:path/path.dart" as path;
+import "package:path_provider/path_provider.dart" as syspaths;
 
 class User with ChangeNotifier {
   String email;
@@ -23,8 +25,13 @@ class User with ChangeNotifier {
       final resData = await json.decode(res.body);
       print("RESDATA $resData");
       if (resData != null) {
-        VirtualCard fetchedCard = VirtualCard(resData["name"], resData["image"],
-            resData["title"], resData["email"]);
+        final decodedImage = path.absolute(resData["image"]);
+        VirtualCard fetchedCard = VirtualCard(
+          resData["name"],
+          File(decodedImage),
+          resData["title"],
+          resData["email"],
+        );
         userCard = fetchedCard;
       } else {
         userCard = null;
@@ -37,8 +44,7 @@ class User with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createUserProfile(
-      String name, String title, String image) async {
+  Future<void> createUserProfile(String name, String title, File image) async {
     final VirtualCard newCard = VirtualCard(name, image, title, email);
     final url =
         "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
@@ -47,8 +53,8 @@ class User with ChangeNotifier {
       body: json.encode({
         "name": newCard.name,
         "title": newCard.title,
-        "email": email,
-        "image": newCard.image
+        "userEmail": email,
+        "image": newCard.image.toString()
       }),
     );
     userCard = newCard;
@@ -60,7 +66,7 @@ class User with ChangeNotifier {
 
 class VirtualCard {
   String name;
-  String image;
+  File image;
   String title;
   String email;
 

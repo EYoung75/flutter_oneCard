@@ -2,7 +2,6 @@ import "dart:async";
 import "dart:convert";
 import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
-import "../models/profile.dart";
 import "../models/httpException.dart";
 
 class Auth with ChangeNotifier {
@@ -10,6 +9,7 @@ class Auth with ChangeNotifier {
   String _userId;
   DateTime _expiryDate;
   Timer _authTimer;
+  String email;
 
   bool get isAuth {
     return token != null;
@@ -22,6 +22,10 @@ class Auth with ChangeNotifier {
       return _token;
     }
     return null;
+  }
+
+  String get getEmail {
+    return email;
   }
 
   String get userId {
@@ -52,6 +56,7 @@ class Auth with ChangeNotifier {
           seconds: int.parse(resData["expiresIn"]),
         ),
       );
+      email = email;
       notifyListeners();
       // final prefs = await SharedPreferences.getInstance();
       // final userData = json.encode(
@@ -70,19 +75,19 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=APIKEY";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=APIKEYHERE";
 
     return _authenicate(email, password, url);
   }
 
   Future<void> signUp(String email, String password) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=APIKEY";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=APIKEYHERE";
 
     await _authenicate(email, password, url);
 
-    final createUserUrl = "https://onecard-a0072.firebaseio.com/users.json?";
-    final res = await http.post(
+    final createUserUrl = "https://onecard-a0072.firebaseio.com/users/$_userId.json?";
+    final res = await http.put(
       createUserUrl,
       body: json.encode(
         {

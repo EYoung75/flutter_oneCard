@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProxyProvider<Auth, User>(
           builder: (ctx, auth, initData) => User(
-            auth.email,
+            auth.getEmail,
             auth.userId,
             auth.token,
           ),
