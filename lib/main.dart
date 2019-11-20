@@ -5,7 +5,6 @@ import "./screens/tabScreen.dart";
 import "./providers/placesProvider.dart";
 import "./providers/auth.dart";
 import "./screens/authScreen.dart";
-import "./screens/home.dart";
 import "./providers/user.dart";
 
 void main() => runApp(MyApp());
@@ -44,12 +43,13 @@ class MyApp extends StatelessWidget {
           // routes: {
           //   "/home": (ctx) => TabScreen(),
           // },
-          home: !auth.isAuth
-              ? AuthScreen()
-              : Consumer<User>(
-                  builder: (ctx, user, _) =>
-                      user.userCard != null ? TabScreen() : CreateCardScreen(),
-                ),
+          home: !auth.isAuth ? AuthScreen() : TabScreen(),
+
+          //       : Consumer<User>(
+          //           builder: (ctx, user, _) =>
+          //               user.fetchUserProfile() == true ? TabScreen() : CreateCardScreen(),
+          //         ),
+          // ),
         ),
       ),
     );

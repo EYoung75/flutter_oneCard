@@ -1,23 +1,25 @@
 import "package:flutter/material.dart";
 import 'package:flip_card/flip_card.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
-
+import "package:provider/provider.dart";
+import "../providers/user.dart";
 
 class MainCard extends StatelessWidget {
-
+  
   @override
   Widget build(BuildContext context) {
+    final userCard = Provider.of<User>(context).userCard;
     return FlipCard(
       direction: FlipDirection.HORIZONTAL,
       front: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.black38,
-                blurRadius: 30,
-                spreadRadius: 10,
-                offset: Offset(5, 5))
+              color: Colors.black38,
+              blurRadius: 30,
+              spreadRadius: 10,
+              offset: Offset(5, 5),
+            )
           ],
           borderRadius: BorderRadius.circular(10),
           color: Colors.white70,
@@ -33,10 +35,11 @@ class MainCard extends StatelessWidget {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
-                child: Image.network(
-                  "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
-                  fit: BoxFit.cover,
-                ),
+                // child: Image.file(userCard.image)
+                // child: Image.network(
+                //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
+                //   fit: BoxFit.cover,
+                // ),
               ),
             ),
             Container(
@@ -51,11 +54,11 @@ class MainCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Evan Young",
+                    userCard.name,
                     style: TextStyle(fontSize: 25, fontFamily: "Dosis"),
                   ),
                   Text(
-                    "Software Engineer",
+                    userCard.title,
                     style: TextStyle(fontSize: 20, fontFamily: "Dosis"),
                   ),
                 ],

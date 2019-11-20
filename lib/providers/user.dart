@@ -9,31 +9,43 @@ class User with ChangeNotifier {
   String email;
   String userId;
   String authToken;
-  Card userCard;
+  VirtualCard userCard;
 
   User(this.email, this.userId, this.authToken);
 
   Future<void> fetchUserProfile() async {
     final url =
         "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
-    final res = await http.get(url);
-    final resData = await json.decode(res.body);
+
+    try {
+      final res = await http.get(url);
+      final resData = await json.decode(res.body);
+      print("RESDATA $resData");
+      if (resData == null) {
+        return null;
+      }
+      VirtualCard fetchedCard = VirtualCard(resData["name"], resData["image"], resData["title"], resData["email"]);
+      userCard = fetchedCard;
+    } catch (err) {
+      return null;
+      throw (err);
+    }
+    notifyListeners();
   }
 
-  Future<void> createUserProfile(String name, String title, File image) async {
-    final Card newCard = Card(name, title, image.toString(), email);
+  Future<void> createUserProfile(
+      String name, String title, String image) async {
+    final VirtualCard newCard = VirtualCard(name, image, title, email);
     final url =
         "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
     final res = await http.put(
       url,
-      body: json.encode(
-        {
-          "name": newCard.name,
-          "title": newCard.title,
-          "email": newCard.email,
-          "image": newCard.image
-        }
-      ),
+      body: json.encode({
+        "name": newCard.name,
+        "title": newCard.title,
+        "email": email,
+        "image": newCard.image
+      }),
     );
     userCard = newCard;
     print("USER CARD: $userCard");
@@ -42,11 +54,11 @@ class User with ChangeNotifier {
   }
 }
 
-class Card {
+class VirtualCard {
   String name;
   String image;
   String title;
   String email;
 
-  Card(this.name, this.image, this.title, this.email);
+  VirtualCard([this.name, this.image, this.title, this.email]);
 }

@@ -28,6 +28,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
     print(_pickedImage);
   }
 
+ 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context, listen: false);
@@ -89,7 +90,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                 RaisedButton(
                   child: Text("Create"),
                   onPressed: () {
-                    user.createUserProfile(name, title, _pickedImage);
+                    user.createUserProfile(name, title, _pickedImage.toString());
                     
                   },
                 )
