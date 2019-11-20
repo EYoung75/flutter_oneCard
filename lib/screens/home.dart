@@ -35,9 +35,6 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     MainCard(),
-                    SizedBox(
-                      height: 60,
-                    ),
                   ],
                 )
               : CreateCardScreen(),

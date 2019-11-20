@@ -22,8 +22,9 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
     final appDir = await syspaths.getApplicationDocumentsDirectory();
     final fileName = path.basename(imageFile.path);
     final savedImage = await imageFile.copy("${appDir.path}/${fileName}");
+    print(savedImage);
      setState(() {
-      _pickedImage = imageFile;
+      _pickedImage = savedImage;
     });
   }
 

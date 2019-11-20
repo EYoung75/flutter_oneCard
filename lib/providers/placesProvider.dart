@@ -95,9 +95,10 @@ class Places with ChangeNotifier {
     _places.forEach(
       (place) => newNearby.add(
         Marker(
-            markerId: MarkerId(place.placeId),
-            position: place.location,
-            infoWindow: InfoWindow(title: place.name)),
+          markerId: MarkerId(place.placeId),
+          position: place.location,
+          infoWindow: InfoWindow(title: place.name),
+        ),
       ),
     );
     nearbyPlaces = newNearby;

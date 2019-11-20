@@ -7,7 +7,6 @@ import "package:provider/provider.dart";
 import "../providers/user.dart";
 
 class MainCard extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     final userCard = Provider.of<User>(context).userCard;
@@ -34,15 +33,15 @@ class MainCard extends StatelessWidget {
             Container(
               height: 450,
               child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                child: Image.file(userCard.image)
-                // child: Image.network(
-                //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
-                //   fit: BoxFit.cover,
-                // ),
-              ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  child: Image.file(userCard.image)
+                  // child: Image.network(
+                  //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
+                  //   fit: BoxFit.cover,
+                  // ),
+                  ),
             ),
             Container(
               height: 75,
@@ -100,10 +99,11 @@ class MainCard extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.black38,
-                blurRadius: 30,
-                spreadRadius: 10,
-                offset: Offset(5, 5))
+              color: Colors.black38,
+              blurRadius: 30,
+              spreadRadius: 10,
+              offset: Offset(5, 5),
+            )
           ],
           borderRadius: BorderRadius.circular(10),
           color: Colors.white70,

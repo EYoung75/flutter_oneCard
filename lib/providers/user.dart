@@ -25,7 +25,7 @@ class User with ChangeNotifier {
       final resData = await json.decode(res.body);
       print("RESDATA $resData");
       if (resData != null) {
-        final decodedImage = path.absolute(resData["image"]);
+        final decodedImage = "Users/evanyoung/Library/Developer/CoreSimulator/Devices/2D4CCE3F-9D2C-4829-AB04-5B749490E485/data/Containers/Data/Application/3DE04F57-0E21-4E40-AE98-880A3A6BA3B8/Documents/image_picker_62CC9469-6E5D-49F5-8101-F81B95706D49-38952-00002189EF090B45.jpg";
         VirtualCard fetchedCard = VirtualCard(
           resData["name"],
           File(decodedImage),
@@ -54,7 +54,7 @@ class User with ChangeNotifier {
         "name": newCard.name,
         "title": newCard.title,
         "userEmail": email,
-        "image": newCard.image.toString()
+        "image": newCard.image
       }),
     );
     userCard = newCard;

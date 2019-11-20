@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:one_card_revisited/screens/createCard.dart';
 import "package:provider/provider.dart";
 import "./screens/tabScreen.dart";
 import "./providers/placesProvider.dart";
