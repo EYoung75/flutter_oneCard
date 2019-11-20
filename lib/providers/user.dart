@@ -10,6 +10,7 @@ class User with ChangeNotifier {
   String userId;
   String authToken;
   VirtualCard userCard;
+  bool triedFetch = false;
 
   User(this.email, this.userId, this.authToken);
 
@@ -21,15 +22,18 @@ class User with ChangeNotifier {
       final res = await http.get(url);
       final resData = await json.decode(res.body);
       print("RESDATA $resData");
-      if (resData == null) {
-        return null;
+      if (resData != null) {
+        VirtualCard fetchedCard = VirtualCard(resData["name"], resData["image"],
+            resData["title"], resData["email"]);
+        userCard = fetchedCard;
+      } else {
+        userCard = null;
       }
-      VirtualCard fetchedCard = VirtualCard(resData["name"], resData["image"], resData["title"], resData["email"]);
-      userCard = fetchedCard;
     } catch (err) {
-      return null;
+      userCard = null;
       throw (err);
     }
+    triedFetch = true;
     notifyListeners();
   }
 

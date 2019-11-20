@@ -26,17 +26,21 @@ class _HomeState extends State<Home> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: userInfo.userCard != null
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                MainCard(),
-                SizedBox(
-                  height: 60,
-                ),
-              ],
+      child: userInfo.triedFetch == false
+          ? Center(
+              child: CircularProgressIndicator(),
             )
-          : CreateCardScreen(),
+          : userInfo.userCard != null
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    MainCard(),
+                    SizedBox(
+                      height: 60,
+                    ),
+                  ],
+                )
+              : CreateCardScreen(),
     );
   }
 }
