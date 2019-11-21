@@ -22,6 +22,7 @@ dependencies:
   flip_card: ^0.4.3
   qr_flutter: ^3.0.1
   google_maps_flutter: ^0.5.21+8
+  firebase_storage: ^3.0.8
   geolocator: ^5.1.4+2
   barcode_scan:
   provider: 3.0.0
@@ -78,6 +79,9 @@ flutter:
       fonts:
         - asset: assets/fonts/Roboto-Light.ttf
           weight: 300
+    - family: RockSalt
+      fonts: 
+        - asset: assets/fonts/RockSalt-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

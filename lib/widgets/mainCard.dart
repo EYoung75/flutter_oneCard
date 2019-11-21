@@ -37,7 +37,9 @@ class MainCard extends StatelessWidget {
                     Radius.circular(10),
                   ),
                   child: Image.file(
-                    userCard.image,
+                    File(
+                      '/var/mobile/Containers/Data/Application/95094257-43EF-4F64-A07A-81D6DBF22188/Documents/image_picker_1744C6F2-F57F-4EAE-90DE-497BB075E7C4-12577-000006497360E6B2.jpg',
+                    ),
                     fit: BoxFit.cover,
                   )
                   // child: Image.network(
@@ -121,13 +123,15 @@ class MainCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: Theme.of(context).primaryColor, width: 2),
+                    color: Theme.of(context).primaryColor,
+                    width: 2,
+                  ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: QrImage(
-                    data: "Profile",
+                    data: userCard.toString(),
                     version: QrVersions.auto,
                     constrainErrorBounds: false,
                     backgroundColor: Colors.white,

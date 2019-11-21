@@ -16,6 +16,7 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        alignment: Alignment.center,
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -29,10 +30,17 @@ class AuthScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
+        child: ListView(
+          padding: EdgeInsets.only(top: 45),
           children: <Widget>[
-            SizedBox(
-              height: 50,
+            Text(
+              "OneCard",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: "RockSalt",
+                fontSize: 30,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
             AuthCard(),
           ],
@@ -140,7 +148,7 @@ class _AuthCardState extends State<AuthCard> {
           border: Border.all(color: Colors.blueGrey, width: 2),
         ),
         padding: EdgeInsets.symmetric(horizontal: 50),
-        margin: EdgeInsets.all(50),
+        margin: EdgeInsets.symmetric(horizontal: 50),
         height: 350,
         width: double.infinity,
         child: Form(

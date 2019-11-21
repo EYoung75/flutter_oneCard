@@ -30,7 +30,7 @@ class User with ChangeNotifier {
         // final decodedImage = File("/Users/evanyoung/Library/Developer/CoreSimulator/Devices/2D4CCE3F-9D2C-4829-AB04-5B749490E485/data/Containers/Data/Application/F6902B1A-7595-4EDD-B1CA-AFA45DF6FA80/Documents/image_picker_C61C6938-5848-4EA6-A928-0FF4CE9096BD-3470-00000149EAFCF45E.jpg");
         // final imagePathRaw = await resData["image"].replaceRange(0, 7, "");
         // final newpath = imagePathRaw.toString().replaceRange(imagePathRaw.length - 1, imagePathRaw.length, "");
-        final newpath = resData["image"].toString().substring(7, resData["image"].length - 1);
+        final newpath = await resData["image"].toString().substring(6, resData["image"].length);
         VirtualCard fetchedCard = VirtualCard(
           resData["name"],
           File(newpath),

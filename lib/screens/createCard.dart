@@ -21,10 +21,11 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
     final imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     final appDir = await syspaths.getApplicationDocumentsDirectory();
     final fileName = path.basename(imageFile.path);
-    final savedImage = await imageFile.copy("${appDir.path}/${fileName}");
-    print(savedImage);
+    // final savedImage = await imageFile.copy("${appDir.path}/${fileName}");
+    final filePath = await path.absolute(appDir.toString(), fileName);
+    print("FILE PATH: $filePath");
      setState(() {
-      _pickedImage = savedImage;
+      _pickedImage = File(filePath);
     });
   }
 
