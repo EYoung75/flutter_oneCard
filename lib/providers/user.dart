@@ -25,10 +25,15 @@ class User with ChangeNotifier {
       final resData = await json.decode(res.body);
       print("RESDATA $resData");
       if (resData != null) {
-        final decodedImage = "Users/evanyoung/Library/Developer/CoreSimulator/Devices/2D4CCE3F-9D2C-4829-AB04-5B749490E485/data/Containers/Data/Application/3DE04F57-0E21-4E40-AE98-880A3A6BA3B8/Documents/image_picker_62CC9469-6E5D-49F5-8101-F81B95706D49-38952-00002189EF090B45.jpg";
+        // File: '/var/mobile/Containers/Data/Application/E1FA5D92-2596-4771-8F96-8A3D4BC9BA1E/Documents/image_picker_5986AD07-DB1D-402E-B38D-DB664018D671-12417-0000062E3EBD54E4.jpg'
+        // '/var/mobile/Containers/Data/Application/E1FA5D92-2596-4771-8F96-8A3D4BC9BA1E/Documents/image_picker_5986AD07-DB1D-402E-B38D-DB664018D671-12417-0000062E3EBD54E4.jpg'
+        // final decodedImage = File("/Users/evanyoung/Library/Developer/CoreSimulator/Devices/2D4CCE3F-9D2C-4829-AB04-5B749490E485/data/Containers/Data/Application/F6902B1A-7595-4EDD-B1CA-AFA45DF6FA80/Documents/image_picker_C61C6938-5848-4EA6-A928-0FF4CE9096BD-3470-00000149EAFCF45E.jpg");
+        // final imagePathRaw = await resData["image"].replaceRange(0, 7, "");
+        // final newpath = imagePathRaw.toString().replaceRange(imagePathRaw.length - 1, imagePathRaw.length, "");
+        final newpath = resData["image"].toString().substring(7, resData["image"].length - 1);
         VirtualCard fetchedCard = VirtualCard(
           resData["name"],
-          File(decodedImage),
+          File(newpath),
           resData["title"],
           resData["email"],
         );
@@ -46,6 +51,9 @@ class User with ChangeNotifier {
 
   Future<void> createUserProfile(String name, String title, File image) async {
     final VirtualCard newCard = VirtualCard(name, image, title, email);
+    // File: '/var/mobile/Containers/Data/Application/E1FA5D92-2596-4771-8F96-8A3D4BC9BA1E/Documents/image_picker_5986AD07-DB1D-402E-B38D-DB664018D671-12417-0000062E3EBD54E4.jpg'
+    // '/var/mobile/Containers/Data/Application/E1FA5D92-2596-4771-8F96-8A3D4BC9BA1E/Documents/image_picker_5986AD07-DB1D-402E-B38D-DB664018D671-12417-0000062E3EBD54E4.jpg'
+
     final url =
         "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
     final res = await http.put(
@@ -54,7 +62,7 @@ class User with ChangeNotifier {
         "name": newCard.name,
         "title": newCard.title,
         "userEmail": email,
-        "image": newCard.image
+        "image": image.toString()
       }),
     );
     userCard = newCard;

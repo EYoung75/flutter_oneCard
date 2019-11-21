@@ -16,27 +16,28 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).primaryColor.withOpacity(.3),
-                Theme.of(context).primaryColor.withOpacity(.7),
-                Theme.of(context).primaryColor,
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 50,
-              ),
-              AuthCard(),
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Theme.of(context).primaryColor.withOpacity(.3),
+              Theme.of(context).primaryColor.withOpacity(.7),
+              Theme.of(context).primaryColor,
             ],
-          )),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 50,
+            ),
+            AuthCard(),
+          ],
+        ),
+      ),
     );
   }
 }
