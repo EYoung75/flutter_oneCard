@@ -25,7 +25,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
     final filePath = await path.absolute(appDir.toString(), fileName);
     print("FILE PATH: $filePath");
      setState(() {
-      _pickedImage = File(filePath);
+      _pickedImage = imageFile;
     });
   }
 
