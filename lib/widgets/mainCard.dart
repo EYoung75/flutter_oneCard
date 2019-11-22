@@ -36,7 +36,11 @@ class MainCard extends StatelessWidget {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
-                child: userCard.image,
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: userCard.image, 
+                ),
 
                 // child: Image.network(
                 //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
