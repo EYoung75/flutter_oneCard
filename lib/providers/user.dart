@@ -6,6 +6,8 @@ import "package:flutter/material.dart";
 import "dart:convert";
 import "package:path/path.dart" as path;
 import "package:path_provider/path_provider.dart" as syspaths;
+import "package:firebase_core/firebase_core.dart";
+import "package:firebase_storage/firebase_storage.dart";
 
 class User with ChangeNotifier {
   String email;
@@ -25,17 +27,12 @@ class User with ChangeNotifier {
       final resData = await json.decode(res.body);
       print("RESDATA $resData");
       if (resData != null) {
-        // File: '/var/mobile/Containers/Data/Application/E1FA5D92-2596-4771-8F96-8A3D4BC9BA1E/Documents/image_picker_5986AD07-DB1D-402E-B38D-DB664018D671-12417-0000062E3EBD54E4.jpg'
-        // '/var/mobile/Containers/Data/Application/E1FA5D92-2596-4771-8F96-8A3D4BC9BA1E/Documents/image_picker_5986AD07-DB1D-402E-B38D-DB664018D671-12417-0000062E3EBD54E4.jpg'
-        // final decodedImage = File("/Users/evanyoung/Library/Developer/CoreSimulator/Devices/2D4CCE3F-9D2C-4829-AB04-5B749490E485/data/Containers/Data/Application/F6902B1A-7595-4EDD-B1CA-AFA45DF6FA80/Documents/image_picker_C61C6938-5848-4EA6-A928-0FF4CE9096BD-3470-00000149EAFCF45E.jpg");
-        // final imagePathRaw = await resData["image"].replaceRange(0, 7, "");
-        // final newpath = imagePathRaw.toString().replaceRange(imagePathRaw.length - 1, imagePathRaw.length, "");
-        final newpath = await resData["image"]
-            .toString()
-            .substring(6, resData["image"].length);
+        final userImage =
+            FirebaseStorage.instance.ref().child(resData["image"]);
+        final fetchedImage = await userImage.getDownloadURL();
         VirtualCard fetchedCard = VirtualCard(
           resData["name"],
-          File(newpath),
+          Image.network(fetchedImage),
           resData["title"],
           resData["email"],
         );
@@ -51,40 +48,43 @@ class User with ChangeNotifier {
     notifyListeners();
   }
 
-  // Future storeUserImage() async {
-  //   String fileName = path.basename(_image.path)
-  // }
-
-  Future<void> createUserProfile(String name, String title, File image) async {
-    final VirtualCard newCard = VirtualCard(name, image, title, email);
-    // File: '/var/mobile/Containers/Data/Application/E1FA5D92-2596-4771-8F96-8A3D4BC9BA1E/Documents/image_picker_5986AD07-DB1D-402E-B38D-DB664018D671-12417-0000062E3EBD54E4.jpg'
-    // '/var/mobile/Containers/Data/Application/E1FA5D92-2596-4771-8F96-8A3D4BC9BA1E/Documents/image_picker_5986AD07-DB1D-402E-B38D-DB664018D671-12417-0000062E3EBD54E4.jpg'
+  Future<void> createUserProfile(
+      String name, String title, dynamic image) async {
+    bool imageUploaded = false;
     String fileName = path.basename(image.path);
-    // StorageReference imageReference = FirebaseStorage.instance.ref().child(fileName);
-    // StorageUploadTask uploadTask = imageReference.putFile(image);
-    // StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+    StorageReference imageReference =
+        FirebaseStorage.instance.ref().child("$userId/$fileName");
+    StorageUploadTask uploadTask = imageReference.putFile(image);
+    await uploadTask.onComplete.then((_) {
+      imageUploaded = true;
+    });
+    if (imageUploaded == true) {
+      final storedImage = await imageReference.getDownloadURL();
+      final VirtualCard newCard =
+          VirtualCard(name, Image.network(storedImage), title, email);
 
-    final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
-    final res = await http.put(
-      url,
-      body: json.encode({
-        "name": newCard.name,
-        "title": newCard.title,
-        "userEmail": email,
-        "image": image.toString()
-      }),
-    );
-    userCard = newCard;
-    print("USER CARD: $userCard");
-    print(res.body);
+      final url =
+          "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
+      final res = await http.put(
+        url,
+        body: json.encode({
+          "name": newCard.name,
+          "title": newCard.title,
+          "userEmail": email,
+          "image": "$userId/$fileName"
+        }),
+      );
+      userCard = newCard;
+      print("USER CARD: $userCard");
+      print(res.body);
+    }
     notifyListeners();
   }
 }
 
 class VirtualCard {
   String name;
-  File image;
+  dynamic image;
   String title;
   String email;
 

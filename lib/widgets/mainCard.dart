@@ -33,20 +33,16 @@ class MainCard extends StatelessWidget {
             Container(
               height: 450,
               child: ClipRRect(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Image.file(
-                    File(
-                      '/var/mobile/Containers/Data/Application/95094257-43EF-4F64-A07A-81D6DBF22188/Documents/image_picker_1744C6F2-F57F-4EAE-90DE-497BB075E7C4-12577-000006497360E6B2.jpg',
-                    ),
-                    fit: BoxFit.cover,
-                  )
-                  // child: Image.network(
-                  //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
-                  //   fit: BoxFit.cover,
-                  // ),
-                  ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                child: userCard.image,
+
+                // child: Image.network(
+                //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
+                //   fit: BoxFit.cover,
+                // ),
+              ),
             ),
             Container(
               height: 75,

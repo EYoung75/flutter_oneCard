@@ -6,7 +6,10 @@ import "./providers/auth.dart";
 import "./screens/authScreen.dart";
 import "./providers/user.dart";
 
-void main() => runApp(MyApp());
+
+void main() async {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
