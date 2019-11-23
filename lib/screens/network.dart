@@ -12,7 +12,7 @@ class Network extends StatefulWidget {
 }
 
 class _NetworkState extends State<Network> {
-  String _searchValue = "";
+  String _searchValue;
   Completer<GoogleMapController> _mapController = Completer();
   TextEditingController _searchController = TextEditingController();
   final geolocator = Geolocator();
@@ -40,6 +40,12 @@ class _NetworkState extends State<Network> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  void handleSearch() {
+    setState(() {
+      _searchValue = _searchController.value.toString();
+    });
   }
 
   void toggleSearching() {
@@ -95,61 +101,84 @@ class _NetworkState extends State<Network> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 25),
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Center(
-                          child: Text(
-                            "Search",
-                            style: TextStyle(fontSize: 30, color: Colors.white),
-                          ),
-                        ),
-                        TextFormField(),
-                        SizedBox(
-                          height: 35,
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Suggestions",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ),
-                        // Container(
-                        //   height: 300,
-                        //   width: double.infinity,
-                        //   child: ListView.builder(
-                        //     scrollDirection: Axis.horizontal,
-                        //     itemCount: 6,
-                        //     itemBuilder: (ctx, i) => Text(i.toString()),
-                        //   ),
-                        // )
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 15),
-                          height: 200,
-                          width: double.infinity,
-                          child: ListView.builder(
-                            itemCount: 12,
-                            itemBuilder: (ctx, i) => Container(
-                              margin: EdgeInsets.all(10),
-                              height: 5,
-                              width: 200,
-                              child: Card(
-                                color: Colors.white,
-                                child: Text(i.toString()),
+                  Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 60),
+                        child: Column(
+                          children: <Widget>[
+                            Center(
+                              child: Text(
+                                "Search",
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
                               ),
                             ),
-                            scrollDirection: Axis.horizontal,
-                          ),
+                            TextFormField(
+                              controller: _searchController,
+                              onChanged: (value) {
+                                setState(() {
+                                  _searchValue = value;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                _searchValue == null || _searchValue == ""
+                                    ? "Suggestions"
+                                    : "Results for $_searchValue",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )
+                      ),
+                      // Container(
+                      //   height: 300,
+                      //   width: double.infinity,
+                      //   child: ListView.builder(
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemCount: 6,
+                      //     itemBuilder: (ctx, i) => Text(i.toString()),
+                      //   ),
+                      // )
+                      Container(
+                        height: 350,
+                        width: double.infinity,
+                        child: ListView.builder(
+                          padding: EdgeInsets.only(left: 40),
+                          itemCount: 12,
+                          itemBuilder: (ctx, i) => Column(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(right: 25, top: 40),
+                                height: 200,
+                                width: 200,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    "https://i.pinimg.com/474x/8f/86/16/8f8616d80380a6bfec0c54b00387de3c.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Text("Place Name")
+                            ],
+                          ),
+                          scrollDirection: Axis.horizontal,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
       ),
