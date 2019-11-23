@@ -54,7 +54,6 @@ class _NetworkState extends State<Network> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -67,94 +66,181 @@ class _NetworkState extends State<Network> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black38, blurRadius: 20, spreadRadius: 7)
-                ],
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(
-                    20,
-                  ),
-                  bottomRight: Radius.circular(
-                    20,
-                  ),
-                ),
-                color: Color.fromRGBO(255, 255, 255, .8),
-              ),
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                "Check into a place to start connecting",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            searching
-                ? Column(
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(225, 225, 225, .9),
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: Colors.black, width: .5),
+        child: currentPosition == null
+            ? CircularProgressIndicator()
+            : ListView(
+                children: <Widget>[
+                  Container(
+                    height: 250,
+                    width: double.infinity,
+                    child: GoogleMap(
+                      markers: {
+                        Marker(
+                          markerId: MarkerId(""),
+                          position: LatLng(currentPosition.latitude,
+                              currentPosition.longitude),
+                          infoWindow: InfoWindow(title: "YOU ARE HERE"),
                         ),
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                        height: 40,
-                        width: double.infinity,
-                        child: TextField(
-                          controller: _searchController,
-                          autocorrect: true,
-                          decoration: InputDecoration(
-                            hintText: "Enter a place:",
-                            icon: Icon(
-                              Icons.location_on,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
+                      },
+                      compassEnabled: true,
+                      rotateGesturesEnabled: true,
+                      scrollGesturesEnabled: true,
+                      myLocationEnabled: true,
+                      myLocationButtonEnabled: false,
+                      mapType: MapType.normal,
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(currentPosition.latitude,
+                            currentPosition.longitude),
+                        zoom: 17,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: RaisedButton(
-                          color: Theme.of(context).accentColor,
-                          elevation: 5,
-                          child: Text(
-                            "Search",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                          onPressed: () async {
-                            await Provider.of<Places>(context, listen: false)
-                                .fetchNearby(
-                                    _searchController.text, currentPosition);
-                            toggleSearching();
-                          },
-                        ),
-                      ),
-                    ],
-                  )
-                : Container(
-                    child: RaisedButton(
-                      child: Text("Search Again"),
-                      onPressed: toggleSearching,
                     ),
                   ),
-            Spacer(),
-            NetWorkList()
-          ],
-        ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 25),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Text(
+                            "Search",
+                            style: TextStyle(fontSize: 30, color: Colors.white),
+                          ),
+                        ),
+                        TextFormField(),
+                        SizedBox(
+                          height: 35,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Suggestions",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ),
+                        // Container(
+                        //   height: 300,
+                        //   width: double.infinity,
+                        //   child: ListView.builder(
+                        //     scrollDirection: Axis.horizontal,
+                        //     itemCount: 6,
+                        //     itemBuilder: (ctx, i) => Text(i.toString()),
+                        //   ),
+                        // )
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 15),
+                          height: 200,
+                          width: double.infinity,
+                          child: ListView.builder(
+                            itemCount: 12,
+                            itemBuilder: (ctx, i) => Container(
+                              margin: EdgeInsets.all(10),
+                              height: 5,
+                              width: 200,
+                              child: Card(
+                                color: Colors.white,
+                                child: Text(i.toString()),
+                              ),
+                            ),
+                            scrollDirection: Axis.horizontal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
       ),
     );
   }
 }
+
+// Column(
+//           children: <Widget>[
+//             Container(
+//               padding: EdgeInsets.all(15),
+//               decoration: BoxDecoration(
+//                 boxShadow: [
+//                   BoxShadow(
+//                       color: Colors.black38, blurRadius: 20, spreadRadius: 7)
+//                 ],
+//                 borderRadius: BorderRadius.only(
+//                   bottomLeft: Radius.circular(
+//                     20,
+//                   ),
+//                   bottomRight: Radius.circular(
+//                     20,
+//                   ),
+//                 ),
+//                 color: Color.fromRGBO(255, 255, 255, .8),
+//               ),
+//               margin: EdgeInsets.symmetric(horizontal: 10),
+//               child: Text(
+//                 "Check into a place to start connecting",
+//                 textAlign: TextAlign.center,
+//                 style: TextStyle(
+//                   fontSize: 20,
+//                 ),
+//               ),
+//             ),
+//             SizedBox(
+//               height: 25,
+//             ),
+//             searching
+//                 ? Column(
+//                     children: <Widget>[
+//                       Container(
+//                         decoration: BoxDecoration(
+//                           color: Color.fromRGBO(225, 225, 225, .9),
+//                           borderRadius: BorderRadius.circular(5),
+//                           border: Border.all(color: Colors.black, width: .5),
+//                         ),
+//                         margin:
+//                             EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+//                         height: 40,
+//                         width: double.infinity,
+//                         child: TextField(
+//                           controller: _searchController,
+//                           autocorrect: true,
+//                           decoration: InputDecoration(
+//                             hintText: "Enter a place:",
+//                             icon: Icon(
+//                               Icons.location_on,
+//                               color: Colors.red,
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                       Container(
+//                         decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(10),
+//                         ),
+//                         child: RaisedButton(
+//                           color: Theme.of(context).accentColor,
+//                           elevation: 5,
+//                           child: Text(
+//                             "Search",
+//                             style: TextStyle(color: Colors.black, fontSize: 16),
+//                           ),
+//                           onPressed: () async {
+//                             await Provider.of<Places>(context, listen: false)
+//                                 .fetchNearby(
+//                                     _searchController.text, currentPosition);
+//                             toggleSearching();
+//                           },
+//                         ),
+//                       ),
+//                     ],
+//                   )
+//                 : Container(
+//                     child: RaisedButton(
+//                       child: Text("Search Again"),
+//                       onPressed: toggleSearching,
+//                     ),
+//                   ),
+//             Spacer(),
+//             NetWorkList()
+//           ],
+//         ),

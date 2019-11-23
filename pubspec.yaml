@@ -31,7 +31,7 @@ dependencies:
   image_picker: ^0.6.1+10
   path_provider: ^1.4.0
   path: ^1.6.4
-  firebase_core: 
+  firebase_core: ^0.4.2
   firebase_storage:
 
 
@@ -73,16 +73,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Dosis
+    - family: Maven
       fonts:
-        - asset: assets/fonts/Dosis-Regular.ttf
-    - family: Roboto
+        - asset: assets/fonts/MavenPro-Regular.ttf
+    - family: Open Sans
       fonts:
-        - asset: assets/fonts/Roboto-Light.ttf
-          weight: 300
-    - family: RockSalt
-      fonts: 
-        - asset: assets/fonts/RockSalt-Regular.ttf
+        - asset: assets/fonts/OpenSans-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

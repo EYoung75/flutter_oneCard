@@ -48,7 +48,6 @@ class MainMapState extends State<MainMap> {
                 ),
               ),
               child: GoogleMap(
-                compassEnabled: true,
                 markers: {
                   Marker(
                     markerId: MarkerId(""),
@@ -57,6 +56,7 @@ class MainMapState extends State<MainMap> {
                     infoWindow: InfoWindow(title: widget.selectedPlace.name),
                   ),
                 },
+                compassEnabled: true,
                 rotateGesturesEnabled: false,
                 scrollGesturesEnabled: false,
                 myLocationEnabled: true,

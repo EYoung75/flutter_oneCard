@@ -175,7 +175,7 @@ class _TabScreenState extends State<TabScreen> {
             title: Text("Network"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.portrait),
             title: Text("Home"),
           ),
           BottomNavigationBarItem(

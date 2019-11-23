@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import "package:flutter/material.dart";
-import "dart:math";
-
 import "../providers/auth.dart";
 import "package:provider/provider.dart";
 import "../models/httpException.dart";
@@ -16,6 +14,7 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: EdgeInsets.only(top: 150),
         alignment: Alignment.center,
         height: double.infinity,
         width: double.infinity,
@@ -37,7 +36,7 @@ class AuthScreen extends StatelessWidget {
               "OneCard",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: "RockSalt",
+                fontFamily: "Open Sans",
                 fontSize: 30,
                 color: Theme.of(context).primaryColor,
               ),

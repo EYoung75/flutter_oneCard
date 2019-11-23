@@ -5,6 +5,7 @@ import "./providers/placesProvider.dart";
 import "./providers/auth.dart";
 import "./screens/authScreen.dart";
 import "./providers/user.dart";
+import "./screens/network.dart";
 
 
 void main() async {
@@ -40,12 +41,17 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primaryColor: Color.fromRGBO(47, 95, 114, 1),
             accentColor: Color.fromRGBO(255, 233, 214, 1),
-            fontFamily: "Roboto",
+            fontFamily: "Maven",
           ),
           // routes: {
           //   "/home": (ctx) => TabScreen(),
           // },
-          home: !auth.isAuth ? AuthScreen() : TabScreen(),
+          // home: Network()
+          home: auth.isAuth ? AuthScreen() : TabScreen(),
+
+
+
+
 
           //       : Consumer<User>(
           //           builder: (ctx, user, _) =>
