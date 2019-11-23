@@ -69,13 +69,15 @@ class Places with ChangeNotifier {
     return nearbyPlaces;
   }
 
-  Future<void> fetchNearby(String searchTerm, Position position) async {
+  Future<void> fetchNearby(Position position, String searchTerm) async {
+    // String searchTerm
     Set<Marker> newNearby = {};
     final url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${util.googleMap}&location=${position.latitude},${position.longitude}&rankby=distance&name=$searchTerm";
+
     final res = await http.get(url);
     final resData = await json.decode(res.body)["results"];
-    // print(resData);
+    print(resData);
     final List<Place> loadedPlaces = [];
     await resData.forEach(
       (place) => loadedPlaces.add(
@@ -92,16 +94,16 @@ class Places with ChangeNotifier {
       ),
     );
     _places = loadedPlaces;
-    _places.forEach(
-      (place) => newNearby.add(
-        Marker(
-          markerId: MarkerId(place.placeId),
-          position: place.location,
-          infoWindow: InfoWindow(title: place.name),
-        ),
-      ),
-    );
-    nearbyPlaces = newNearby;
+    // _places.forEach(
+    //   (place) => newNearby.add(
+    //     Marker(
+    //       markerId: MarkerId(place.placeId),
+    //       position: place.location,
+    //       infoWindow: InfoWindow(title: place.name),
+    //     ),
+    //   ),
+    // );
+    // nearbyPlaces = newNearby;
 
     print(_places);
     notifyListeners();

@@ -34,6 +34,9 @@ class _NetworkState extends State<Network> {
   void initState() {
     super.initState();
     setUserLocation();
+    // .then((_) {
+    //   Provider.of<Places>(context).fetchNearby(currentPosition);
+    // });
   }
 
   @override
@@ -58,6 +61,7 @@ class _NetworkState extends State<Network> {
 
   @override
   Widget build(BuildContext context) {
+    final placeData = Provider.of<Places>(context);
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -125,8 +129,20 @@ class _NetworkState extends State<Network> {
                                 });
                               },
                             ),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 5),
+                              alignment: Alignment.centerRight,
+                              child: RaisedButton.icon(
+                                icon: Icon(Icons.search),
+                                label: Text("Go"),
+                                onPressed: () {
+                                  placeData.fetchNearby(currentPosition, _searchValue);
+                                },
+                              ),
+                            ),
+
                             SizedBox(
-                              height: 45,
+                              height: 15,
                             ),
                             Container(
                               alignment: Alignment.centerLeft,
@@ -141,11 +157,11 @@ class _NetworkState extends State<Network> {
                                 ),
                               ),
                             ),
-                            Divider(
-                              color: Colors.white,
-                              indent: 25,
-                              endIndent: 25,
-                            ),
+                            // Divider(
+                            //   color: Colors.white,
+                            //   indent: 25,
+                            //   endIndent: 25,
+                            // ),
                           ],
                         ),
                       ),
@@ -158,38 +174,44 @@ class _NetworkState extends State<Network> {
                       //     itemBuilder: (ctx, i) => Text(i.toString()),
                       //   ),
                       // )
-                      Container(
-                        height: 350,
-                        width: double.infinity,
-                        child: ListView.builder(
-                          padding: EdgeInsets.only(left: 85),
-                          itemCount: 12,
-                          itemBuilder: (ctx, i) => Column(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(right: 25, top: 40),
-                                height: 200,
-                                width: 200,
-                                child: Card(
-                                  elevation: 10,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(5),
-                                    child: Image.network(
-                                      "https://i.pinimg.com/474x/f3/86/67/f386670133229dbe5c7c2dc8128837ed.jpg",
-                                      fit: BoxFit.cover,
-                                    ),
+                      placeData.places.length <= 0
+                          ? Container()
+                          : Container(
+                              height: 350,
+                              width: double.infinity,
+                              child: ListView.builder(
+                                padding: EdgeInsets.only(left: 100),
+                                itemCount: placeData.places.length,
+                                itemBuilder: (ctx, i) => Container(
+                                  margin: EdgeInsets.only(left: 20, top: 10),
+                                  height: 200,
+                                  width: 200,
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Card(
+                                        elevation: 10,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            "https://i.pinimg.com/474x/f3/86/67/f386670133229dbe5c7c2dc8128837ed.jpg",
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        placeData.places[i].name,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
+                                scrollDirection: Axis.horizontal,
                               ),
-                              Text(
-                                "Place Name",
-                                style: TextStyle(fontSize: 20),
-                              )
-                            ],
-                          ),
-                          scrollDirection: Axis.horizontal,
-                        ),
-                      ),
+                            ),
                     ],
                   ),
                 ],
