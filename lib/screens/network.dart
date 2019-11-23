@@ -126,18 +126,25 @@ class _NetworkState extends State<Network> {
                               },
                             ),
                             SizedBox(
-                              height: 25,
+                              height: 45,
                             ),
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 _searchValue == null || _searchValue == ""
-                                    ? "Suggestions"
+                                    ? "Suggestions:"
                                     : "Results for $_searchValue",
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 16),
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
                               ),
+                            ),
+                            Divider(
+                              color: Colors.white,
+                              indent: 25,
+                              endIndent: 25,
                             ),
                           ],
                         ),
@@ -155,7 +162,7 @@ class _NetworkState extends State<Network> {
                         height: 350,
                         width: double.infinity,
                         child: ListView.builder(
-                          padding: EdgeInsets.only(left: 40),
+                          padding: EdgeInsets.only(left: 85),
                           itemCount: 12,
                           itemBuilder: (ctx, i) => Column(
                             children: <Widget>[
@@ -163,15 +170,21 @@ class _NetworkState extends State<Network> {
                                 margin: EdgeInsets.only(right: 25, top: 40),
                                 height: 200,
                                 width: 200,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    "https://i.pinimg.com/474x/8f/86/16/8f8616d80380a6bfec0c54b00387de3c.jpg",
-                                    fit: BoxFit.cover,
+                                child: Card(
+                                  elevation: 10,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Image.network(
+                                      "https://i.pinimg.com/474x/f3/86/67/f386670133229dbe5c7c2dc8128837ed.jpg",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
-                              Text("Place Name")
+                              Text(
+                                "Place Name",
+                                style: TextStyle(fontSize: 20),
+                              )
                             ],
                           ),
                           scrollDirection: Axis.horizontal,
