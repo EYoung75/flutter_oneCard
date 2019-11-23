@@ -32,7 +32,7 @@ class User with ChangeNotifier {
         final fetchedImage = await userImage.getDownloadURL();
         VirtualCard fetchedCard = VirtualCard(
           resData["name"],
-          Image.network(fetchedImage),
+          Image.network(fetchedImage, fit: BoxFit.cover),
           resData["title"],
           resData["email"],
         );
@@ -60,8 +60,12 @@ class User with ChangeNotifier {
     });
     if (imageUploaded == true) {
       final storedImage = await imageReference.getDownloadURL();
-      final VirtualCard newCard =
-          VirtualCard(name, Image.network(storedImage), title, email);
+      final VirtualCard newCard = VirtualCard(
+        name,
+        Image.network(storedImage, fit: BoxFit.cover),
+        title,
+        email,
+      );
 
       final url =
           "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";

@@ -32,27 +32,28 @@ class MainCard extends StatelessWidget {
           children: <Widget>[
             Container(
               height: 450,
+              width: double.infinity,
               child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: userCard.image, 
-                ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  child: userCard.image
+                  // child: Image.network(
+                  //   userCard.image,
+                  //   fit: BoxFit.cover,
+                  // )
 
-                // child: Image.network(
-                //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
-                //   fit: BoxFit.cover,
-                // ),
-              ),
+                  // child: Image.network(
+                  //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
+                  //   fit: BoxFit.cover,
+                  // ),
+                  ),
             ),
             Container(
               height: 75,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(255, 255, 255, .6),
+                color: Color.fromRGBO(255, 255, 255, 1),
               ),
               width: double.infinity,
               margin: EdgeInsets.all(25),
