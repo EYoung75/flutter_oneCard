@@ -5,6 +5,7 @@ import "dart:async";
 import "package:provider/provider.dart";
 import "../providers/placesProvider.dart";
 import "../widgets/networkList.dart";
+import "./placeDetails.dart";
 
 class Network extends StatefulWidget {
   @override
@@ -134,9 +135,10 @@ class _NetworkState extends State<Network> {
                               alignment: Alignment.centerRight,
                               child: RaisedButton.icon(
                                 icon: Icon(Icons.search),
-                                label: Text("Go"),
+                                label: Text("Find"),
                                 onPressed: () {
-                                  placeData.fetchNearby(currentPosition, _searchValue);
+                                  placeData.fetchNearby(
+                                      currentPosition, _searchValue);
                                 },
                               ),
                             ),
@@ -177,36 +179,49 @@ class _NetworkState extends State<Network> {
                       placeData.places.length <= 0
                           ? Container()
                           : Container(
-                              height: 350,
+                              height: 200,
                               width: double.infinity,
                               child: ListView.builder(
                                 padding: EdgeInsets.only(left: 100),
                                 itemCount: placeData.places.length,
-                                itemBuilder: (ctx, i) => Container(
-                                  margin: EdgeInsets.only(left: 20, top: 10),
-                                  height: 200,
-                                  width: 200,
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Card(
-                                        elevation: 10,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Image.network(
-                                            "https://i.pinimg.com/474x/f3/86/67/f386670133229dbe5c7c2dc8128837ed.jpg",
-                                            fit: BoxFit.cover,
-                                          ),
+                                itemBuilder: (ctx, i) => InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        fullscreenDialog: true,
+                                        builder: (ctx) => PlaceDetails(
+                                          placeData.places[i],
                                         ),
                                       ),
-                                      Text(
-                                        placeData.places[i].name,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(left: 20, top: 10),
+                                    height: 200,
+                                    width: 150,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Card(
+                                          elevation: 10,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image.network(
+                                              "https://i.pinimg.com/474x/f3/86/67/f386670133229dbe5c7c2dc8128837ed.jpg",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         ),
-                                      )
-                                    ],
+                                        Text(
+                                          placeData.places[i].name,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                          ),
+                                          textAlign: TextAlign.right,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 scrollDirection: Axis.horizontal,
