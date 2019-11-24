@@ -136,7 +136,7 @@ class _NetworkState extends State<Network> {
                               child: RaisedButton.icon(
                                 icon: Icon(Icons.search),
                                 label: Text("Find"),
-                                onPressed: () {
+                                onPressed: () {   
                                   placeData.fetchNearby(
                                       currentPosition, _searchValue);
                                 },
