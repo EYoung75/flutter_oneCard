@@ -144,7 +144,7 @@ class _NetworkState extends State<Network> {
                             ),
 
                             SizedBox(
-                              height: 15,
+                              height: 45,
                             ),
                             Container(
                               alignment: Alignment.centerLeft,
