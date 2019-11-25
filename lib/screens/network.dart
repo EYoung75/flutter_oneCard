@@ -85,14 +85,7 @@ class _NetworkState extends State<Network> {
                     height: 250,
                     width: double.infinity,
                     child: GoogleMap(
-                      markers: {
-                        Marker(
-                          markerId: MarkerId(""),
-                          position: LatLng(currentPosition.latitude,
-                              currentPosition.longitude),
-                          infoWindow: InfoWindow(title: "YOU ARE HERE"),
-                        ),
-                      },
+                      markers: placeData.nearbyMarkers,
                       compassEnabled: true,
                       rotateGesturesEnabled: true,
                       scrollGesturesEnabled: true,
@@ -136,7 +129,7 @@ class _NetworkState extends State<Network> {
                               child: RaisedButton.icon(
                                 icon: Icon(Icons.search),
                                 label: Text("Find"),
-                                onPressed: () {   
+                                onPressed: () {
                                   placeData.fetchNearby(
                                       currentPosition, _searchValue);
                                 },

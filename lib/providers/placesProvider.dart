@@ -94,16 +94,16 @@ class Places with ChangeNotifier {
       ),
     );
     _places = loadedPlaces;
-    // _places.forEach(
-    //   (place) => newNearby.add(
-    //     Marker(
-    //       markerId: MarkerId(place.placeId),
-    //       position: place.location,
-    //       infoWindow: InfoWindow(title: place.name),
-    //     ),
-    //   ),
-    // );
-    // nearbyPlaces = newNearby;
+    _places.forEach(
+      (place) => newNearby.add(
+        Marker(
+          markerId: MarkerId(place.placeId),
+          position: place.location,
+          infoWindow: InfoWindow(title: place.name),
+        ),
+      ),
+    );
+    nearbyPlaces = newNearby;
 
     print(_places);
     notifyListeners();

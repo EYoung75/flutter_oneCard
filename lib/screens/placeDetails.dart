@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:one_card_revisited/widgets/mainMap.dart';
 import "../providers/placesProvider.dart";
+import "package:provider/provider.dart";
+import "../providers/user.dart";
 
 class PlaceDetails extends StatelessWidget {
   Place selectedPlace;
@@ -9,6 +11,13 @@ class PlaceDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.group),
+        label: Text("Check In"),
+        onPressed: () {
+          Provider.of<User>(context).checkIn(selectedPlace.placeId);
+        },
+      ),
       appBar: AppBar(
         elevation: 10,
         title: Text(selectedPlace.name),
@@ -30,20 +39,52 @@ class PlaceDetails extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              height: 350,
-              child: MainMap(selectedPlace),
+              margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black38, blurRadius: 40, spreadRadius: 10)
+                ],
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(
+                    30,
+                  ),
+                  bottomRight: Radius.circular(
+                    30,
+                  ),
+                ),
+              ),
+              height: 300,
+              width: double.infinity,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(
+                    25,
+                  ),
+                  bottomRight: Radius.circular(
+                    25,
+                  ),
+                ),
+                child: Image.network(
+                  "https://www.hospitalitydesign.com/wp-content/uploads/CrossroadsLobby.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            Text(selectedPlace.name),
-            Text(selectedPlace.address),
+            // Container(
+            //   height: 350,
+            //   child: MainMap(selectedPlace),
+            // ),
+            Text(
+              selectedPlace.name,
+              style: TextStyle(fontSize: 28),
+            ),
+            Text(
+              selectedPlace.address,
+              style: TextStyle(fontSize: 20),
+            ),
             SizedBox(
               height: 20,
-            ),
-            RaisedButton.icon(
-              icon: Icon(Icons.group),
-              label: Text("Check In"),
-              onPressed: () {
-                // Navigator.of(context).popAndPushNamed("/checked_in");
-              },
             ),
             // Spacer(),
             // Text("Currently here:"),
