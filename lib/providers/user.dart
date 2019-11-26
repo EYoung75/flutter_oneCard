@@ -15,6 +15,7 @@ class User with ChangeNotifier {
   String authToken;
   VirtualCard userCard;
   bool triedFetch = false;
+  String checkedIn;
 
   User(this.email, this.userId, this.authToken);
 
@@ -82,6 +83,35 @@ class User with ChangeNotifier {
       print("USER CARD: $userCard");
       print(res.body);
     }
+    notifyListeners();
+  }
+
+  Future<void> checkIn(String placeId) async {
+    final url =
+        "https://onecard-a0072.firebaseio.com/users/$userId.json?auth=$authToken";
+    final res = await http.patch(
+      url,
+      body: json.encode(
+        {
+          "location": placeId,
+        },
+      ),
+    );
+    checkedIn = placeId;
+    print(json.decode(res.body));
+    notifyListeners();
+  }
+
+  Future<void> checkout() async {
+    final url =
+        "https://onecard-a0072.firebaseio.com/users/$userId/location.json?auth=$authToken";
+    final res = await http.patch(
+      url,
+      body: json.encode(
+        {"location": null},
+      ),
+    );
+    checkedIn = null;
     notifyListeners();
   }
 }

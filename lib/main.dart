@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:one_card_revisited/providers/walletProvider.dart';
 import "package:provider/provider.dart";
 import "./screens/tabScreen.dart";
 import "./providers/placesProvider.dart";
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: Places(),
+        ),
+        ChangeNotifierProvider.value(
+          value: WalletProvider(),
         ),
         ChangeNotifierProxyProvider<Auth, User>(
           builder: (ctx, auth, initData) => User(
@@ -47,7 +51,7 @@ class MyApp extends StatelessWidget {
           //   "/home": (ctx) => TabScreen(),
           // },
           // home: Network()
-          home: auth.isAuth ? AuthScreen() : TabScreen(),
+          home: !auth.isAuth ? AuthScreen() : TabScreen(),
 
 
 
