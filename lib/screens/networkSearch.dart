@@ -136,9 +136,8 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                 },
                               ),
                             ),
-
                             SizedBox(
-                              height: 45,
+                              height: 35,
                             ),
                             Container(
                               alignment: Alignment.centerLeft,
@@ -149,31 +148,17 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 15,
+                                  fontSize: 18,
                                 ),
                               ),
                             ),
-                            // Divider(
-                            //   color: Colors.white,
-                            //   indent: 25,
-                            //   endIndent: 25,
-                            // ),
                           ],
                         ),
                       ),
-                      // Container(
-                      //   height: 300,
-                      //   width: double.infinity,
-                      //   child: ListView.builder(
-                      //     scrollDirection: Axis.horizontal,
-                      //     itemCount: 6,
-                      //     itemBuilder: (ctx, i) => Text(i.toString()),
-                      //   ),
-                      // )
                       placeData.places.length <= 0
                           ? Container()
                           : Container(
-                              height: 200,
+                              height: 350,
                               width: double.infinity,
                               child: ListView.builder(
                                 padding: EdgeInsets.only(left: 100),
@@ -190,21 +175,36 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                     );
                                   },
                                   child: Container(
-                                    margin: EdgeInsets.only(left: 20, top: 10),
-                                    height: 200,
-                                    width: 150,
-                                    child: Stack(
+                                    margin: EdgeInsets.only(left: 30, top: 30),
+                                    height: 250,
+                                    child: Column(
                                       children: <Widget>[
-                                        Card(
-                                          elevation: 10,
+                                        Container(
+                                          height: 175,
+                                          width: 200,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black38,
+                                                blurRadius: 10,
+                                                spreadRadius: 5,
+                                                offset: Offset(5, 10),
+                                              )
+                                            ],
+                                          ),
                                           child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(10),
+                                                BorderRadius.circular(12),
                                             child: Image.network(
                                               "https://i.pinimg.com/474x/f3/86/67/f386670133229dbe5c7c2dc8128837ed.jpg",
                                               fit: BoxFit.cover,
                                             ),
                                           ),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
                                         ),
                                         Text(
                                           placeData.places[i].name,
@@ -212,8 +212,25 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                             color: Colors.white,
                                             fontSize: 20,
                                           ),
-                                          textAlign: TextAlign.right,
-                                        )
+                                        ),
+                                        // Container(
+                                        //   height: 30,
+                                        //   decoration: BoxDecoration(
+                                        //     color: Colors.white,
+                                        //     borderRadius: BorderRadius.only(
+                                        //       topLeft: Radius.circular(12),
+                                        //       topRight: Radius.circular(12),
+                                        //     ),
+                                        //   ),
+                                        //   alignment: Alignment.topCenter,
+                                        // child: Text(
+                                        //   "Place Name",
+                                        //   style: TextStyle(
+                                        //     color: Colors.black,
+                                        //     fontSize: 20,
+                                        //   ),
+                                        // ),
+                                        // )
                                       ],
                                     ),
                                   ),

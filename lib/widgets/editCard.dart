@@ -16,6 +16,9 @@ class _EditCardState extends State<EditCard> {
   Widget build(BuildContext context) {
     final userInfo = Provider.of<User>(context, listen: false).userCard;
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Edit "),
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
