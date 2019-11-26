@@ -53,7 +53,7 @@ class MainCard extends StatelessWidget {
               height: 75,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(255, 255, 255, 1),
+                color: Color.fromRGBO(255, 255, 255, .8),
               ),
               width: double.infinity,
               margin: EdgeInsets.all(25),
@@ -62,11 +62,11 @@ class MainCard extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     userCard.name,
-                    style: TextStyle(fontSize: 25, fontFamily: "Dosis"),
+                    style: Theme.of(context).textTheme.subtitle,
                   ),
                   Text(
                     userCard.title,
-                    style: TextStyle(fontSize: 20, fontFamily: "Dosis"),
+                    style: Theme.of(context).textTheme.subtitle,
                   ),
                 ],
               ),
@@ -132,7 +132,7 @@ class MainCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: QrImage(
-                    data: userCard.toString(),
+                    data: userCard.userId,
                     version: QrVersions.auto,
                     constrainErrorBounds: false,
                     backgroundColor: Colors.white,

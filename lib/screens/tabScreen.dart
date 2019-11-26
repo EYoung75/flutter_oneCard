@@ -107,7 +107,7 @@ class _TabScreenState extends State<TabScreen> {
                       leading: Icon(Icons.settings),
                       title: Text(
                         "Settings",
-                        style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
+                        style: Theme.of(context).textTheme.body2,
                       ),
                     ),
                   ),
@@ -118,7 +118,7 @@ class _TabScreenState extends State<TabScreen> {
                     leading: Icon(Icons.question_answer),
                     title: Text(
                       "Messenger",
-                      style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
+                      style: Theme.of(context).textTheme.body2,
                     ),
                   ),
                 ),
@@ -128,7 +128,7 @@ class _TabScreenState extends State<TabScreen> {
                     leading: Icon(Icons.live_help),
                     title: Text(
                       "Help",
-                      style: TextStyle(fontSize: 20, fontFamily: "Dosis"),
+                      style: Theme.of(context).textTheme.body2,
                     ),
                   ),
                 ),
@@ -142,7 +142,7 @@ class _TabScreenState extends State<TabScreen> {
                       leading: Icon(Icons.exit_to_app),
                       title: Text(
                         "Logout",
-                        style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
+                        style: Theme.of(context).textTheme.body2,
                       ),
                     ),
                   ),
@@ -159,16 +159,19 @@ class _TabScreenState extends State<TabScreen> {
             onPressed: _scanQR,
           )
         ],
-        elevation: 20,
-        title: Text(_pages[_selectedPageIndex]["title"]),
+        elevation: 10,
+        title: Text(
+          _pages[_selectedPageIndex]["title"],
+          style: Theme.of(context).textTheme.title,
+        ),
       ),
       body: _pages[_selectedPageIndex]["page"],
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: BottomNavigationBar(
-        elevation: 20,
+        elevation: 10,
         backgroundColor: Theme.of(context).primaryColor,
         selectedIconTheme: IconThemeData(size: 30),
-        unselectedIconTheme: IconThemeData(size: 20),
+        unselectedIconTheme: IconThemeData(size: 22),
         unselectedItemColor: Colors.white70,
         selectedItemColor: Colors.white,
         onTap: _setPage,
@@ -176,15 +179,24 @@ class _TabScreenState extends State<TabScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.near_me),
-            title: Text("Network"),
+            title: Text(
+              "Network",
+              style: Theme.of(context).textTheme.display1,
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.portrait),
-            title: Text("Home"),
+            title: Text(
+              "Home",
+              style: Theme.of(context).textTheme.display1,
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.payment),
-            title: Text("Wallet"),
+            title: Text(
+              "Wallet",
+              style: Theme.of(context).textTheme.display1,
+            ),
           ),
         ],
       ),

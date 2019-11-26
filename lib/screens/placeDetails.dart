@@ -3,6 +3,7 @@ import 'package:one_card_revisited/widgets/mainMap.dart';
 import "../providers/placesProvider.dart";
 import "package:provider/provider.dart";
 import "../providers/user.dart";
+import "dart:io";
 
 class PlaceDetails extends StatelessWidget {
   Place selectedPlace;
@@ -14,13 +15,14 @@ class PlaceDetails extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.group),
         label: Text("Check In"),
-        onPressed: () {
-          Provider.of<User>(context).checkIn(selectedPlace.placeId);
+        onPressed: () async {
+          await Provider.of<User>(context).checkIn(selectedPlace.placeId);
+          Navigator.of(context).pop();
         },
       ),
       appBar: AppBar(
         elevation: 10,
-        title: Text(selectedPlace.name),
+        title: Text(selectedPlace.name, style: Theme.of(context).textTheme.title,),
       ),
       body: Container(
         height: double.infinity,
@@ -43,7 +45,10 @@ class PlaceDetails extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black38, blurRadius: 40, spreadRadius: 10)
+                    color: Colors.black38,
+                    blurRadius: 40,
+                    spreadRadius: 10,
+                  )
                 ],
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(

@@ -43,6 +43,10 @@ class _NetworkSearchState extends State<NetworkSearch> {
   @override
   void dispose() {
     _searchController.dispose();
+    Provider.of<Places>(context).clearSearch();
+    setState(() {
+      _searchValue = "";
+    });
     super.dispose();
   }
 
@@ -59,6 +63,8 @@ class _NetworkSearchState extends State<NetworkSearch> {
       _searchController.clear();
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -137,19 +143,16 @@ class _NetworkSearchState extends State<NetworkSearch> {
                               ),
                             ),
                             SizedBox(
-                              height: 35,
+                              height: 25,
                             ),
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                _searchValue == null || _searchValue == ""
+                                placeData.places.length <= 0 || placeData.places == null || _searchValue == null
                                     ? "Suggestions:"
                                     : "Results for $_searchValue",
                                 textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
+                                style: Theme.of(context).textTheme.body1,
                               ),
                             ),
                           ],
@@ -175,7 +178,7 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                     );
                                   },
                                   child: Container(
-                                    margin: EdgeInsets.only(left: 30, top: 30),
+                                    margin: EdgeInsets.only(left: 30, top: 20),
                                     height: 250,
                                     child: Column(
                                       children: <Widget>[
@@ -206,11 +209,18 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                         SizedBox(
                                           height: 15,
                                         ),
-                                        Text(
-                                          placeData.places[i].name,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
+                                        Container(
+                                          alignment: Alignment.center,
+                                          width: 150,
+                                          child: Text(
+                                            placeData.places[i].name,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                            overflow: TextOverflow.fade,
+                                            softWrap: true,
+                                            textAlign: TextAlign.center,
                                           ),
                                         ),
                                         // Container(

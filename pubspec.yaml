@@ -73,12 +73,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Maven
+    - family: BenchNine
       fonts:
-        - asset: assets/fonts/MavenPro-Regular.ttf
-    - family: Open Sans
+        - asset: assets/fonts/BenchNine-Regular.ttf
+    - family: Barlow
       fonts:
-        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/BarlowCondensed-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
