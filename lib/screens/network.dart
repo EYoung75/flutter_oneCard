@@ -23,7 +23,11 @@ class Network extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: user.checkedIn != null ? CheckedIn() : NetworkSearch(),
+        child: user.isloading == true
+            ? CircularProgressIndicator()
+            : Container(
+                child: user.checkedIn == null ? NetworkSearch() : CheckedIn(),
+              ),
       ),
     );
   }

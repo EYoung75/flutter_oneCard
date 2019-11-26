@@ -16,6 +16,8 @@ class User with ChangeNotifier {
   VirtualCard userCard;
   bool triedFetch = false;
   String checkedIn;
+  bool isloading = false;
+  File pickedImage;
 
   User(this.email, this.userId, this.authToken);
 
@@ -87,31 +89,44 @@ class User with ChangeNotifier {
   }
 
   Future<void> checkIn(String placeId) async {
-    final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId.json?auth=$authToken";
-    final res = await http.patch(
-      url,
-      body: json.encode(
-        {
-          "location": placeId,
-        },
-      ),
-    );
-    checkedIn = placeId;
-    print(json.decode(res.body));
+    try {
+      isloading = true;
+      final url =
+          "https://onecard-a0072.firebaseio.com/users/$userId.json?auth=$authToken";
+      final res = await http.patch(
+        url,
+        body: json.encode(
+          {
+            "location": placeId,
+          },
+        ),
+      );
+
+      checkedIn = placeId;
+      print(json.decode(res.body));
+    } catch (err) {
+      throw (err);
+    }
+    isloading = false;
     notifyListeners();
   }
 
   Future<void> checkout() async {
-    final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/location.json?auth=$authToken";
-    final res = await http.patch(
-      url,
-      body: json.encode(
-        {"location": null},
-      ),
-    );
-    checkedIn = null;
+    try {
+      isloading = true;
+      final url =
+          "https://onecard-a0072.firebaseio.com/users/$userId/location.json?auth=$authToken";
+      final res = await http.patch(
+        url,
+        body: json.encode(
+          {"location": null},
+        ),
+      );
+      checkedIn = null;
+    } catch (err) {
+      throw (err);
+    }
+    isloading = false;
     notifyListeners();
   }
 }

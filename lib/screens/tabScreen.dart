@@ -85,67 +85,71 @@ class _TabScreenState extends State<TabScreen> {
             ),
           ),
           child: Padding(
-                  padding: const EdgeInsets.all(35.0),
-                  child: Column(
-                    children: <Widget>[
-                      ListTile(
-                        title: Text(
-                          "OneCard",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30, top: 15),
-                        child: ListTile(
-                          leading: Icon(Icons.settings),
-                          title: Text(
-                            "Settings",
-                            style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: ListTile(
-                          leading: Icon(Icons.question_answer),
-                          title: Text(
-                            "Messenger",
-                            style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: ListTile(
-                          leading: Icon(Icons.live_help),
-                          title: Text(
-                            "Help",
-                            style: TextStyle(fontSize: 20, fontFamily: "Dosis"),
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Provider.of<Auth>(context).logout();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 30),
-                          child: ListTile(
-                            leading: Icon(Icons.exit_to_app),
-                            title: Text(
-                              "Logout",
-                              style:
-                                  TextStyle(fontSize: 18, fontFamily: "Dosis"),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+            padding: const EdgeInsets.all(35.0),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    "OneCard",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                    ),
                   ),
                 ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed("/settings");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30, top: 15),
+                    child: ListTile(
+                      leading: Icon(Icons.settings),
+                      title: Text(
+                        "Settings",
+                        style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: ListTile(
+                    leading: Icon(Icons.question_answer),
+                    title: Text(
+                      "Messenger",
+                      style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: ListTile(
+                    leading: Icon(Icons.live_help),
+                    title: Text(
+                      "Help",
+                      style: TextStyle(fontSize: 20, fontFamily: "Dosis"),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Provider.of<Auth>(context).logout();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: ListTile(
+                      leading: Icon(Icons.exit_to_app),
+                      title: Text(
+                        "Logout",
+                        style: TextStyle(fontSize: 18, fontFamily: "Dosis"),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       appBar: AppBar(
