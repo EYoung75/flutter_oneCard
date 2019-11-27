@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:one_card_revisited/providers/walletProvider.dart';
+import 'package:one_card_revisited/screens/networkSearch.dart';
 import "package:provider/provider.dart";
 import "./screens/tabScreen.dart";
 import "./providers/placesProvider.dart";
@@ -7,7 +8,7 @@ import "./providers/auth.dart";
 import "./screens/authScreen.dart";
 import "./providers/user.dart";
 import "./screens/network.dart";
-
+import "./screens/settings.dart";
 
 void main() async {
   runApp(MyApp());
@@ -22,9 +23,6 @@ class MyApp extends StatelessWidget {
           value: Auth(),
         ),
         ChangeNotifierProvider.value(
-          value: Places(),
-        ),
-        ChangeNotifierProvider.value(
           value: WalletProvider(),
         ),
         ChangeNotifierProxyProvider<Auth, User>(
@@ -32,6 +30,12 @@ class MyApp extends StatelessWidget {
             auth.getEmail,
             auth.userId,
             auth.token,
+          ),
+        ),
+        ChangeNotifierProxyProvider<Auth, Places>(
+          builder: (ctx, auth, _) => Places(
+            auth.userId,
+            auth.token
           ),
         )
         // ChangeNotifierProvider.value(
@@ -45,17 +49,22 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primaryColor: Color.fromRGBO(47, 95, 114, 1),
             accentColor: Color.fromRGBO(255, 233, 214, 1),
-            fontFamily: "Maven",
+            fontFamily: "Barlow",
+            textTheme: TextTheme(
+              title: TextStyle(fontSize: 36, fontFamily: "BenchNine", color: Colors.white),
+              subtitle: TextStyle(fontSize: 30, fontFamily: "Barlow", color: Colors.black),
+              body1: TextStyle(fontSize: 24, fontFamily: "Barlow", color: Colors.white),
+              body2: TextStyle(fontSize: 22, fontFamily: "BenchNine", color: Colors.black),
+              button: TextStyle(fontSize: 20),
+              display1: TextStyle(fontSize: 16, fontFamily: "BenchNine", color: Colors.white)
+            ),
           ),
-          // routes: {
-          //   "/home": (ctx) => TabScreen(),
-          // },
-          // home: Network()
+          routes: {
+            "/home": (ctx) => TabScreen(),
+            "/settings": (ctx) => Settings()
+          },
+          // home: NetworkSearch()
           home: !auth.isAuth ? AuthScreen() : TabScreen(),
-
-
-
-
 
           //       : Consumer<User>(
           //           builder: (ctx, user, _) =>

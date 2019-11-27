@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:one_card_revisited/widgets/mainMap.dart';
 import "../providers/placesProvider.dart";
 import "package:provider/provider.dart";
-import "../providers/user.dart";
+import "../providers/placesProvider.dart";
 import "dart:io";
 
 class PlaceDetails extends StatelessWidget {
@@ -16,7 +16,7 @@ class PlaceDetails extends StatelessWidget {
         icon: Icon(Icons.group),
         label: Text("Check In"),
         onPressed: () async {
-          await Provider.of<User>(context).checkIn(selectedPlace.placeId);
+          await Provider.of<Places>(context).checkIn(selectedPlace.placeId);
           Navigator.of(context).pop();
         },
       ),

@@ -15,8 +15,6 @@ class User with ChangeNotifier {
   String authToken;
   VirtualCard userCard;
   bool triedFetch = false;
-  String checkedIn;
-  bool isloading = false;
   File pickedImage;
 
   User(this.email, this.userId, this.authToken);
@@ -34,6 +32,7 @@ class User with ChangeNotifier {
             FirebaseStorage.instance.ref().child(resData["image"]);
         final fetchedImage = await userImage.getDownloadURL();
         VirtualCard fetchedCard = VirtualCard(
+          resData["userId"],
           resData["name"],
           Image.network(fetchedImage, fit: BoxFit.cover),
           resData["title"],
@@ -64,6 +63,7 @@ class User with ChangeNotifier {
     if (imageUploaded == true) {
       final storedImage = await imageReference.getDownloadURL();
       final VirtualCard newCard = VirtualCard(
+        userId,
         name,
         Image.network(storedImage, fit: BoxFit.cover),
         title,
@@ -75,6 +75,7 @@ class User with ChangeNotifier {
       final res = await http.put(
         url,
         body: json.encode({
+          "userId": userId,
           "name": newCard.name,
           "title": newCard.title,
           "userEmail": email,
@@ -87,55 +88,20 @@ class User with ChangeNotifier {
     }
     notifyListeners();
   }
-
-  Future<void> checkIn(String placeId) async {
-    try {
-      isloading = true;
-      final url =
-          "https://onecard-a0072.firebaseio.com/users/$userId.json?auth=$authToken";
-      final res = await http.patch(
-        url,
-        body: json.encode(
-          {
-            "location": placeId,
-          },
-        ),
-      );
-
-      checkedIn = placeId;
-      print(json.decode(res.body));
-    } catch (err) {
-      throw (err);
-    }
-    isloading = false;
-    notifyListeners();
-  }
-
-  Future<void> checkout() async {
-    try {
-      isloading = true;
-      final url =
-          "https://onecard-a0072.firebaseio.com/users/$userId/location.json?auth=$authToken";
-      final res = await http.patch(
-        url,
-        body: json.encode(
-          {"location": null},
-        ),
-      );
-      checkedIn = null;
-    } catch (err) {
-      throw (err);
-    }
-    isloading = false;
-    notifyListeners();
-  }
 }
 
 class VirtualCard {
+  String userId;
   String name;
   dynamic image;
   String title;
   String email;
 
-  VirtualCard([this.name, this.image, this.title, this.email]);
+  VirtualCard([
+    this.userId,
+    this.name,
+    this.image,
+    this.title,
+    this.email,
+  ]);
 }

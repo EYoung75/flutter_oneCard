@@ -1,13 +1,13 @@
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
-import "../providers/user.dart";
+import "../providers/placesProvider.dart";
 import "./networkCheckedIn.dart";
 import "./networkSearch.dart";
 
 class Network extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final placeData = Provider.of<Places>(context);
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -23,11 +23,7 @@ class Network extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: user.isloading == true
-            ? CircularProgressIndicator()
-            : Container(
-                child: user.checkedIn == null ? NetworkSearch() : CheckedIn(),
-              ),
+        child: placeData.checkedIn == null ? NetworkSearch() : CheckedIn(),
       ),
     );
   }

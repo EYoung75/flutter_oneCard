@@ -64,8 +64,6 @@ class _NetworkSearchState extends State<NetworkSearch> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final placeData = Provider.of<Places>(context);
@@ -148,7 +146,9 @@ class _NetworkSearchState extends State<NetworkSearch> {
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                placeData.places.length <= 0 || placeData.places == null || _searchValue == null
+                                placeData.places.length <= 0 ||
+                                        placeData.places == null ||
+                                        _searchValue == null
                                     ? "Suggestions:"
                                     : "Results for $_searchValue",
                                 textAlign: TextAlign.left,

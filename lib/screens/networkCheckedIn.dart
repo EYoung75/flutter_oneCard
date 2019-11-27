@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
-import "../providers/user.dart";
+import "../providers/placesProvider.dart";
 
 class CheckedIn extends StatelessWidget {
   @override
@@ -25,7 +25,7 @@ class CheckedIn extends StatelessWidget {
             icon: Icon(Icons.exit_to_app),
             label: Text("Check Out"),
             onPressed: () {
-              Provider.of<User>(context).checkout();
+              Provider.of<Places>(context).checkout();
             },
           ),
         ],
