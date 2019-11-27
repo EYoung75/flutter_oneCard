@@ -13,7 +13,7 @@ class NetworkSearch extends StatefulWidget {
 }
 
 class _NetworkSearchState extends State<NetworkSearch> {
-  String _searchValue;
+  String searchValue;
   Completer<GoogleMapController> _mapController = Completer();
   TextEditingController _searchController = TextEditingController();
   final geolocator = Geolocator();
@@ -45,21 +45,21 @@ class _NetworkSearchState extends State<NetworkSearch> {
     _searchController.dispose();
     Provider.of<Places>(context).clearSearch();
     setState(() {
-      _searchValue = "";
+      searchValue = "";
     });
     super.dispose();
   }
 
   void handleSearch() {
     setState(() {
-      _searchValue = _searchController.value.toString();
+      searchValue = _searchController.value.toString();
     });
   }
 
   void toggleSearching() {
     setState(() {
       searching = !searching;
-      _searchValue = "";
+      searchValue = "";
       _searchController.clear();
     });
   }
@@ -124,7 +124,7 @@ class _NetworkSearchState extends State<NetworkSearch> {
                               controller: _searchController,
                               onChanged: (value) {
                                 setState(() {
-                                  _searchValue = value;
+                                  searchValue = value;
                                 });
                               },
                             ),
@@ -134,9 +134,9 @@ class _NetworkSearchState extends State<NetworkSearch> {
                               child: RaisedButton.icon(
                                 icon: Icon(Icons.search),
                                 label: Text("Find"),
-                                onPressed: () {
-                                  placeData.fetchNearby(
-                                      currentPosition, _searchValue);
+                                onPressed: () async {
+                                  await placeData.fetchNearby(
+                                      currentPosition, searchValue);
                                 },
                               ),
                             ),
@@ -148,9 +148,9 @@ class _NetworkSearchState extends State<NetworkSearch> {
                               child: Text(
                                 placeData.places.length <= 0 ||
                                         placeData.places == null ||
-                                        _searchValue == null
+                                        searchValue == null
                                     ? "Suggestions:"
-                                    : "Results for $_searchValue",
+                                    : "Results for $searchValue",
                                 textAlign: TextAlign.left,
                                 style: Theme.of(context).textTheme.body1,
                               ),
