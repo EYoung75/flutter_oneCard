@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:badges/badges.dart';
+// import 'package:badges/badges.dart';
 
 class Wallet extends StatelessWidget {
   final List<Map<String, String>> cardList = [
@@ -49,19 +49,19 @@ class Wallet extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   ListTile(
-                    leading: Badge(
-                      elevation: 7,
-                      padding: EdgeInsets.all(4),
-                      child: Icon(
-                        Icons.group,
-                        size: 40,
-                      ),
-                      badgeColor: Theme.of(context).primaryColor,
-                      badgeContent: Text(
-                        "28",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
+                    // leading: Badge(
+                    //   elevation: 7,
+                    //   padding: EdgeInsets.all(4),
+                    //   child: Icon(
+                    //     Icons.group,
+                    //     size: 40,
+                    //   ),
+                    //   badgeColor: Theme.of(context).primaryColor,
+                    //   badgeContent: Text(
+                    //     "28",
+                    //     style: TextStyle(fontSize: 20),
+                    //   ),
+                    // ),
                     title: Text(
                       "Work",
                       style: Theme.of(context).textTheme.body2,

@@ -33,45 +33,6 @@ class Places with ChangeNotifier {
     return nearbyPlaces;
   }
 
-  Future<dynamic> fetchNearby(Position position, String searchTerm) async {
-    Set<Marker> newNearby = {};
-
-    // final url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${util.googleMap}&input=$searchTerm&inputtype=textquery&locationbias=point:${position.latitude},${position.longitude}";
-    final url =
-        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${util.googleMap}&location=${position.latitude},${position.longitude}&rankby=distance&name=$searchTerm";
-
-    final res = await http.get(url);
-    final resData = await json.decode(res.body);
-    final List<Place> loadedPlaces = [];
-    await resData.forEach(
-      (place) => loadedPlaces.add(
-        Place(
-          name: place["name"],
-          placeId: place["id"].toString(),
-          address: place["vicinity"],
-          location: LatLng(
-            place["geometry"]["location"]["lat"],
-            place["geometry"]["location"]["lng"],
-          ),
-          icon: place["icon"],
-        ),
-      ),
-    );
-    _places = loadedPlaces;
-    _places.forEach(
-      (place) => newNearby.add(
-        Marker(
-          markerId: MarkerId(place.placeId),
-          position: place.location,
-          infoWindow: InfoWindow(title: place.name),
-        ),
-      ),
-    );
-    nearbyPlaces = newNearby;
-
-    notifyListeners();
-  }
- 
   Future<void> clearSearch() async {
     _places = [];
   }
@@ -94,6 +55,31 @@ class Places with ChangeNotifier {
     } catch (err) {
       throw (err);
     }
+    notifyListeners();
+  }
+
+  Future<void> fetchNearby(String searchValue, Position position) async {
+    final url =
+        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${util.googleMap}&location=${position.latitude},${position.longitude}&rankby=distance&keyword=$searchValue";
+    final res = await http.get(url);
+    final resData = await json.decode(res.body);
+    final List<Place> loadedPlaces = [];
+    print("FUCKIGN SHDIFH $resData");
+    await resData.forEach(
+      (place) => loadedPlaces.add(
+        Place(
+          name: place["name"],
+          placeId: place["id"].toString(),
+          address: place["vicinity"],
+          location: LatLng(
+            place["geometry"]["location"]["lat"],
+            place["geometry"]["location"]["lng"],
+          ),
+          icon: place["icon"],
+        ),
+      ),
+    );
+    _places = loadedPlaces;
     notifyListeners();
   }
 

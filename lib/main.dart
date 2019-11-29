@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
             "/settings": (ctx) => Settings()
           },
           // home: NetworkSearch()
-          home: !auth.isAuth ? AuthScreen() : TabScreen(),
+          home: auth.isAuth ? AuthScreen() : TabScreen(),
 
           //       : Consumer<User>(
           //           builder: (ctx, user, _) =>
