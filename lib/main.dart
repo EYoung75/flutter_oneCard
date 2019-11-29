@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:one_card_revisited/providers/walletProvider.dart';
 import 'package:one_card_revisited/screens/networkSearch.dart';
+import 'package:one_card_revisited/screens/wallet.dart';
 import "package:provider/provider.dart";
 import "./screens/tabScreen.dart";
 import "./providers/placesProvider.dart";
@@ -22,14 +23,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Auth(),
         ),
-        ChangeNotifierProvider.value(
-          value: WalletProvider(),
-        ),
         ChangeNotifierProxyProvider<Auth, User>(
           builder: (ctx, auth, initData) => User(
             auth.getEmail,
             auth.userId,
             auth.token,
+          ),
+        ),
+        ChangeNotifierProxyProvider<Auth,WalletProvider>(
+          builder: (ctx, auth, _) => WalletProvider(
+            auth.userId,
+            auth.token
           ),
         ),
         ChangeNotifierProxyProvider<Auth, Places>(
