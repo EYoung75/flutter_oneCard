@@ -14,7 +14,7 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: 150),
+        padding: EdgeInsets.only(top: 50),
         alignment: Alignment.center,
         height: double.infinity,
         width: double.infinity,
@@ -36,9 +36,9 @@ class AuthScreen extends StatelessWidget {
               "OneCard",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: "Open Sans",
-                fontSize: 30,
-                color: Theme.of(context).primaryColor,
+                fontFamily: "BenchNine",
+                fontSize: 50,
+                color: Colors.white,
               ),
             ),
             AuthCard(),
@@ -155,7 +155,10 @@ class _AuthCardState extends State<AuthCard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(_authMode == AuthMode.Login ? "Sign In" : "Sign Up"),
+              Text(
+                _authMode == AuthMode.Login ? "Login" : "Sign Up",
+                style: TextStyle(color: Colors.black),
+              ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'E-Mail:'),
                 keyboardType: TextInputType.emailAddress,
