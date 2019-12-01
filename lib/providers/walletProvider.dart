@@ -14,7 +14,7 @@ class WalletProvider extends ChangeNotifier {
 
   List<VirtualCard> addedUsers = [];
 
-  String result = "";
+  String result;
   bool showScan = false;
 
   Future scanQR() async {

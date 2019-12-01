@@ -5,8 +5,8 @@ import "../screens/network.dart";
 import "../screens/wallet.dart";
 import "package:provider/provider.dart";
 import "../providers/auth.dart";
-import "package:provider/provider.dart";
 import "../providers/walletProvider.dart";
+import "./ScanScreen.dart";
 
 class TabScreen extends StatefulWidget {
   @override
@@ -137,7 +137,10 @@ class _TabScreenState extends State<TabScreen> {
           style: Theme.of(context).textTheme.title,
         ),
       ),
-      body: _pages[_selectedPageIndex]["page"],
+      body: wallet.result == null ?
+      _pages[_selectedPageIndex]["page"] :
+      ScanScreen()
+      ,
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: BottomNavigationBar(
         elevation: 10,
