@@ -32,7 +32,7 @@ class WalletProvider extends ChangeNotifier {
       resData["userId"],
       resData["name"],
       fetchedImage,
-      resData["title"],
+      resData["title"], 
     );
   }
 
