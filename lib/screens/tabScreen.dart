@@ -1,14 +1,12 @@
-import "dart:async";
-import 'dart:convert';
-import "package:barcode_scan/barcode_scan.dart";
 import "package:flutter/material.dart";
-import "package:flutter/services.dart";
 import 'package:one_card_revisited/providers/user.dart';
 import "../screens/home.dart";
 import "../screens/network.dart";
 import "../screens/wallet.dart";
 import "package:provider/provider.dart";
 import "../providers/auth.dart";
+import "package:provider/provider.dart";
+import "../providers/walletProvider.dart";
 
 class TabScreen extends StatefulWidget {
   @override
@@ -20,35 +18,6 @@ class _TabScreenState extends State<TabScreen> {
 
   int _selectedPageIndex = 1;
 
-  String result = "";
-  bool showScan = false;
-
-  Future _scanQR() async {
-    try {
-      String qrResult = await BarcodeScanner.scan();
-      setState(() {
-        result = qrResult;
-        showScan = true;
-      });
-    } on PlatformException catch (ex) {
-      if (ex.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          result = "Camera access was denied";
-        });
-      } else {
-        setState(() {
-          result = "Unknown Error $ex";
-        });
-      }
-    } on FormatException {
-      setState(() {
-        result = "Camera was not used to scan anything";
-      });
-    } catch (ex) {
-      result = "Unknown error code: $ex";
-    }
-    print(result.toString());
-  }
 
   @override
   void initState() {
@@ -68,6 +37,7 @@ class _TabScreenState extends State<TabScreen> {
   }
 
   Widget build(BuildContext context) {
+    final wallet = Provider.of<WalletProvider>(context);
     return Scaffold(
       drawer: Drawer(
         child: Container(
@@ -156,7 +126,9 @@ class _TabScreenState extends State<TabScreen> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.camera),
-            onPressed: _scanQR,
+            onPressed: () {
+              wallet.scanQR();
+            },
           )
         ],
         elevation: 10,
