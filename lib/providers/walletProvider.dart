@@ -74,10 +74,10 @@ class WalletProvider extends ChangeNotifier {
     final res = await http.get(url);
   }
 
-  Future<void> deleteUser(String userId) async {
+  Future<void> deleteUser() async {
     final url = "";
     final res = await http.delete(
-      url,
+      url
     );
     _result = "";
     showScan = false;

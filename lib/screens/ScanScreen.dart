@@ -93,7 +93,7 @@ class ScanScreen extends StatelessWidget {
               RaisedButton.icon(
                 icon: Icon(Icons.delete),
                 onPressed: () {
-                  
+                  wallet.deleteUser();
                 },
                 label: Text("Delete"),
               )
