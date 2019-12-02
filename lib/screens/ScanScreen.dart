@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
+import "../providers/walletProvider.dart";
 
 class ScanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final wallet = Provider.of<WalletProvider>(context);
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -76,7 +79,9 @@ class ScanScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 25,),
+          SizedBox(
+            height: 25,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -87,7 +92,9 @@ class ScanScreen extends StatelessWidget {
               ),
               RaisedButton.icon(
                 icon: Icon(Icons.delete),
-                onPressed: () {},
+                onPressed: () {
+                  
+                },
                 label: Text("Delete"),
               )
             ],

@@ -18,7 +18,6 @@ class _TabScreenState extends State<TabScreen> {
 
   int _selectedPageIndex = 1;
 
-
   @override
   void initState() {
     super.initState();
@@ -137,10 +136,9 @@ class _TabScreenState extends State<TabScreen> {
           style: Theme.of(context).textTheme.title,
         ),
       ),
-      body: wallet.result == null ?
-      _pages[_selectedPageIndex]["page"] :
-      ScanScreen()
-      ,
+      body: wallet.qrContent == false
+          ? _pages[_selectedPageIndex]["page"]
+          : ScanScreen(),
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: BottomNavigationBar(
         elevation: 10,

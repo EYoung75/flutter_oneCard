@@ -14,28 +14,36 @@ class WalletProvider extends ChangeNotifier {
 
   List<VirtualCard> addedUsers = [];
 
-  String result;
+  String _result = "";
   bool showScan = false;
+  bool _qrError = false;
+
+  bool get qrContent {
+    return _qrError;
+  }
 
   Future scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
-
-      result = qrResult;
+      _result = qrResult;
       showScan = true;
+      _qrError = false;
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
-        result = "Camera access was denied";
+        _result = "Camera access was denied";
       } else {
-        result = "Unknown Error $ex";
+        _result = "Unknown Error $ex";
       }
+      _qrError = true;
     } on FormatException {
-      result = "Camera was not used to scan anything";
+      _result = "Camera was not used to scan anything";
+      _qrError = true;
     } catch (ex) {
-      result = "Unknown error code: $ex";
+      _result = "Unknown error code: $ex";
+      _qrError = true;
     }
     notifyListeners();
-    print(result.toString());
+    print(_result.toString());
   }
 
   Future<void> addUser(String newUser) async {
@@ -71,5 +79,9 @@ class WalletProvider extends ChangeNotifier {
     final res = await http.delete(
       url,
     );
+    _result = "";
+    showScan = false;
+    _qrError = false;
+    notifyListeners();
   }
 }
