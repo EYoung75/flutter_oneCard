@@ -83,7 +83,9 @@ class _NetworkSearchState extends State<NetworkSearch> {
           ),
         ),
         child: currentPosition == null
-            ? CircularProgressIndicator()
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
             : ListView(
                 children: <Widget>[
                   Container(
@@ -135,7 +137,7 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                 icon: Icon(Icons.search),
                                 label: Text("Find"),
                                 onPressed: () {
-                                placeData.fetchNearby(
+                                  placeData.fetchNearby(
                                       searchValue, currentPosition);
                                 },
                               ),

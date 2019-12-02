@@ -12,16 +12,11 @@ class WalletProvider extends ChangeNotifier {
   String authToken;
   WalletProvider(this.userId, this.authToken);
 
-  List<VirtualCard> addedUsers = [];
+  // List<VirtualCard> addedUsers = [];
 
   String _result = "";
   bool showScan = false;
-  // bool _qrError = false;
   VirtualCard scannedCard;
-
-  // bool get qrContent {
-  //   return _qrError;
-  // }
 
   Future scanQR() async {
     try {
@@ -29,20 +24,16 @@ class WalletProvider extends ChangeNotifier {
       _result = qrResult;
       showScan = true;
       fetchUser();
-      // _qrError = false;
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
         _result = "Camera access was denied";
       } else {
         _result = "Unknown Error $ex";
       }
-      // _qrError = true;
     } on FormatException {
       _result = "Camera was not used to scan anything";
-      // _qrError = true;
     } catch (ex) {
       _result = "Unknown error code: $ex";
-      // _qrError = true;
     }
     notifyListeners();
     print(_result.toString());
@@ -62,6 +53,7 @@ class WalletProvider extends ChangeNotifier {
         },
       ),
     );
+    _result = "";
     scannedCard = null;
     notifyListeners();
     print(
@@ -71,7 +63,7 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> fetchUser() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$_result/card.json?auth=$authToken";
+        "https://onecard-a0072.firebaseio.com/users/${scannedCard.userId}/card.json?auth=$authToken";
     final res = await http.get(url);
     final resData = await json.decode(res.body);
     final userImage = FirebaseStorage.instance.ref().child(resData["image"]);
@@ -101,7 +93,6 @@ class WalletProvider extends ChangeNotifier {
     final res = await http.delete(url);
     _result = "";
     showScan = false;
-    // _qrError = false;
     notifyListeners();
   }
 }

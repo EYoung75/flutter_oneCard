@@ -46,7 +46,7 @@ class Auth with ChangeNotifier {
       );
       final resData = json.decode(res.body);
       print(resData);
-       if(resData["error"] != null) {
+      if (resData["error"] != null) {
         throw HttpException(resData["error"]["message"]);
       }
       _token = resData["idToken"];
@@ -75,18 +75,19 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=APIKEYHERE";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDq3eUVrAasnKOnS2hIpfxDNRC3evYJSYk";
 
     return _authenicate(email, password, url);
   }
 
   Future<void> signUp(String email, String password) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=APIKEYHERE";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDq3eUVrAasnKOnS2hIpfxDNRC3evYJSYk";
 
     await _authenicate(email, password, url);
 
-    final createUserUrl = "https://onecard-a0072.firebaseio.com/users/$_userId.json?";
+    final createUserUrl =
+        "https://onecard-a0072.firebaseio.com/users/$_userId.json?";
     final res = await http.put(
       createUserUrl,
       body: json.encode(

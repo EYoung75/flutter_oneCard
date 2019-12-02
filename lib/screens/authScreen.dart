@@ -29,20 +29,22 @@ class AuthScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: ListView(
-          padding: EdgeInsets.only(top: 45),
-          children: <Widget>[
-            Text(
-              "OneCard",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: "BenchNine",
-                fontSize: 50,
-                color: Colors.white,
+        child: Center(
+          child: ListView(   
+            padding: EdgeInsets.only(top: 45),
+            children: <Widget>[
+              Text(
+                "OneCard",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "BenchNine",
+                  fontSize: 50,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            AuthCard(),
-          ],
+              AuthCard(),
+            ],
+          ),
         ),
       ),
     );

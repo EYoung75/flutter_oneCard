@@ -50,6 +50,18 @@ class User with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteUser() async {
+    final dbUrl =
+        "https://onecard-a0072.firebaseio.com/users/$userId.json?auth=$authToken";
+    final dbClear = await http.delete(dbUrl);
+    final authUrl =
+        "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=";
+    ;
+    print(
+      json.decode(dbClear.body),
+    );
+  }
+
   Future<void> createUserProfile(
       String name, String title, dynamic image) async {
     bool imageUploaded = false;
