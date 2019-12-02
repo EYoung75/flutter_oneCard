@@ -41,9 +41,6 @@ class AuthScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
             AuthCard(),
           ],
         ),
@@ -158,7 +155,7 @@ class _AuthCardState extends State<AuthCard> {
           ],
         ),
         padding: EdgeInsets.symmetric(horizontal: 50),
-        margin: EdgeInsets.all(50),
+        margin:  EdgeInsets.fromLTRB(50, 10, 50, 50),
         height: 350,
         width: double.infinity,
         child: Form(

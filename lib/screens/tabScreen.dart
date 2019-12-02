@@ -39,6 +39,8 @@ class _TabScreenState extends State<TabScreen> {
     final wallet = Provider.of<WalletProvider>(context);
     return Scaffold(
       drawer: Drawer(
+        elevation: 7,
+        semanticLabel: "App Drawer",
         child: Container(
           height: double.infinity,
           width: double.infinity,
@@ -65,6 +67,11 @@ class _TabScreenState extends State<TabScreen> {
                       fontSize: 40,
                     ),
                   ),
+                ),
+                Divider(
+                  color: Colors.white,
+                  thickness: 1.5,
+                  height: 10,
                 ),
                 InkWell(
                   onTap: () {
@@ -136,7 +143,7 @@ class _TabScreenState extends State<TabScreen> {
           style: Theme.of(context).textTheme.title,
         ),
       ),
-      body: wallet.qrContent == false
+      body: wallet.scannedCard == null
           ? _pages[_selectedPageIndex]["page"]
           : ScanScreen(),
       resizeToAvoidBottomInset: true,

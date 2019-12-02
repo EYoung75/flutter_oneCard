@@ -6,6 +6,7 @@ class ScanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final wallet = Provider.of<WalletProvider>(context);
+    final scannedCard = Provider.of<WalletProvider>(context).scannedCard;
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -36,8 +37,8 @@ class ScanScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: Colors.white70,
             ),
-            height: 450,
-            width: 350,
+            height: 400,
+            width: 300,
             child: Stack(
               alignment: Alignment.bottomLeft,
               children: <Widget>[
@@ -49,7 +50,7 @@ class ScanScreen extends StatelessWidget {
                       Radius.circular(10),
                     ),
                     child: Image.network(
-                      "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
+                      scannedCard.image,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -57,20 +58,22 @@ class ScanScreen extends StatelessWidget {
                 Container(
                   height: 75,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
                     color: Color.fromRGBO(255, 255, 255, .8),
                   ),
                   width: double.infinity,
-                  margin: EdgeInsets.all(25),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Evan Young",
+                        scannedCard.name,
                         style: Theme.of(context).textTheme.subtitle,
                       ),
                       Text(
-                        "Software Engineer",
+                        scannedCard.title,
                         style: Theme.of(context).textTheme.subtitle,
                       ),
                     ],
@@ -87,13 +90,15 @@ class ScanScreen extends StatelessWidget {
             children: <Widget>[
               RaisedButton.icon(
                 icon: Icon(Icons.add),
-                onPressed: () {},
+                onPressed: () {
+                  wallet.addUser();
+                },
                 label: Text("Add"),
               ),
               RaisedButton.icon(
                 icon: Icon(Icons.delete),
                 onPressed: () {
-                  wallet.deleteUser();
+                  wallet.cancel();
                 },
                 label: Text("Delete"),
               )

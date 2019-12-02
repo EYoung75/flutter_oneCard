@@ -16,57 +16,79 @@ class WalletProvider extends ChangeNotifier {
 
   String _result = "";
   bool showScan = false;
-  bool _qrError = false;
+  // bool _qrError = false;
+  VirtualCard scannedCard;
 
-  bool get qrContent {
-    return _qrError;
-  }
+  // bool get qrContent {
+  //   return _qrError;
+  // }
 
   Future scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
       _result = qrResult;
       showScan = true;
-      _qrError = false;
+      fetchUser();
+      // _qrError = false;
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
         _result = "Camera access was denied";
       } else {
         _result = "Unknown Error $ex";
       }
-      _qrError = true;
+      // _qrError = true;
     } on FormatException {
       _result = "Camera was not used to scan anything";
-      _qrError = true;
+      // _qrError = true;
     } catch (ex) {
       _result = "Unknown error code: $ex";
-      _qrError = true;
+      // _qrError = true;
     }
     notifyListeners();
     print(_result.toString());
   }
 
-  Future<void> addUser(String newUser) async {
+  Future<void> addUser() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallet/$newUser";
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallet/${scannedCard.userId}.json?auth=$authToken";
     final res = await http.put(
       url,
+      body: json.encode(
+        {
+          "userId": scannedCard.userId,
+          "name": scannedCard.name,
+          "title": scannedCard.title,
+          "image": scannedCard.image
+        },
+      ),
+    );
+    scannedCard = null;
+    notifyListeners();
+    print(
+      json.decode(res.body),
     );
   }
 
-  Future<VirtualCard> fetchUser(String id) async {
+  Future<void> fetchUser() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$id/card.json?auth=$authToken";
+        "https://onecard-a0072.firebaseio.com/users/$_result/card.json?auth=$authToken";
     final res = await http.get(url);
     final resData = await json.decode(res.body);
     final userImage = FirebaseStorage.instance.ref().child(resData["image"]);
     final fetchedImage = await userImage.getDownloadURL();
-    return VirtualCard(
+    scannedCard = VirtualCard(
       resData["userId"],
       resData["name"],
       fetchedImage,
       resData["title"],
     );
+    notifyListeners();
+  }
+
+  Future<void> cancel() async {
+    scannedCard = null;
+    _result = "";
+    notifyListeners();
   }
 
   Future<void> fetchCollections() async {
@@ -76,12 +98,10 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> deleteUser() async {
     final url = "";
-    final res = await http.delete(
-      url
-    );
+    final res = await http.delete(url);
     _result = "";
     showScan = false;
-    _qrError = false;
+    // _qrError = false;
     notifyListeners();
   }
 }
