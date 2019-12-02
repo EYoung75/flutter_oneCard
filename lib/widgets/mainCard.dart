@@ -50,13 +50,16 @@ class MainCard extends StatelessWidget {
                   ),
             ),
             Container(
-              height: 75,
+              height: 85,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(255, 255, 255, .8),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
+                ),
+                color: Color.fromRGBO(255, 255, 255, .7),
               ),
               width: double.infinity,
-              margin: EdgeInsets.all(25),
+              // margin: EdgeInsets.all(25),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

@@ -21,9 +21,9 @@ class AuthScreen extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).primaryColor.withOpacity(.3),
-              Theme.of(context).primaryColor.withOpacity(.7),
               Theme.of(context).primaryColor,
+              Theme.of(context).primaryColor.withOpacity(.8),
+              Theme.of(context).primaryColor.withOpacity(.4),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -40,6 +40,9 @@ class AuthScreen extends StatelessWidget {
                 fontSize: 50,
                 color: Colors.white,
               ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             AuthCard(),
           ],
@@ -142,12 +145,20 @@ class _AuthCardState extends State<AuthCard> {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromRGBO(255, 255, 255, .8),
+          color: Color.fromRGBO(255, 255, 255, 1),
           borderRadius: BorderRadius.circular(7),
           border: Border.all(color: Colors.blueGrey, width: 2),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 18,
+              spreadRadius: 10,
+              offset: Offset(6, 12)
+            )
+          ],
         ),
         padding: EdgeInsets.symmetric(horizontal: 50),
-        margin: EdgeInsets.symmetric(horizontal: 50),
+        margin: EdgeInsets.all(50),
         height: 350,
         width: double.infinity,
         child: Form(
