@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
             auth.getEmail,
             auth.userId,
             auth.token,
+            auth.apiKey
           ),
         ),
         ChangeNotifierProxyProvider<Auth,WalletProvider>(

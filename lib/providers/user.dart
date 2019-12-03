@@ -16,8 +16,9 @@ class User with ChangeNotifier {
   VirtualCard userCard;
   bool triedFetch = false;
   File pickedImage;
+  String apiKey;
 
-  User(this.email, this.userId, this.authToken);
+  User(this.email, this.userId, this.authToken, this.apiKey);
 
   Future<void> fetchUserProfile() async {
     final url =
@@ -53,13 +54,18 @@ class User with ChangeNotifier {
   Future<void> deleteUser() async {
     final dbUrl =
         "https://onecard-a0072.firebaseio.com/users/$userId.json?auth=$authToken";
-    final dbClear = await http.delete(dbUrl);
-    final authUrl =
-        "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=";
-    ;
-    print(
-      json.decode(dbClear.body),
-    );
+    StorageReference imageReference =
+        FirebaseStorage.instance.ref().child("$userId/${userCard.image}");
+    await imageReference.delete().then((_) {
+      http.delete(dbUrl).then((_) {
+        final authUrl =
+            "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=$apiKey";
+        ;
+        http.delete(authUrl);
+      });
+    });
+
+    notifyListeners();
   }
 
   Future<void> createUserProfile(

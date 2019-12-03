@@ -12,7 +12,6 @@ class WalletProvider extends ChangeNotifier {
   String authToken;
   WalletProvider(this.userId, this.authToken);
 
-  // List<VirtualCard> addedUsers = [];
 
   String _result = "";
   bool showScan = false;
@@ -63,7 +62,7 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> fetchUser() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/${scannedCard.userId}/card.json?auth=$authToken";
+        "https://onecard-a0072.firebaseio.com/users/$_result/card.json?auth=$authToken";
     final res = await http.get(url);
     final resData = await json.decode(res.body);
     final userImage = FirebaseStorage.instance.ref().child(resData["image"]);
