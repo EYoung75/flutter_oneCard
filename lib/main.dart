@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:one_card_revisited/providers/walletProvider.dart';
+import 'package:one_card_revisited/screens/createCard.dart';
 import 'package:one_card_revisited/screens/networkSearch.dart';
 import 'package:one_card_revisited/screens/wallet.dart';
 import "package:provider/provider.dart";
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
             "/home": (ctx) => TabScreen(),
             "/settings": (ctx) => Settings()
           },
-          // home: NetworkSearch()
+          // home: CreateCardScreen()
           home: !auth.isAuth ? AuthScreen() : TabScreen(),
 
           //       : Consumer<User>(

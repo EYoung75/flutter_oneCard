@@ -12,10 +12,10 @@ class WalletProvider extends ChangeNotifier {
   String authToken;
   WalletProvider(this.userId, this.authToken);
 
-
   String _result = "";
   bool showScan = false;
   VirtualCard scannedCard;
+  List wallets = [];
 
   Future scanQR() async {
     try {
@@ -40,7 +40,7 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> addUser() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallet/${scannedCard.userId}.json?auth=$authToken";
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallets/${scannedCard.userId}.json?auth=$authToken";
     final res = await http.put(
       url,
       body: json.encode(
@@ -83,8 +83,11 @@ class WalletProvider extends ChangeNotifier {
   }
 
   Future<void> fetchCollections() async {
-    final url = "https://onecard-a0072.firebaseio.com/users/$userId/wallet";
+    final url = "https://onecard-a0072.firebaseio.com/users/$userId/wallets";
     final res = await http.get(url);
+    wallets.add(json.decode(res.body));
+    print("WALLETS $wallets");
+    notifyListeners();
   }
 
   Future<void> deleteUser() async {
