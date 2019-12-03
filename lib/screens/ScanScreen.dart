@@ -92,6 +92,14 @@ class ScanScreen extends StatelessWidget {
                 icon: Icon(Icons.add),
                 onPressed: () {
                   wallet.addUser();
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.green,
+                      content: Text("Added to your network!", style: Theme.of(context).textTheme.body1,),
+                      elevation: 5,
+                      duration: Duration(seconds: 1),
+                    ),
+                  );
                 },
                 label: Text("Add"),
               ),
