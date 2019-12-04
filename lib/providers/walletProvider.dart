@@ -15,7 +15,7 @@ class WalletProvider extends ChangeNotifier {
   String _result = "";
   bool showScan = false;
   VirtualCard scannedCard;
-  List wallets = [];
+  List wallet = [];
 
   Future scanQR() async {
     try {
@@ -39,10 +39,10 @@ class WalletProvider extends ChangeNotifier {
   }
 
   Future<void> addUser() async {
-    final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallets/${scannedCard.userId}.json?auth=$authToken";
+    final userOne =
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallets.json?auth=$authToken";
     final res = await http.put(
-      url,
+      userOne,
       body: json.encode(
         {
           "userId": scannedCard.userId,
@@ -52,12 +52,36 @@ class WalletProvider extends ChangeNotifier {
         },
       ),
     );
+    // final userTwo =
+    //     "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
+    // final resTwo = await http.get(userTwo).then(
+    //   (res) {
+    //     http.put(
+    //       "https://onecard-a0072.firebaseio.com/users/${scannedCard.userId}/wallets/$userId.json?auth=$authToken",
+    //       body: res,
+    //     );
+    //   },
+    // );
+    // final resTwo = await http.put(
+    //   userTwo,
+    //   body: json.encode(
+    //     {
+    //       "userId": scannedCard.userId,
+    //       "name": scannedCard.name,
+    //       "title": scannedCard.title,
+    //       "image": scannedCard.image
+    //     },
+    //   ),
+    // );
     _result = "";
     scannedCard = null;
     notifyListeners();
     print(
       json.decode(res.body),
     );
+    // print(
+    //   json.decode(resTwo.body),
+    // );
   }
 
   Future<void> fetchUser() async {
@@ -83,10 +107,12 @@ class WalletProvider extends ChangeNotifier {
   }
 
   Future<void> fetchCollections() async {
-    final url = "https://onecard-a0072.firebaseio.com/users/$userId/wallets";
+    final url =
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallets.json?auth=$authToken";
+
     final res = await http.get(url);
-    wallets.add(json.decode(res.body));
-    print("WALLETS $wallets");
+    wallet.add(json.decode(res.body));
+    print("WALLET:  ${json.decode(res.body)}");
     notifyListeners();
   }
 

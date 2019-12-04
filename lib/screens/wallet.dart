@@ -9,7 +9,12 @@ class Wallet extends StatefulWidget {
 }
 
 class _WalletState extends State<Wallet> {
- 
+  @override
+  void initState() {
+    Provider.of<WalletProvider>(context, listen: false).fetchCollections();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final wallet = Provider.of<WalletProvider>(context);
@@ -28,6 +33,7 @@ class _WalletState extends State<Wallet> {
         ),
       ),
       child: Container(
+        height: 350,
         margin: EdgeInsets.all(25),
         child: Column(
           children: <Widget>[
@@ -38,12 +44,14 @@ class _WalletState extends State<Wallet> {
             SizedBox(
               height: 45,
             ),
-            wallet.wallets.length == 0
+            wallet.wallet.isEmpty
                 ? EmptyWallet()
                 : ListView.builder(
-                    itemCount: wallet.wallets.length,
-                    itemBuilder: (ctx, i) => Card(
-                      child: Text(""),
+                    itemCount: wallet.wallet.length,
+                    itemBuilder: (ctx, i) => Container(
+                      height: 50,
+                      width: 50,
+                      child: Text("HEYYYYY"),
                     ),
                   )
           ],

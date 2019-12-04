@@ -5,7 +5,7 @@ class EmptyWallet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Text("Start scanning cards to add to your wallet!"),
+      child: Text("Start scanning cards to add to your wallet!", textAlign: TextAlign.center,),
     );
   }
 }
