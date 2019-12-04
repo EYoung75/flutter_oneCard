@@ -21,23 +21,23 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
 
   Future<void> _selectImage() async {
     final imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    File cropped = await ImageCropper.cropImage(sourcePath: imageFile.path);
+    // File cropped = await ImageCropper.cropImage(sourcePath: imageFile.path, iosUiSettings: IOSUiSettings(hidesNavigationBar: false, ));
     // final appDir = await syspaths.getApplicationDocumentsDirectory();
     // final fileName = path.basename(imageFile.path);
     // // final savedImage = await imageFile.copy("${appDir.path}/${fileName}");
     // final filePath = await path.absolute(appDir.toString(), fileName);
     // print("FILE PATH: $filePath");
     setState(() {
-      _pickedImage = cropped;
+      _pickedImage = imageFile;
     });
   }
 
-  Future<void> _cropImage() async {
-    File cropped = await ImageCropper.cropImage(sourcePath: _pickedImage.path);
-    setState(() {
-      _pickedImage = cropped;
-    });
-  }
+  // Future<void> _cropImage() async {
+  //   File cropped = await ImageCropper.cropImage(sourcePath: _pickedImage.path, );
+  //   setState(() {
+  //     _pickedImage = cropped;
+  //   });
+  // }
 
   // @override
   // void initState() {
@@ -100,6 +100,9 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                     name = value;
                   });
                 },
+                autocorrect: true,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(labelText: "Full Name:"),
               ),
               TextFormField(
@@ -108,6 +111,9 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                     title = value;
                   });
                 },
+                autocorrect: true,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(labelText: "Job Title"),
               ),
               // _pickedImage != null
@@ -123,7 +129,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
               //         ))
               //     : Container(),
               FlatButton(
-                child: Text("Select image"),
+                child: Text(_pickedImage == null ? "Select image" : "Select different image"),
                 onPressed: _selectImage,
               ),
               SizedBox(

@@ -37,7 +37,11 @@ class _HomeState extends State<Home> {
                     MainCard(),
                   ],
                 )
-              : CreateCardScreen(),
+              : userInfo.loading == true
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : CreateCardScreen(),
     );
   }
 }

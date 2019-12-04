@@ -17,10 +17,15 @@ class User with ChangeNotifier {
   bool triedFetch = false;
   File pickedImage;
   String apiKey;
+  bool loading = false;
 
   User(this.email, this.userId, this.authToken, this.apiKey);
 
   Future<void> fetchUserProfile() async {
+    // if(loading == false) {
+    //   loading = true;
+    //   notifyListeners();
+    // }
     final url =
         "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
 
@@ -48,6 +53,7 @@ class User with ChangeNotifier {
       throw (err);
     }
     triedFetch = true;
+    // loading = false;
     notifyListeners();
   }
 
@@ -70,6 +76,10 @@ class User with ChangeNotifier {
 
   Future<void> createUserProfile(
       String name, String title, dynamic image) async {
+    if (loading == false) {
+      loading = true;
+      notifyListeners();
+    }
     bool imageUploaded = false;
     String fileName = path.basename(image.path);
     StorageReference imageReference =
@@ -104,6 +114,7 @@ class User with ChangeNotifier {
       print("USER CARD: $userCard");
       print(res.body);
     }
+    loading = false;
     notifyListeners();
   }
 }
