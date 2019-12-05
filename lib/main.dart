@@ -1,16 +1,13 @@
 import "package:flutter/material.dart";
-import 'package:one_card_revisited/providers/walletProvider.dart';
-import 'package:one_card_revisited/screens/createCard.dart';
-import 'package:one_card_revisited/screens/networkSearch.dart';
-import 'package:one_card_revisited/screens/wallet.dart';
 import "package:provider/provider.dart";
+
 import "./screens/tabScreen.dart";
+import "./screens/settings.dart";
+import "./screens/authScreen.dart";
 import "./providers/placesProvider.dart";
 import "./providers/auth.dart";
-import "./screens/authScreen.dart";
 import "./providers/user.dart";
-import "./screens/network.dart";
-import "./screens/settings.dart";
+import "./providers/walletProvider.dart";
 
 void main() async {
   runApp(MyApp());
@@ -71,12 +68,6 @@ class MyApp extends StatelessWidget {
           },
           // home: CreateCardScreen()
           home: !auth.isAuth ? AuthScreen() : TabScreen(),
-
-          //       : Consumer<User>(
-          //           builder: (ctx, user, _) =>
-          //               user.fetchUserProfile() == true ? TabScreen() : CreateCardScreen(),
-          //         ),
-          // ),
         ),
       ),
     );

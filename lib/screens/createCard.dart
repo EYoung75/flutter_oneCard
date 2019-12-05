@@ -2,11 +2,12 @@ import "package:flutter/material.dart";
 
 import "dart:io";
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as path;
-import "package:path_provider/path_provider.dart" as syspaths;
+// Below imports to be added when implementing local storage variables
+// import 'package:path/path.dart' as path;
+// import "package:path_provider/path_provider.dart" as syspaths;
 import "package:provider/provider.dart";
 import "../providers/user.dart";
-import 'package:image_cropper/image_cropper.dart';
+// import 'package:image_cropper/image_cropper.dart';
 
 class CreateCardScreen extends StatefulWidget {
   @override
@@ -31,13 +32,6 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
       _pickedImage = imageFile;
     });
   }
-
-  // Future<void> _cropImage() async {
-  //   File cropped = await ImageCropper.cropImage(sourcePath: _pickedImage.path, );
-  //   setState(() {
-  //     _pickedImage = cropped;
-  //   });
-  // }
 
   // @override
   // void initState() {
@@ -116,20 +110,10 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                 textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(labelText: "Job Title"),
               ),
-              // _pickedImage != null
-              //     ? Container(
-              //         height: 250,
-              //         width: 200,
-              //         alignment: Alignment.center,
-              //         margin: EdgeInsets.all(25),
-              //         color: Color.fromRGBO(255, 255, 255, .7),
-              //         child: Image.file(
-              //           _pickedImage,
-              //           fit: BoxFit.cover,
-              //         ))
-              //     : Container(),
               FlatButton(
-                child: Text(_pickedImage == null ? "Select image" : "Select different image"),
+                child: Text(_pickedImage == null
+                    ? "Select image"
+                    : "Select different image"),
                 onPressed: _selectImage,
               ),
               SizedBox(
@@ -167,7 +151,8 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                                 )
                               : Image.network(
                                   "https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png",
-                                  fit: BoxFit.cover)
+                                  fit: BoxFit.cover,
+                                )
                           // : Image.asset(
                           //     "assets/images/blankprofile.png",
                           //     fit: BoxFit.cover,
@@ -184,7 +169,6 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                         color: Color.fromRGBO(255, 255, 255, .7),
                       ),
                       width: double.infinity,
-                      // margin: EdgeInsets.all(25),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[

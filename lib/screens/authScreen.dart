@@ -1,8 +1,8 @@
-import 'dart:io';
+import "dart:io";
 
 import "package:flutter/material.dart";
-import "../providers/auth.dart";
 import "package:provider/provider.dart";
+import "../providers/auth.dart";
 import "../models/httpException.dart";
 
 enum AuthMode { Signup, Login }

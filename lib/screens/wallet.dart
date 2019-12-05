@@ -32,31 +32,33 @@ class _WalletState extends State<Wallet> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: Container(
-        height: 350,
-        margin: EdgeInsets.all(25),
-        child: Column(
-          children: <Widget>[
-            Text(
-              "Collections",
-              style: Theme.of(context).textTheme.subtitle,
-            ),
-            SizedBox(
-              height: 45,
-            ),
-            wallet.wallet.isEmpty
-                ? EmptyWallet()
-                : ListView.builder(
+      child: wallet.wallet.isEmpty
+          ? EmptyWallet()
+          : Column(
+              children: <Widget>[
+                Text(
+                  "Collections:",
+                  style: Theme.of(context).textTheme.subtitle,
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Container(
+                  height: 350,
+                  child: ListView.builder(
                     itemCount: wallet.wallet.length,
-                    itemBuilder: (ctx, i) => Container(
-                      height: 50,
-                      width: 50,
-                      child: Text("HEYYYYY"),
+                    itemBuilder: (ctx, i) => Card(
+                      color: Colors.blue,
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        child: Text("HEYYYYY"),
+                      ),
                     ),
-                  )
-          ],
-        ),
-      ),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

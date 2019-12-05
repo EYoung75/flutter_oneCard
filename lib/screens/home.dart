@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import "../widgets/mainCard.dart";
 import "package:provider/provider.dart";
 import "../providers/user.dart";
+import "../widgets/mainCard.dart";
 import "./createCard.dart";
 
 class Home extends StatefulWidget {
@@ -31,12 +31,7 @@ class _HomeState extends State<Home> {
               child: CircularProgressIndicator(),
             )
           : userInfo.userCard != null
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    MainCard(),
-                  ],
-                )
+              ? MainCard()
               : userInfo.loading == true
                   ? Center(
                       child: CircularProgressIndicator(),
