@@ -16,6 +16,7 @@ class WalletProvider extends ChangeNotifier {
   bool showScan = false;
   VirtualCard scannedCard;
   dynamic wallet;
+  bool loading = true;
 
   Future scanQR() async {
     try {
@@ -40,7 +41,7 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> addUser() async {
     final userOne =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallets/${scannedCard.userId}.json?auth=$authToken";
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallet/${scannedCard.userId}.json?auth=$authToken";
     final res = await http.put(
       userOne,
       body: json.encode(
@@ -84,6 +85,15 @@ class WalletProvider extends ChangeNotifier {
     // );
   }
 
+  Future<void> createWallet(String walletName) async {
+    final url =
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallets/$walletName.json?auth=$authToken";
+    final res = await http.post(
+      url,
+    );
+    print(json.decode(res.body));
+  }
+
   Future<void> fetchUser() async {
     final url =
         "https://onecard-a0072.firebaseio.com/users/$_result/card.json?auth=$authToken";
@@ -97,6 +107,7 @@ class WalletProvider extends ChangeNotifier {
       fetchedImage,
       resData["title"],
     );
+    loading = false;
     notifyListeners();
   }
 
@@ -108,11 +119,12 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> fetchCollections() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallets.json?auth=$authToken";
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallet/.json?auth=$authToken";
 
     final res = await http.get(url);
     final resData = await json.decode(res.body);
     wallet = resData;
+    loading = false;
     print("WALLET:  ${json.decode(res.body)}");
     notifyListeners();
   }

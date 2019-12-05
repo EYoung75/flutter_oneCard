@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
             "/home": (ctx) => TabScreen(),
             "/settings": (ctx) => Settings()
           },
-          // home: CreateCardScreen()
+          // home: TabScreen()
           home: !auth.isAuth ? AuthScreen() : TabScreen(),
         ),
       ),

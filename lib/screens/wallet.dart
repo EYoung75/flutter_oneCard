@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:one_card_revisited/providers/walletProvider.dart';
 import "package:provider/provider.dart";
 import "../widgets/emptyWallet.dart";
+import "../widgets/walletTile.dart";
 
 class Wallet extends StatefulWidget {
   @override
@@ -32,33 +33,34 @@ class _WalletState extends State<Wallet> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: wallet.wallet.isEmpty
-          ? EmptyWallet()
-          : Column(
-              children: <Widget>[
-                Text(
-                  "Collections:",
-                  style: Theme.of(context).textTheme.subtitle,
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Container(
-                  height: 350,
-                  child: ListView.builder(
-                    itemCount: wallet.wallet.length,
-                    itemBuilder: (ctx, i) => Card(
-                      color: Colors.blue,
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        child: Text("HEYYYYY"),
+      child: wallet.loading == true
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : wallet.wallet != null
+              ? EmptyWallet()
+              : Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Text(
+                      "Collections:",
+                      style: Theme.of(context).textTheme.subtitle,
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 50),
+                      height: 600,
+                      child: ListView.builder(
+                        itemCount: 5,
+                        itemBuilder: (ctx, i) => WalletTile(),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
     );
   }
 }
