@@ -41,6 +41,29 @@ class _WalletState extends State<Wallet> {
               ? EmptyWallet()
               : Column(
                   children: <Widget>[
+                    Container(
+                      height: 40,
+                      margin: EdgeInsets.only(
+                          top: 25, bottom: 25, right: 40, left: 20),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.search,
+                          ),
+                          hasFloatingPlaceholder: false,
+                          labelText: "Search",
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                            borderSide: BorderSide(
+                              width: 0,
+                              style: BorderStyle.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 25,
                     ),
@@ -53,10 +76,14 @@ class _WalletState extends State<Wallet> {
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 50),
-                      height: 600,
+                      height: 500,
                       child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (ctx, i) => WalletTile(),
+                        itemCount: 1,
+                        itemBuilder: (ctx, i) => ListTile(
+                          leading: CircleAvatar(
+                            child: Image.network(""),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -64,38 +91,3 @@ class _WalletState extends State<Wallet> {
     );
   }
 }
-
-// Container(
-//               decoration: BoxDecoration(
-//                 color: Colors.white,
-//                 borderRadius: BorderRadius.circular(10),
-//               ),
-//               height: 200,
-//               width: 250,
-//               child: Column(
-//                 children: <Widget>[
-//                   ListTile(
-//                     title: Text(
-//                       "Work",
-//                       style: Theme.of(context).textTheme.body2,
-//                     ),
-//                     trailing: Icon(Icons.arrow_forward_ios),
-//                   ),
-//                   Divider(
-//                     thickness: 2,
-//                   ),
-//                   Expanded(
-//                     child: ClipRRect(
-//                       borderRadius: BorderRadius.only(
-//                         bottomLeft: Radius.circular(10),
-//                         bottomRight: Radius.circular(10),
-//                       ),
-//                       child: Image.network(
-//                         "https://images.pexels.com/photos/796602/pexels-photo-796602.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-//                         fit: BoxFit.fitWidth,
-//                       ),
-//                     ),
-//                   )
-//                 ],
-//               ),
-//             ),

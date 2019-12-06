@@ -87,9 +87,14 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> createWallet(String walletName) async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallets/$walletName.json?auth=$authToken";
-    final res = await http.post(
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallets.json?auth=$authToken";
+    final res = await http.put(
       url,
+      body: json.encode(
+        {
+          "$walletName" : ""
+        },
+      ),
     );
     print(json.decode(res.body));
   }

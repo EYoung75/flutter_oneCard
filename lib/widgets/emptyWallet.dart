@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "../screens/createWalletScreen.dart";
 
 class EmptyWallet extends StatelessWidget {
   @override
@@ -13,18 +12,6 @@ class EmptyWallet extends StatelessWidget {
             "Start scanning cards to add to your wallet!",
             textAlign: TextAlign.center,
           ),
-          RaisedButton.icon(
-            icon: Icon(Icons.add),
-            label: Text("Create wallet"),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  fullscreenDialog: false,
-                  builder: (ctx) => CreateWallet(),
-                ),
-              );
-            },
-          )
         ],
       ),
     );
