@@ -3,6 +3,7 @@ import 'package:one_card_revisited/providers/walletProvider.dart';
 import "package:provider/provider.dart";
 import "../widgets/emptyWallet.dart";
 import "../widgets/walletTile.dart";
+import "../widgets/walletList.dart";
 
 class Wallet extends StatefulWidget {
   @override
@@ -12,8 +13,8 @@ class Wallet extends StatefulWidget {
 class _WalletState extends State<Wallet> {
   @override
   void initState() {
-    Provider.of<WalletProvider>(context, listen: false).fetchCollections();
     super.initState();
+    Provider.of<WalletProvider>(context, listen: false).fetchWallet();
   }
 
   @override
@@ -33,78 +34,58 @@ class _WalletState extends State<Wallet> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: wallet.loading == true
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : wallet.wallet != null
-              ? EmptyWallet()
-              : Column(
-                  children: <Widget>[
-                    Container(
-                      height: 40,
-                      margin: EdgeInsets.only(
-                          top: 25, bottom: 25, right: 40, left: 20),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.search,
-                          ),
-                          hasFloatingPlaceholder: false,
-                          labelText: "Search",
-                          fillColor: Colors.white,
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Text(
-                      "Collection:",
-                      style: Theme.of(context).textTheme.subtitle,
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 50),
-                      height: 500,
-                      child: ListView.builder(
-                        itemCount: 3,
-                        itemBuilder: (ctx, i) => InkWell(
-                          onTap: () {},
-                          child: Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Card(
-                              elevation: 7,
-                              color: Colors.blueGrey,
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                  radius: 30,
-                                  child: Image.network(""),
-                                ),
-                                title: Text(
-                                  "Evan Young",
-                                  style: Theme.of(context).textTheme.body1,
-                                ),
-                                subtitle: Text("Software Engineer"),
-                                trailing: Icon(Icons.arrow_forward_ios),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 40,
+            margin: EdgeInsets.only(
+              top: 25,
+              bottom: 25,
+              right: 40,
+              left: 20,
+            ),
+            child: TextFormField(
+              decoration: InputDecoration(
+                icon: Icon(
+                  Icons.search,
                 ),
+                hasFloatingPlaceholder: false,
+                labelText: "Search",
+                fillColor: Colors.white,
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Text(
+            "Collection:",
+            style: Theme.of(context).textTheme.subtitle,
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          wallet.wallet == null
+              ? Text(
+                  "Start scanning cards to add to your wallet!",
+                  textAlign: TextAlign.center,
+                )
+              : ListView.builder(
+                  itemCount: wallet.wallet.length,
+                  itemBuilder: (ctx, i) => ListTile(
+                    leading: Text(wallet.wallet[i]["name"]),
+                  ),
+                )
+        ],
+      ),
     );
   }
 }

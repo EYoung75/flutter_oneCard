@@ -53,50 +53,12 @@ class WalletProvider extends ChangeNotifier {
         },
       ),
     );
-    // final userTwo =
-    //     "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
-    // final resTwo = await http.get(userTwo).then(
-    //   (res) {
-    //     http.put(
-    //       "https://onecard-a0072.firebaseio.com/users/${scannedCard.userId}/wallets/$userId.json?auth=$authToken",
-    //       body: res,
-    //     );
-    //   },
-    // );
-    // final resTwo = await http.put(
-    //   userTwo,
-    //   body: json.encode(
-    //     {
-    //       "userId": scannedCard.userId,
-    //       "name": scannedCard.name,
-    //       "title": scannedCard.title,
-    //       "image": scannedCard.image
-    //     },
-    //   ),
-    // );
     _result = "";
     scannedCard = null;
     notifyListeners();
     print(
       json.decode(res.body),
     );
-    // print(
-    //   json.decode(resTwo.body),
-    // );
-  }
-
-  Future<void> createWallet(String walletName) async {
-    final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallets.json?auth=$authToken";
-    final res = await http.put(
-      url,
-      body: json.encode(
-        {
-          "$walletName" : ""
-        },
-      ),
-    );
-    print(json.decode(res.body));
   }
 
   Future<void> fetchUser() async {
@@ -122,15 +84,28 @@ class WalletProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchCollections() async {
+  Future<void> fetchWallet() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallet/.json?auth=$authToken";
-
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallet.json?auth=$authToken";
     final res = await http.get(url);
     final resData = await json.decode(res.body);
-    wallet = resData;
-    loading = false;
-    print("WALLET:  ${json.decode(res.body)}");
+    List newWallet = [];
+    print("Fuickinkajdnvjc ${resData}");
+    if (resData != null) {
+      await resData.forEach(
+        (user) => newWallet.add(
+          VirtualCard(
+            resData[user]["userId"],
+            resData[user]["name"],
+            resData[user]["title"],
+          ),
+        ),
+      );
+      wallet = newWallet;
+    } else {
+      wallet = null;
+    }
+    wallet = newWallet;
     notifyListeners();
   }
 
