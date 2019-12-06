@@ -68,7 +68,7 @@ class _WalletState extends State<Wallet> {
                       height: 25,
                     ),
                     Text(
-                      "Collections:",
+                      "Collection:",
                       style: Theme.of(context).textTheme.subtitle,
                     ),
                     SizedBox(
@@ -78,10 +78,27 @@ class _WalletState extends State<Wallet> {
                       margin: EdgeInsets.symmetric(horizontal: 50),
                       height: 500,
                       child: ListView.builder(
-                        itemCount: 1,
-                        itemBuilder: (ctx, i) => ListTile(
-                          leading: CircleAvatar(
-                            child: Image.network(""),
+                        itemCount: 3,
+                        itemBuilder: (ctx, i) => InkWell(
+                          onTap: () {},
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 10),
+                            child: Card(
+                              elevation: 7,
+                              color: Colors.blueGrey,
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  radius: 30,
+                                  child: Image.network(""),
+                                ),
+                                title: Text(
+                                  "Evan Young",
+                                  style: Theme.of(context).textTheme.body1,
+                                ),
+                                subtitle: Text("Software Engineer"),
+                                trailing: Icon(Icons.arrow_forward_ios),
+                              ),
+                            ),
                           ),
                         ),
                       ),
