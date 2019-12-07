@@ -97,7 +97,7 @@ class WalletProvider extends ChangeNotifier {
           VirtualCard(
             resData[user]["userId"],
             resData[user]["name"],
-            resData[user]["title"],
+            resData[user]["title"], 
           ),
         ),
       );
