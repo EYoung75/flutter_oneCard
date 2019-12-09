@@ -15,7 +15,7 @@ class WalletProvider extends ChangeNotifier {
   String _result = "";
   bool showScan = false;
   VirtualCard scannedCard;
-  dynamic wallet;
+  List<dynamic> wallet;
   bool loading = true;
 
   Future scanQR() async {
@@ -86,37 +86,41 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> fetchWallet() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallet/.json?auth=$authToken";
+        'https://onecard-a0072.firebaseio.com/users/$userId/wallet.json?auth=$authToken';
     final res = await http.get(url);
     final resData = json.decode(res.body);
     List newWallet = [];
-    print("WALLET DATA: ${resData}");
     if (resData != null) {
-      await resData.forEach((key, value) {
-        final userImage =
-            FirebaseStorage.instance.ref().child(resData[key]["image"]);
-        final fetchedImage = userImage.getDownloadURL();
-        newWallet.add(
-          VirtualCard(
-            resData[key]["userId"],
-            resData[key]["name"],
-            fetchedImage,
-            resData["title"],
-          ),
+      await resData.forEach((key, value) async {
+        // final userImage =
+        //     FirebaseStorage.instance.ref().child(resData[key]["image"]);
+        // final fetchedImage = await userImage.getDownloadURL();
+        VirtualCard userCard = VirtualCard(
+          resData[key]["userId"],
+          resData[key]["name"],
+          // fetchedImage,
+          "https://res.cloudinary.com/inbound-org/image/twitter/w_200/189315459.jpg",
+          resData[key]["title"],
         );
+        newWallet.add(userCard);
       });
-      print("NEW WALLET $newWallet");
       wallet = newWallet;
     } else {
       wallet = null;
     }
-    wallet = newWallet;
+    print("FINAL WALLET ${wallet}");
     notifyListeners();
   }
 
-  Future<void> deleteUser() async {
+  Future<void> userSearch(String value) {
+    wallet.where((i) => i.name.contains(value)).toList();
+    notifyListeners();
+  }
+
+  Future<void> deleteUser(String id) async {
     final url = "";
     final res = await http.delete(url);
+    // wallet.removeWhere();
     _result = "";
     showScan = false;
     notifyListeners();

@@ -3,7 +3,7 @@ import 'package:one_card_revisited/providers/walletProvider.dart';
 import "package:provider/provider.dart";
 import "../widgets/emptyWallet.dart";
 import "../widgets/walletTile.dart";
-import "../widgets/walletList.dart";
+import "../screens/cardDetails.dart";
 
 class Wallet extends StatefulWidget {
   @override
@@ -83,9 +83,33 @@ class _WalletState extends State<Wallet> {
                   width: double.infinity,
                   child: ListView.builder(
                     itemCount: wallet.wallet.length,
-                    itemBuilder: (ctx, i) => ListTile(
-                      leading: Text(
-                        wallet.wallet[i].name,
+                    itemBuilder: (ctx, i) => InkWell(
+                      onTap: () {
+                         Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        fullscreenDialog: false,
+                                        builder: (ctx) => CardDetails(
+                                         wallet.wallet[i],
+                                        ),
+                                      ),
+                                    );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        child: Card(
+                          color: Color.fromRGBO(255, 255, 255, .8),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 40,
+                              child: Image.network(
+                                  wallet.wallet[i].image,
+                                  fit: BoxFit.cover),
+                            ),
+                            title: Text(wallet.wallet[i].name),
+                            subtitle: Text(wallet.wallet[i].title),
+                            trailing: Icon(Icons.keyboard_arrow_right),
+                          ),
+                        ),
                       ),
                     ),
                   ),
