@@ -86,22 +86,27 @@ class WalletProvider extends ChangeNotifier {
 
   Future<void> fetchWallet() async {
     final url =
-        "https://onecard-a0072.firebaseio.com/users/$userId/wallet.json?auth=$authToken";
+        "https://onecard-a0072.firebaseio.com/users/$userId/wallet/.json?auth=$authToken";
     final res = await http.get(url);
-    final resData = await json.decode(res.body);
+    final resData = json.decode(res.body);
     List newWallet = [];
-    print("Fuickinkajdnvjc ${resData}");
+    print("WALLET DATA: ${resData}");
     if (resData != null) {
-      await resData.forEach(
-        (user) => newWallet.add(
-          VirtualCard(   
-            resData[user]["userId"],
-            resData[user]["name"],
-            resData[user]["title"], 
+      await resData.forEach((key, value) {
+        final userImage =
+            FirebaseStorage.instance.ref().child(resData[key]["image"]);
+        final fetchedImage = userImage.getDownloadURL();
+        newWallet.add(
+          VirtualCard(
+            resData[key]["userId"],
+            resData[key]["name"],
+            fetchedImage,
+            resData["title"],
           ),
-        ),
-      );
-      wallet = newWallet; 
+        );
+      });
+      print("NEW WALLET $newWallet");
+      wallet = newWallet;
     } else {
       wallet = null;
     }

@@ -78,10 +78,16 @@ class _WalletState extends State<Wallet> {
                   "Start scanning cards to add to your wallet!",
                   textAlign: TextAlign.center,
                 )
-              : ListView.builder(
-                  itemCount: wallet.wallet.length,
-                  itemBuilder: (ctx, i) => ListTile(
-                    leading: Text(wallet.wallet[i]["name"]),
+              : Container(
+                  height: 350,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    itemCount: wallet.wallet.length,
+                    itemBuilder: (ctx, i) => ListTile(
+                      leading: Text(
+                        wallet.wallet[i].name,
+                      ),
+                    ),
                   ),
                 )
         ],
