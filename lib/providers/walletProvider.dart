@@ -101,7 +101,7 @@ class WalletProvider extends ChangeNotifier {
           ),
         ),
       );
-      wallet = newWallet;
+      wallet = newWallet; 
     } else {
       wallet = null;
     }
