@@ -94,7 +94,7 @@ class WalletProvider extends ChangeNotifier {
     if (resData != null) {
       await resData.forEach(
         (user) => newWallet.add(
-          VirtualCard(
+          VirtualCard(   
             resData[user]["userId"],
             resData[user]["name"],
             resData[user]["title"], 
