@@ -21,11 +21,11 @@ class Places with ChangeNotifier {
     return _isLoading;
   }
 
-  List<Place> _places = [];
+  List<Place> places;
 
-  List<Place> get places {
-    return [..._places];
-  }
+  // List<Place> get places {
+  //   return [..._places];
+  // }
 
   Set<Marker> nearbyPlaces = {};
 
@@ -34,7 +34,7 @@ class Places with ChangeNotifier {
   }
 
   Future<void> clearSearch() async {
-    _places = [];
+    places =  null;
     notifyListeners();
   }
 
@@ -65,7 +65,10 @@ class Places with ChangeNotifier {
       final res = await http.get(url);
       final resData = await json.decode(res.body);
       final List<Place> loadedPlaces = [];
-      print("FUCKIGN SHDIFH $resData");
+      print("PLACES RES DATA: $resData");
+      if(resData["results"] == []) {
+        places = [];
+      }
       await resData["results"].forEach((place) {
         loadedPlaces.add(
           Place(
@@ -80,7 +83,7 @@ class Places with ChangeNotifier {
           ),
         );
       });
-      _places = loadedPlaces;
+      places = loadedPlaces;
     } catch (err) {
       throw (err);
     }
