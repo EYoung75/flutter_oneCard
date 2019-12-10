@@ -65,8 +65,8 @@ class Places with ChangeNotifier {
     final resData = await json.decode(res.body);
     final List<Place> loadedPlaces = [];
     print("FUCKIGN SHDIFH $resData");
-    await resData.forEach(
-      (place) => loadedPlaces.add(
+    await resData["results"].forEach((place) {
+      loadedPlaces.add(
         Place(
           name: place["name"],
           placeId: place["id"].toString(),
@@ -77,8 +77,8 @@ class Places with ChangeNotifier {
           ),
           icon: place["icon"],
         ),
-      ),
-    );
+      );
+    });
     _places = loadedPlaces;
     notifyListeners();
   }

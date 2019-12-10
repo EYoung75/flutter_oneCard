@@ -71,42 +71,42 @@ class _WalletState extends State<Wallet> {
             style: Theme.of(context).textTheme.subtitle,
           ),
           SizedBox(
-            height: 25,
+            height: 10,
           ),
           wallet.wallet == null
               ? Text(
                   "Start scanning cards to add to your wallet!",
                   textAlign: TextAlign.center,
                 )
-              : Container(
-                  height: 350,
-                  width: double.infinity,
+              : Expanded(
                   child: ListView.builder(
-                    itemCount: wallet.wallet.length,
+                    itemCount: 12,
                     itemBuilder: (ctx, i) => InkWell(
                       onTap: () {
-                         Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        fullscreenDialog: false,
-                                        builder: (ctx) => CardDetails(
-                                         wallet.wallet[i],
-                                        ),
-                                      ),
-                                    );
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            fullscreenDialog: false,
+                            builder: (ctx) => CardDetails(
+                              wallet.wallet[0],
+                            ),
+                          ),
+                        );
                       },
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 2),
                         child: Card(
-                          color: Color.fromRGBO(255, 255, 255, .8),
+                          elevation: 5,
+                          color: Color.fromRGBO(255, 255, 255, .5),
                           child: ListTile(
-                            leading: CircleAvatar(
-                              radius: 40,
-                              child: Image.network(
-                                  wallet.wallet[i].image,
+                            leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Image.network(wallet.wallet[0].image,
                                   fit: BoxFit.cover),
                             ),
-                            title: Text(wallet.wallet[i].name),
-                            subtitle: Text(wallet.wallet[i].title),
+                            title: Text(wallet.wallet[0].name,
+                                style: TextStyle(fontSize: 25)),
+                            subtitle: Text(wallet.wallet[0].title),
                             trailing: Icon(Icons.keyboard_arrow_right),
                           ),
                         ),
