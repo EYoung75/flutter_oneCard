@@ -3,6 +3,7 @@ import "package:provider/provider.dart";
 import "../providers/user.dart";
 import "../widgets/mainCard.dart";
 import "./createCard.dart";
+import "../widgets/background.dart";
 
 class Home extends StatefulWidget {
   @override
@@ -13,20 +14,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final userInfo = Provider.of<User>(context);
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).primaryColor.withOpacity(.4),
-            Theme.of(context).primaryColor,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: userInfo.triedFetch == false
+    return Background(
+      userInfo.triedFetch == false
           ? Center(
               child: CircularProgressIndicator(),
             )

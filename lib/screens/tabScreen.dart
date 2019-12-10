@@ -7,6 +7,8 @@ import "package:provider/provider.dart";
 import "../providers/auth.dart";
 import "../providers/walletProvider.dart";
 import "./ScanScreen.dart";
+import "../widgets/background.dart";
+
 
 class TabScreen extends StatefulWidget {
   @override
@@ -41,21 +43,8 @@ class _TabScreenState extends State<TabScreen> {
       drawer: Drawer(
         elevation: 7,
         semanticLabel: "App Drawer",
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).primaryColor.withOpacity(.8),
-                Theme.of(context).primaryColor.withOpacity(.3),
-              ],
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-            ),
-          ),
-          child: Padding(
+        child: Background(
+          Padding(
             padding: const EdgeInsets.all(35.0),
             child: Column(
               children: <Widget>[

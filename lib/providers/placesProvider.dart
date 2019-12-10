@@ -35,6 +35,7 @@ class Places with ChangeNotifier {
 
   Future<void> clearSearch() async {
     _places = [];
+    notifyListeners();
   }
 
   Future<void> checkIn(String placeId) async {
@@ -49,7 +50,6 @@ class Places with ChangeNotifier {
           },
         ),
       );
-
       checkedIn = placeId;
       print(json.decode(res.body));
     } catch (err) {
@@ -59,27 +59,31 @@ class Places with ChangeNotifier {
   }
 
   Future<void> fetchNearby(String searchValue, Position position) async {
-    final url =
-        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${util.googleMap}&location=${position.latitude},${position.longitude}&rankby=distance&keyword=$searchValue";
-    final res = await http.get(url);
-    final resData = await json.decode(res.body);
-    final List<Place> loadedPlaces = [];
-    print("FUCKIGN SHDIFH $resData");
-    await resData["results"].forEach((place) {
-      loadedPlaces.add(
-        Place(
-          name: place["name"],
-          placeId: place["id"].toString(),
-          address: place["vicinity"],
-          location: LatLng(
-            place["geometry"]["location"]["lat"],
-            place["geometry"]["location"]["lng"],
+    try {
+      final url =
+          "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${util.googleMap}&location=${position.latitude},${position.longitude}&rankby=distance&keyword=$searchValue";
+      final res = await http.get(url);
+      final resData = await json.decode(res.body);
+      final List<Place> loadedPlaces = [];
+      print("FUCKIGN SHDIFH $resData");
+      await resData["results"].forEach((place) {
+        loadedPlaces.add(
+          Place(
+            name: place["name"],
+            placeId: place["id"].toString(),
+            address: place["vicinity"],
+            location: LatLng(
+              place["geometry"]["location"]["lat"],
+              place["geometry"]["location"]["lng"],
+            ),
+            icon: place["icon"],
           ),
-          icon: place["icon"],
-        ),
-      );
-    });
-    _places = loadedPlaces;
+        );
+      });
+      _places = loadedPlaces;
+    } catch (err) {
+      throw (err);
+    }
     notifyListeners();
   }
 

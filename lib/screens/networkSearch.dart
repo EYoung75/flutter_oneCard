@@ -6,6 +6,7 @@ import "package:provider/provider.dart";
 import "../providers/placesProvider.dart";
 import "../widgets/networkList.dart";
 import "./placeDetails.dart";
+import "../widgets/background.dart";
 
 class NetworkSearch extends StatefulWidget {
   @override
@@ -68,21 +69,8 @@ class _NetworkSearchState extends State<NetworkSearch> {
   Widget build(BuildContext context) {
     final placeData = Provider.of<Places>(context);
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).primaryColor.withOpacity(.3),
-              Theme.of(context).primaryColor.withOpacity(.7),
-              Theme.of(context).primaryColor,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: currentPosition == null
+      body: Background(
+        currentPosition == null
             ? Center(
                 child: CircularProgressIndicator(),
               )

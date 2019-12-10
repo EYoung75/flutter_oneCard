@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "../providers/user.dart";
 import "../widgets/cardTemplate.dart";
+import "../widgets/background.dart";
 
 class CardDetails extends StatelessWidget {
   final VirtualCard selectedUser;
@@ -13,22 +14,8 @@ class CardDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(selectedUser.name),
       ),
-      body: Container(
-        padding: EdgeInsets.only(bottom: 100),
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).primaryColor.withOpacity(.3),
-              Theme.of(context).primaryColor.withOpacity(.7),
-              Theme.of(context).primaryColor,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Column(
+      body: Background(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
@@ -55,6 +42,7 @@ class CardDetails extends StatelessWidget {
             ),
             Text(selectedUser.name),
             Text(selectedUser.title),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[

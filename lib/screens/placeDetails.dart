@@ -4,6 +4,7 @@ import "../providers/placesProvider.dart";
 import "package:provider/provider.dart";
 import "../providers/placesProvider.dart";
 import "dart:io";
+import "../widgets/background.dart";
 
 class PlaceDetails extends StatelessWidget {
   Place selectedPlace;
@@ -22,23 +23,13 @@ class PlaceDetails extends StatelessWidget {
       ),
       appBar: AppBar(
         elevation: 10,
-        title: Text(selectedPlace.name, style: Theme.of(context).textTheme.title,),
-      ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).primaryColor.withOpacity(.3),
-              Theme.of(context).primaryColor.withOpacity(.7),
-              Theme.of(context).primaryColor,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+        title: Text(
+          selectedPlace.name,
+          style: Theme.of(context).textTheme.title,
         ),
-        child: Column(
+      ),
+      body: Background(
+        Column(
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),

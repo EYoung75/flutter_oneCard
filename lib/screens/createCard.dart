@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 // import "package:path_provider/path_provider.dart" as syspaths;
 import "package:provider/provider.dart";
 import "../providers/user.dart";
+import "../widgets/background.dart";
 // import 'package:image_cropper/image_cropper.dart';
 
 class CreateCardScreen extends StatefulWidget {
@@ -58,22 +59,8 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context, listen: false);
-    return Container(
-      padding: EdgeInsets.only(left: 30, right: 30),
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).primaryColor.withOpacity(.3),
-            Theme.of(context).primaryColor.withOpacity(.7),
-            Theme.of(context).primaryColor,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Form(
+    return Background(
+      Form(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[

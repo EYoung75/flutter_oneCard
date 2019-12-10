@@ -4,6 +4,7 @@ import "package:provider/provider.dart";
 import "../widgets/emptyWallet.dart";
 import "../widgets/walletTile.dart";
 import "../screens/cardDetails.dart";
+import "../widgets/background.dart";
 
 class Wallet extends StatefulWidget {
   @override
@@ -20,21 +21,8 @@ class _WalletState extends State<Wallet> {
   @override
   Widget build(BuildContext context) {
     final wallet = Provider.of<WalletProvider>(context);
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).primaryColor.withOpacity(.3),
-            Theme.of(context).primaryColor.withOpacity(.7),
-            Theme.of(context).primaryColor,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Column(
+    return Background(
+      Column(
         children: <Widget>[
           Container(
             height: 40,
@@ -80,14 +68,14 @@ class _WalletState extends State<Wallet> {
                 )
               : Expanded(
                   child: ListView.builder(
-                    itemCount: 12,
+                    itemCount: wallet.wallet.length,
                     itemBuilder: (ctx, i) => InkWell(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             fullscreenDialog: false,
                             builder: (ctx) => CardDetails(
-                              wallet.wallet[0],
+                              wallet.wallet[i],
                             ),
                           ),
                         );
@@ -97,16 +85,16 @@ class _WalletState extends State<Wallet> {
                             EdgeInsets.symmetric(horizontal: 50, vertical: 2),
                         child: Card(
                           elevation: 5,
-                          color: Color.fromRGBO(255, 255, 255, .5),
+                          color: Color.fromRGBO(255, 255, 255, .8),
                           child: ListTile(
                             leading: ClipRRect(
                               borderRadius: BorderRadius.circular(50),
-                              child: Image.network(wallet.wallet[0].image,
+                              child: Image.network(wallet.wallet[i].image,
                                   fit: BoxFit.cover),
                             ),
-                            title: Text(wallet.wallet[0].name,
+                            title: Text(wallet.wallet[i].name,
                                 style: TextStyle(fontSize: 25)),
-                            subtitle: Text(wallet.wallet[0].title),
+                            subtitle: Text(wallet.wallet[i].title),
                             trailing: Icon(Icons.keyboard_arrow_right),
                           ),
                         ),

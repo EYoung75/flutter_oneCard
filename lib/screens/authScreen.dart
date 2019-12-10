@@ -1,9 +1,9 @@
 import "dart:io";
-
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "../providers/auth.dart";
 import "../models/httpException.dart";
+import "../widgets/background.dart";
 
 enum AuthMode { Signup, Login }
 
@@ -13,31 +13,16 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: 50),
-        alignment: Alignment.center,
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).primaryColor,
-              Theme.of(context).primaryColor.withOpacity(.8),
-              Theme.of(context).primaryColor.withOpacity(.4),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Center(
-          child: ListView(   
+      body: Background(
+        Center(
+          child: ListView(
             padding: EdgeInsets.only(top: 45),
             children: <Widget>[
               Text(
                 "OneCard",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: "BenchNine",
+                  fontFamily: "Barlow",
                   fontSize: 50,
                   color: Colors.white,
                 ),
@@ -149,15 +134,14 @@ class _AuthCardState extends State<AuthCard> {
           border: Border.all(color: Colors.blueGrey, width: 2),
           boxShadow: [
             BoxShadow(
-              color: Colors.black38,
-              blurRadius: 18,
-              spreadRadius: 10,
-              offset: Offset(6, 12)
-            )
+                color: Colors.black38,
+                blurRadius: 18,
+                spreadRadius: 10,
+                offset: Offset(6, 12))
           ],
         ),
         padding: EdgeInsets.symmetric(horizontal: 50),
-        margin:  EdgeInsets.fromLTRB(50, 10, 50, 50),
+        margin: EdgeInsets.fromLTRB(50, 10, 50, 50),
         height: 350,
         width: double.infinity,
         child: Form(

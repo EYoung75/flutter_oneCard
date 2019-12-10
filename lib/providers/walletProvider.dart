@@ -1,4 +1,4 @@
-import 'dart:async';
+import "dart:async";
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:barcode_scan/barcode_scan.dart";
 import "package:flutter/services.dart";
@@ -85,34 +85,39 @@ class WalletProvider extends ChangeNotifier {
   }
 
   Future<void> fetchWallet() async {
-    final url =
-        'https://onecard-a0072.firebaseio.com/users/$userId/wallet.json?auth=$authToken';
-    final res = await http.get(url);
-    final resData = json.decode(res.body);
-    List newWallet = [];
-    if (resData != null) {
-      await resData.forEach((key, value) async {
-        // final userImage =
-        //     FirebaseStorage.instance.ref().child(resData[key]["image"]);
-        // final fetchedImage = await userImage.getDownloadURL();
-        VirtualCard userCard = VirtualCard(
-          resData[key]["userId"],
-          resData[key]["name"],
-          // fetchedImage,
-          "https://res.cloudinary.com/inbound-org/image/twitter/w_200/189315459.jpg",
-          resData[key]["title"],
-        );
-        newWallet.add(userCard);
-      });
-      wallet = newWallet;
-    } else {
+    try {
+      final url =
+          'https://onecard-a0072.firebaseio.com/users/$userId/wallet.json?auth=$authToken';
+      final res = await http.get(url);
+      final resData = json.decode(res.body);
+      List newWallet = [];
+      if (resData != null) {
+        await resData.forEach((key, value) async {
+          // final userImage =
+          //     FirebaseStorage.instance.ref().child(resData[key]["image"]);
+          // final fetchedImage = await userImage.getDownloadURL();
+          VirtualCard userCard = VirtualCard(
+            resData[key]["userId"],
+            resData[key]["name"],
+            // fetchedImage,
+            "https://res.cloudinary.com/inbound-org/image/twitter/w_200/189315459.jpg",
+            resData[key]["title"],
+          );
+          newWallet.add(userCard);
+        });
+        wallet = newWallet;
+      } else {
+        wallet = null;
+      }
+    } catch (err) {
       wallet = null;
+      throw (err);
     }
     print("FINAL WALLET ${wallet}");
     notifyListeners();
   }
 
-  Future<void> userSearch(String value) {
+  Future<void> userSearch(String value) async {
     wallet.where((i) => i.name.contains(value)).toList();
     notifyListeners();
   }

@@ -1,27 +1,15 @@
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "../providers/walletProvider.dart";
+import "../widgets/background.dart";
 
 class ScanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final wallet = Provider.of<WalletProvider>(context);
     final scannedCard = Provider.of<WalletProvider>(context).scannedCard;
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).primaryColor.withOpacity(.3),
-            Theme.of(context).primaryColor.withOpacity(.7),
-            Theme.of(context).primaryColor,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Column(
+    return Background(
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
@@ -95,7 +83,10 @@ class ScanScreen extends StatelessWidget {
                   Scaffold.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: Colors.green,
-                      content: Text("Added to your wallet!", style: Theme.of(context).textTheme.body1,),
+                      content: Text(
+                        "Added to your wallet!",
+                        style: Theme.of(context).textTheme.body1,
+                      ),
                       elevation: 5,
                       duration: Duration(seconds: 1),
                     ),
