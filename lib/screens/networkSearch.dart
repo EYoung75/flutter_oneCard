@@ -117,7 +117,6 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                     margin: EdgeInsets.symmetric(vertical: 5),
                                     alignment: Alignment.centerRight,
                                     child: RaisedButton.icon(
-                                      
                                       elevation: 7,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -181,7 +180,8 @@ class PlaceList extends StatelessWidget {
           margin: EdgeInsets.symmetric(vertical: 5),
           child: RaisedButton.icon(
             color: Theme.of(context).accentColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
             icon: Icon(Icons.refresh),
             label: Text("Search Again"),
             onPressed: () {
@@ -191,7 +191,6 @@ class PlaceList extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.only(left: 25, top: 25, bottom: 20),
-          decoration: BoxDecoration(),
           alignment: Alignment.bottomLeft,
           child: Text(
             "Results for '$searchValue':",
@@ -214,7 +213,7 @@ class PlaceList extends StatelessWidget {
                 ),
               )
             : Container(
-                height: 500,
+                height: 400,
                 width: double.infinity,
                 child: ListView.builder(
                   padding: EdgeInsets.only(left: 100, right: 20),
