@@ -77,7 +77,6 @@ class _WalletState extends State<Wallet> {
                   color: Color.fromRGBO(255, 255, 255, .5),
                   indent: 50,
                 ),
-              
                 wallet.wallet == null
                     ? Text(
                         "Start scanning cards to add to your wallet!",
@@ -88,9 +87,9 @@ class _WalletState extends State<Wallet> {
                           boxShadow: [
                             BoxShadow(
                               color: Colors.white12,
-                              blurRadius: 50,
-                              spreadRadius: 30,
-                              offset: Offset(0, 50),
+                              blurRadius: 20,
+                              spreadRadius: 20,
+                              offset: Offset(0, 0),
                             )
                           ],
                         ),
@@ -127,7 +126,7 @@ class _WalletState extends State<Wallet> {
                                       style: TextStyle(fontSize: 22),
                                     ),
                                     subtitle: Text(
-                                      wallet.wallet[0].title,
+                                      "      ${wallet.wallet[0].title}",
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 20,

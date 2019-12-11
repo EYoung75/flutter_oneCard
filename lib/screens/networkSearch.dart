@@ -194,8 +194,13 @@ class PlaceList extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           child: Text(
             "Results for '$searchValue':",
-            style: TextStyle(decoration: TextDecoration.underline),
+            style: Theme.of(context).textTheme.subtitle,
           ),
+        ),
+        Divider(
+          thickness: 2,
+          color: Color.fromRGBO(255, 255, 255, .5),
+          endIndent: 50,
         ),
         placeList.places.length == 0
             ? Container(
