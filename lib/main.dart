@@ -22,28 +22,15 @@ class MyApp extends StatelessWidget {
           value: Auth(),
         ),
         ChangeNotifierProxyProvider<Auth, User>(
-          builder: (ctx, auth, initData) => User(
-            auth.getEmail,
-            auth.userId,
-            auth.token,
-            auth.apiKey
-          ),
+          builder: (ctx, auth, initData) =>
+              User(auth.getEmail, auth.userId, auth.token, auth.apiKey),
         ),
-        ChangeNotifierProxyProvider<Auth,WalletProvider>(
-          builder: (ctx, auth, _) => WalletProvider(
-            auth.userId,
-            auth.token
-          ),
+        ChangeNotifierProxyProvider<Auth, WalletProvider>(
+          builder: (ctx, auth, _) => WalletProvider(auth.userId, auth.token),
         ),
         ChangeNotifierProxyProvider<Auth, Places>(
-          builder: (ctx, auth, _) => Places(
-            auth.userId,
-            auth.token
-          ),
-        )
-        // ChangeNotifierProvider.value(
-        //   value: User(),
-        // )
+          builder: (ctx, auth, _) => Places(auth.userId, auth.token),
+        ),
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
@@ -54,20 +41,26 @@ class MyApp extends StatelessWidget {
             accentColor: Color.fromRGBO(255, 233, 214, 1),
             fontFamily: "Barlow",
             textTheme: TextTheme(
-              title: TextStyle(fontSize: 36, fontFamily: "BenchNine", color: Colors.white),
-              subtitle: TextStyle(fontSize: 30, fontFamily: "Barlow", color: Colors.black),
-              body1: TextStyle(fontSize: 24, fontFamily: "Barlow", color: Colors.white),
-              body2: TextStyle(fontSize: 22, fontFamily: "BenchNine", color: Colors.black),
-              button: TextStyle(fontSize: 20),
-              display1: TextStyle(fontSize: 16, fontFamily: "BenchNine", color: Colors.white)
-            ),
+                title: TextStyle(
+                    fontSize: 36, fontFamily: "BenchNine", color: Colors.white),
+                subtitle: TextStyle(
+                    fontSize: 30, fontFamily: "Barlow", color: Colors.black),
+                body1: TextStyle(
+                    fontSize: 24, fontFamily: "Barlow", color: Colors.white),
+                body2: TextStyle(
+                    fontSize: 22, fontFamily: "BenchNine", color: Colors.black),
+                button: TextStyle(fontSize: 20),
+                display1: TextStyle(
+                    fontSize: 16,
+                    fontFamily: "BenchNine",
+                    color: Colors.white)),
           ),
           routes: {
             "/home": (ctx) => TabScreen(),
             "/settings": (ctx) => Settings()
           },
           // home: TabScreen()
-          home: auth.isAuth ? AuthScreen() : TabScreen(),
+          home: !auth.isAuth ? AuthScreen() : TabScreen(),
         ),
       ),
     );
