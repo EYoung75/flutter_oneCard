@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'OneCard',
           theme: ThemeData(
-            primaryColor: Color.fromRGBO(47, 95, 114, 1),
-            accentColor: Color.fromRGBO(255, 233, 214, 1),
+            primaryColor: Color.fromRGBO(19, 89, 117, 1),
+            accentColor: Color.fromRGBO(244, 97, 88, 1),
             fontFamily: "Barlow",
             textTheme: TextTheme(
                 title: TextStyle(

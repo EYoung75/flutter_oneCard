@@ -117,6 +117,12 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                     margin: EdgeInsets.symmetric(vertical: 5),
                                     alignment: Alignment.centerRight,
                                     child: RaisedButton.icon(
+                                      
+                                      elevation: 7,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      color: Theme.of(context).accentColor,
                                       icon: Icon(Icons.search),
                                       label: Text("Find"),
                                       onPressed: () {
@@ -174,6 +180,8 @@ class PlaceList extends StatelessWidget {
         Container(
           margin: EdgeInsets.symmetric(vertical: 5),
           child: RaisedButton.icon(
+            color: Theme.of(context).accentColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
             icon: Icon(Icons.refresh),
             label: Text("Search Again"),
             onPressed: () {

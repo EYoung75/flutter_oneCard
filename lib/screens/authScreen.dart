@@ -16,19 +16,24 @@ class AuthScreen extends StatelessWidget {
       body: Background(
         Padding(
           padding: const EdgeInsets.only(
-            top: 50,
+            top: 75,
           ),
           child: Center(
-            child: ListView(
+            child: Column(
               children: <Widget>[
                 Text(
                   "OneCard",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: "Barlow",
+                    fontFamily: "BenchNine",
                     fontSize: 50,
                     color: Colors.white,
                   ),
+                ),
+                Divider(
+                  color: Colors.white,
+                  endIndent: 50,
+                  thickness: 2,
                 ),
                 AuthCard(),
               ],
@@ -130,82 +135,82 @@ class _AuthCardState extends State<AuthCard> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(255, 255, 255, 1),
-          borderRadius: BorderRadius.circular(7),
-          border: Border.all(color: Colors.blueGrey, width: 2),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black38,
-              blurRadius: 18,
-              spreadRadius: 10,
-              offset: Offset(6, 12),
-            )
-          ],
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 50),
-        margin: EdgeInsets.fromLTRB(50, 10, 50, 50),
-        height: 350,
-        width: double.infinity,
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                _authMode == AuthMode.Login ? "Login" : "Sign Up",
-                style: TextStyle(color: Colors.black),
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'E-Mail:'),
-                keyboardType: TextInputType.emailAddress,
-                onSaved: (value) {
-                  _authData["email"] = value;
-                },
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Password:'),
-                obscureText: true,
-                controller: _passwordController,
-                onSaved: (value) {
-                  _authData["password"] = value;
-                },
-              ),
-              _authMode == AuthMode.Signup
-                  ? TextFormField(
-                      enabled: _authMode == AuthMode.Signup,
-                      decoration:
-                          InputDecoration(labelText: "Confirm Password:"),
-                      obscureText: true,
-                      validator: _authMode == AuthMode.Signup
-                          ? (value) {
-                              if (value != _passwordController.text) {
-                                return 'Passwords do not match!';
-                              }
+    return Padding(
+      padding: EdgeInsets.only(left: 50, right: 50, top: 50),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            Text(
+              _authMode == AuthMode.Login ? "Login" : "Sign Up",
+              style: TextStyle(color: Colors.black, fontSize: 28),
+            ),
+            TextFormField(
+              decoration: InputDecoration(labelText: 'E-Mail:'),
+              keyboardType: TextInputType.emailAddress,
+              onSaved: (value) {
+                _authData["email"] = value;
+              },
+            ),
+            TextFormField(
+              decoration: InputDecoration(labelText: 'Password:'),
+              obscureText: true,
+              controller: _passwordController,
+              onSaved: (value) {
+                _authData["password"] = value;
+              },
+            ),
+            _authMode == AuthMode.Signup
+                ? TextFormField(
+                    enabled: _authMode == AuthMode.Signup,
+                    decoration: InputDecoration(labelText: "Confirm Password:"),
+                    obscureText: true,
+                    validator: _authMode == AuthMode.Signup
+                        ? (value) {
+                            if (value != _passwordController.text) {
+                              return 'Passwords do not match!';
                             }
-                          : null,
-                    )
-                  : Container(),
-              _isLoading
-                  ? CircularProgressIndicator(
-                      backgroundColor: Colors.blueGrey,
-                    )
-                  : SizedBox(
-                      height: 25,
-                    ),
-              RaisedButton(
-                child: Text("Submit"),
+                          }
+                        : null,
+                  )
+                : Container(),
+            _isLoading
+                ? CircularProgressIndicator(
+                    backgroundColor: Colors.blueGrey,
+                  )
+                : SizedBox(
+                    height: 100,
+                  ),
+            Container(
+              height: 50,
+              width: 500,
+              child: RaisedButton(
+                color: Theme.of(context).accentColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                elevation: 5,
+                child: Text(
+                  "Submit",
+                  style: TextStyle(fontSize: 24),
+                ),
                 onPressed: _submit,
               ),
-              FlatButton(
-                child: Text(
-                    _authMode == AuthMode.Signup ? " OR login" : "OR sign-up"),
-                onPressed: _switchAuthMode,
-              )
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            FlatButton(
+              textColor: Colors.white,
+              child: Text(
+                _authMode == AuthMode.Signup
+                    ? " OR login with email"
+                    : "New? Sign up",
+                style: TextStyle(fontSize: 22),
+              ),
+              onPressed: _switchAuthMode,
+            )
+          ],
         ),
       ),
     );
