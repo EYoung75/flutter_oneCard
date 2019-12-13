@@ -19,7 +19,7 @@ class Background extends StatelessWidget {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: childContent,
+      child: childContent,   
     );
   }
 }
