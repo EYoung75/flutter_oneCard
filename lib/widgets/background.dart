@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-class Background extends StatelessWidget {
+class Background extends StatelessWidget {  
   Widget childContent;
   Background(this.childContent);
   @override
