@@ -122,11 +122,11 @@ class _WalletState extends State<Wallet> {
                                 children: <Widget>[
                                   ListTile(
                                     title: Text(
-                                      wallet.wallet[0].name,
+                                      wallet.wallet[i].name,
                                       style: TextStyle(fontSize: 22),
                                     ),
                                     subtitle: Text(
-                                      "      ${wallet.wallet[0].title}",
+                                      "      ${wallet.wallet[i].title}",
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 20,
