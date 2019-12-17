@@ -93,14 +93,10 @@ class WalletProvider extends ChangeNotifier {
       List newWallet = [];
       if (resData != null) {
         await resData.forEach((key, value) async {
-          // final userImage =
-          //     FirebaseStorage.instance.ref().child(resData[key]["image"]);
-          // final fetchedImage = await userImage.getDownloadURL();
           VirtualCard userCard = VirtualCard(
             resData[key]["userId"],
             resData[key]["name"],
-            // fetchedImage,
-            "https://res.cloudinary.com/inbound-org/image/twitter/w_200/189315459.jpg",
+            Image.network(resData[key]["image"], fit: BoxFit.contain,),
             resData[key]["title"],
           );
           newWallet.add(userCard);

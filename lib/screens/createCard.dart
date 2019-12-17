@@ -65,44 +65,23 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 10,
+                height: 25,
               ),
               Text(
                 "Welcome to OneCard!",
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 26),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "Create a virtual card below to get started",
+                style: Theme.of(context).textTheme.body2,
               ),
               SizedBox(
                 height: 25,
               ),
               Divider(),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    name = value;
-                  });
-                },
-                autocorrect: true,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(labelText: "Full Name:"),
-              ),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    title = value;
-                  });
-                },
-                autocorrect: true,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(labelText: "Job Title"),
-              ),
-              FlatButton(
-                child: Text(_pickedImage == null
-                    ? "Select image"
-                    : "Select different image"),
-                onPressed: _selectImage,
-              ),
               SizedBox(
                 height: 25,
               ),
@@ -122,7 +101,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                 height: 450,
                 width: 350,
                 child: Stack(
-                  alignment: Alignment.bottomLeft,
+                  alignment: Alignment.bottomCenter,
                   children: <Widget>[
                     Container(
                       height: 450,
@@ -156,17 +135,62 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                         color: Color.fromRGBO(255, 255, 255, .7),
                       ),
                       width: double.infinity,
+                      // margin: EdgeInsets.all(25),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            name,
-                            style: Theme.of(context).textTheme.subtitle,
+                          Container(
+                            height: 35,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  name = value;
+                                });
+                              },
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.subtitle,
+                              autocorrect: true,
+                              keyboardType: TextInputType.text,
+                              textCapitalization: TextCapitalization.words,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Full Name:",
+                                hintStyle: Theme.of(context).textTheme.body2,
+                                labelStyle: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
                           ),
-                          Text(
-                            title,
-                            style: Theme.of(context).textTheme.subtitle,
+                          Container(
+                            height: 35,
+                            child: TextFormField(
+                              onChanged: (value) {
+                                setState(() {
+                                  title = value;
+                                });
+                              },
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.subtitle,
+                              autocorrect: true,
+                              keyboardType: TextInputType.text,
+                              textCapitalization: TextCapitalization.words,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Job Title:",
+                                hintStyle: Theme.of(context).textTheme.body2,
+                                labelStyle: TextStyle(color: Colors.black),
+                              ),
+                            ),
                           ),
+                          // Text(
+                          //   name,
+                          //   style: Theme.of(context).textTheme.subtitle,
+                          // ),
+                          // Text(
+                          //   title,
+                          //   style: Theme.of(context).textTheme.subtitle,
+                          // ),
                         ],
                       ),
                     )
@@ -176,14 +200,35 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
               SizedBox(
                 height: 25,
               ),
-              RaisedButton(
-                child: Text("Create"),
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  await user.createUserProfile(name, title, _pickedImage);
-                },
+              FlatButton(
+                child: Text(_pickedImage == null
+                    ? "Select image"
+                    : "Select different image"),
+                onPressed: _selectImage,
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                height: 50,
+                width: 300,
+                child: RaisedButton(
+                  color: Theme.of(context).accentColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  elevation: 5,
+                  child: Text(
+                    "Create",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    await user.createUserProfile(name, title, _pickedImage);
+                  },
+                ),
               ),
               SizedBox(
                 height: 30,

@@ -41,19 +41,18 @@ class MyApp extends StatelessWidget {
             accentColor: Color.fromRGBO(244, 97, 88, 1),
             fontFamily: "Barlow",
             textTheme: TextTheme(
-                title: TextStyle(
-                    fontSize: 36, fontFamily: "BenchNine", color: Colors.white),
-                subtitle: TextStyle(
-                    fontSize: 30, fontFamily: "Barlow", color: Colors.black),
-                body1: TextStyle(
-                    fontSize: 24, fontFamily: "Barlow", color: Colors.white),
-                body2: TextStyle(
-                    fontSize: 22, fontFamily: "BenchNine", color: Colors.black),
-                button: TextStyle(fontSize: 20),
-                display1: TextStyle(
-                    fontSize: 16,
-                    fontFamily: "BenchNine",
-                    color: Colors.white)),
+              title: TextStyle(
+                  fontSize: 36, fontFamily: "BenchNine", color: Colors.white),
+              subtitle: TextStyle(
+                  fontSize: 30, fontFamily: "Barlow", color: Colors.black),
+              body1: TextStyle(
+                  fontSize: 24, fontFamily: "Barlow", color: Colors.white),
+              body2: TextStyle(
+                  fontSize: 22, fontFamily: "BenchNine", color: Colors.black),
+              button: TextStyle(fontSize: 20),
+              display1: TextStyle(
+                  fontSize: 16, fontFamily: "BenchNine", color: Colors.white),
+            ),
           ),
           routes: {
             "/home": (ctx) => TabScreen(),

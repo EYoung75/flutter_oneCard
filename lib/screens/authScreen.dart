@@ -18,7 +18,7 @@ class AuthScreen extends StatelessWidget {
           padding: const EdgeInsets.only(
             top: 50,
           ),
-          child: Center(
+          child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 Text(
