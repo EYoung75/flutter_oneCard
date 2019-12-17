@@ -98,7 +98,7 @@ class _WalletState extends State<Wallet> {
                         child: ListView.builder(
                           padding: EdgeInsets.only(left: 75),
                           scrollDirection: Axis.horizontal,
-                          itemCount: 10,
+                          itemCount: wallet.wallet.length,
                           itemBuilder: (ctx, i) => InkWell(
                             onTap: () {
                               Navigator.of(context).push(

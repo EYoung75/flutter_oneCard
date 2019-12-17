@@ -16,7 +16,7 @@ class AuthScreen extends StatelessWidget {
       body: Background(
         Padding(
           padding: const EdgeInsets.only(
-            top: 75,
+            top: 50,
           ),
           child: Center(
             child: Column(
@@ -146,14 +146,20 @@ class _AuthCardState extends State<AuthCard> {
               style: TextStyle(color: Colors.black, fontSize: 28),
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'E-Mail:'),
+              decoration: InputDecoration(
+                labelText: 'E-Mail:',
+                labelStyle: TextStyle(color: Colors.black),
+              ),
               keyboardType: TextInputType.emailAddress,
               onSaved: (value) {
                 _authData["email"] = value;
               },
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Password:'),
+              decoration: InputDecoration(
+                labelText: 'Password:',
+                labelStyle: TextStyle(color: Colors.black),
+              ),
               obscureText: true,
               controller: _passwordController,
               onSaved: (value) {
@@ -163,7 +169,10 @@ class _AuthCardState extends State<AuthCard> {
             _authMode == AuthMode.Signup
                 ? TextFormField(
                     enabled: _authMode == AuthMode.Signup,
-                    decoration: InputDecoration(labelText: "Confirm Password:"),
+                    decoration: InputDecoration(
+                      labelText: "Confirm Password:",
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
                     obscureText: true,
                     validator: _authMode == AuthMode.Signup
                         ? (value) {

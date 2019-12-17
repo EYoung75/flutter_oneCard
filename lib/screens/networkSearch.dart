@@ -41,6 +41,12 @@ class _NetworkSearchState extends State<NetworkSearch> {
     // });
   }
 
+  void clearSearchString() {
+    setState(() {
+      searchValue = "";
+    });
+  }
+
   @override
   void dispose() {
     _searchController.dispose();
@@ -102,7 +108,9 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                     child: Text(
                                       "Search",
                                       style: TextStyle(
-                                          fontSize: 30, color: Colors.white),
+                                        fontSize: 30,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                   TextFormField(
@@ -119,8 +127,8 @@ class _NetworkSearchState extends State<NetworkSearch> {
                                     child: RaisedButton.icon(
                                       elevation: 7,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
                                       color: Theme.of(context).accentColor,
                                       icon: Icon(Icons.search),
                                       label: Text("Find"),
@@ -158,7 +166,10 @@ class _NetworkSearchState extends State<NetworkSearch> {
                               ? Center(
                                   child: CircularProgressIndicator(),
                                 )
-                              : PlaceList(searchValue)
+                              : PlaceList(
+                                  searchValue,
+                                  clearSearchString
+                                )
                     ],
                   ),
                 ],
@@ -170,7 +181,10 @@ class _NetworkSearchState extends State<NetworkSearch> {
 
 class PlaceList extends StatelessWidget {
   String searchValue;
-  PlaceList(this.searchValue);
+  Function clearSearchString;
+
+  PlaceList(this.searchValue, this.clearSearchString);
+
   @override
   Widget build(BuildContext context) {
     final placeList = Provider.of<Places>(context);
@@ -185,6 +199,7 @@ class PlaceList extends StatelessWidget {
             icon: Icon(Icons.refresh),
             label: Text("Search Again"),
             onPressed: () {
+              clearSearchString();
               placeList.clearSearch();
             },
           ),
