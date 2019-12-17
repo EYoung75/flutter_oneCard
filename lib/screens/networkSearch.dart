@@ -44,6 +44,7 @@ class _NetworkSearchState extends State<NetworkSearch> {
   void clearSearchString() {
     setState(() {
       searchValue = "";
+      _searchController.clear();
     });
   }
 
@@ -166,10 +167,7 @@ class _NetworkSearchState extends State<NetworkSearch> {
                               ? Center(
                                   child: CircularProgressIndicator(),
                                 )
-                              : PlaceList(
-                                  searchValue,
-                                  clearSearchString
-                                )
+                              : PlaceList(searchValue, clearSearchString)
                     ],
                   ),
                 ],
