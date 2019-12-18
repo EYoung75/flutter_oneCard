@@ -58,7 +58,7 @@ class MainCard extends StatelessWidget {
                     bottomRight: Radius.circular(12),
                     bottomLeft: Radius.circular(12),
                   ),
-                  color: Color.fromRGBO(255, 255, 255, .7),
+                  color: Color.fromRGBO(255, 255, 255, .9),
                 ),
                 width: double.infinity,
                 // margin: EdgeInsets.all(25),

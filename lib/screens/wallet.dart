@@ -134,8 +134,16 @@ class _WalletState extends State<Wallet> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: wallet.wallet[i].image,
+                                    Container(
+                                      height: 350,
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                        ),
+                                        child: wallet.wallet[i].image,
+                                      ),
                                     )
                                   ],
                                 ),

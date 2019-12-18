@@ -39,6 +39,7 @@ class CardDetails extends StatelessWidget {
                 ),
               ),
               height: 250,
+              child: selectedUser.image,
             ),
             Text(selectedUser.name),
             Text(selectedUser.title),

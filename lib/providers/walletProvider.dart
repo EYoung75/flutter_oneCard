@@ -53,6 +53,7 @@ class WalletProvider extends ChangeNotifier {
         },
       ),
     );
+
     _result = "";
     scannedCard = null;
     notifyListeners();
@@ -96,7 +97,10 @@ class WalletProvider extends ChangeNotifier {
           VirtualCard userCard = VirtualCard(
             resData[key]["userId"],
             resData[key]["name"],
-            Image.network(resData[key]["image"], fit: BoxFit.contain,),
+            Image.network(
+              resData[key]["image"],
+              fit: BoxFit.cover,
+            ),
             resData[key]["title"],
           );
           newWallet.add(userCard);
