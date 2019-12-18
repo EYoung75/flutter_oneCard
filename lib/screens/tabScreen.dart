@@ -88,16 +88,16 @@ class _TabScreenState extends State<TabScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: ListTile(
-                    leading: Icon(Icons.question_answer),
-                    title: Text(
-                      "Messenger",
-                      style: Theme.of(context).textTheme.body2,
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 30),
+                //   child: ListTile(
+                //     leading: Icon(Icons.question_answer),
+                //     title: Text(
+                //       "Messenger",
+                //       style: Theme.of(context).textTheme.body2,
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(left: 30),
                   child: ListTile(

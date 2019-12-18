@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import "package:flutter/material.dart";
+import 'package:image_picker/image_picker.dart';
 import "../widgets/mainCard.dart";
 import "package:provider/provider.dart";
 import "../providers/user.dart";
@@ -10,6 +13,32 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  String _name;
+  String _title;
+  dynamic _pickedImage;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final userInfo = Provider.of<User>(context).userCard;
+    _name = userInfo.name;
+    _title = userInfo.title;
+    _pickedImage = userInfo.image;
+  }
+
+  Future<void> _selectImage() async {
+    final imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // File cropped = await ImageCropper.cropImage(sourcePath: imageFile.path, iosUiSettings: IOSUiSettings(hidesNavigationBar: false, ));
+    // final appDir = await syspaths.getApplicationDocumentsDirectory();
+    // final fileName = path.basename(imageFile.path);
+    // // final savedImage = await imageFile.copy("${appDir.path}/${fileName}");
+    // final filePath = await path.absolute(appDir.toString(), fileName);
+    // print("FILE PATH: $filePath");
+    setState(() {
+      _pickedImage = Image.file(imageFile);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -50,8 +79,8 @@ class _SettingsState extends State<Settings> {
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          child: user.userCard.image != null
-                              ? user.userCard.image
+                          child: _pickedImage != null
+                              ? _pickedImage
                               : Image.network(
                                   "https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png",
                                   fit: BoxFit.cover,
@@ -80,7 +109,9 @@ class _SettingsState extends State<Settings> {
                             height: 35,
                             child: TextFormField(
                               onChanged: (value) {
-                                setState(() {});
+                                setState(() {
+                                  _name = value;
+                                });
                               },
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.subtitle,
@@ -89,7 +120,7 @@ class _SettingsState extends State<Settings> {
                               textCapitalization: TextCapitalization.words,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: user.userCard.name,
+                                hintText: _name,
                                 hintStyle: Theme.of(context).textTheme.body2,
                                 labelStyle: TextStyle(
                                   color: Colors.black,
@@ -101,7 +132,9 @@ class _SettingsState extends State<Settings> {
                             height: 35,
                             child: TextFormField(
                               onChanged: (value) {
-                                setState(() {});
+                                setState(() {
+                                  _title = value;
+                                });
                               },
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.subtitle,
@@ -110,7 +143,7 @@ class _SettingsState extends State<Settings> {
                               textCapitalization: TextCapitalization.words,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: user.userCard.title,
+                                hintText: _title,
                                 hintStyle: Theme.of(context).textTheme.body2,
                                 labelStyle: TextStyle(color: Colors.black),
                               ),
@@ -124,18 +157,29 @@ class _SettingsState extends State<Settings> {
               ),
             ),
             FlatButton.icon(
-              icon: Icon(Icons.wallpaper, color: Colors.white,),
-              label: Text("Change picture", style: Theme.of(context).textTheme.body1,),
-              onPressed: () {},
+              icon: Icon(
+                Icons.wallpaper,
+                color: Colors.white,
+              ),
+              label: Text(
+                "Change picture",
+                style: Theme.of(context).textTheme.body1,
+              ),
+              onPressed: _selectImage,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 RaisedButton(
+                  elevation: 6,
                   child: Text("Save"),
-                  onPressed: () {},
+                  onPressed: () {
+                    user.createUserProfile(_name, _title, _pickedImage);
+                  },
                 ),
                 RaisedButton(
+                  elevation: 6,
+                  color: Theme.of(context).accentColor,
                   child: Text("Delete"),
                   onPressed: () {
                     user.deleteUser();
