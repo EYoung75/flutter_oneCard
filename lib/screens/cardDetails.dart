@@ -12,7 +12,7 @@ class CardDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(selectedUser.name),
+        title: Text(selectedUser.name, style: Theme.of(context).textTheme.title),
       ),
       body: Background(
         Column(
@@ -59,7 +59,8 @@ class CardDetails extends StatelessWidget {
                   label: Text("Share"),
                 )
               ],
-            )
+            ),
+            SizedBox(height: 100)
           ],
         ),
       ),

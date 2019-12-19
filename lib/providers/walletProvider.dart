@@ -62,7 +62,7 @@ class WalletProvider extends ChangeNotifier {
     );
   }
 
-  Future<void> fetchUser() async {
+  Future<void> fetchUser() async { 
     final url =
         "https://onecard-a0072.firebaseio.com/users/$_result/card.json?auth=$authToken";
     final res = await http.get(url);

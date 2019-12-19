@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:one_card_revisited/providers/user.dart';
+import "package:one_card_revisited/providers/user.dart";
 import "../screens/home.dart";
 import "../screens/network.dart";
 import "../screens/wallet.dart";
