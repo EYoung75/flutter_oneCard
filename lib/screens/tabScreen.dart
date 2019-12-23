@@ -106,7 +106,7 @@ class _TabScreenState extends State<TabScreen> {
                       "Help",
                       style: Theme.of(context).textTheme.body2,
                     ),
-                  ),
+                  ), 
                 ),
                 InkWell(
                   onTap: () {
