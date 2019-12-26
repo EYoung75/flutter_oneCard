@@ -107,7 +107,7 @@ class _TabScreenState extends State<TabScreen> {
                       style: Theme.of(context).textTheme.body2,
                     ),
                   ), 
-                ),
+                ), 
                 InkWell(
                   onTap: () {
                     Provider.of<Auth>(context).logout();
