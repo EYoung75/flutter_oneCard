@@ -94,7 +94,7 @@ class _WalletState extends State<Wallet> {
                               )
                             ],
                           ),
-                          height: 360,
+                          height: 550,
                           padding: EdgeInsets.symmetric(vertical: 50),
                           child: ListView.builder(
                             padding: EdgeInsets.only(left: 75),
@@ -124,13 +124,13 @@ class _WalletState extends State<Wallet> {
                                     ListTile(
                                       title: Text(
                                         wallet.wallet[i].name,
-                                        style: TextStyle(fontSize: 22),
+                                        style: TextStyle(fontSize: 24),
                                       ),
                                       subtitle: Text(
                                         "      ${wallet.wallet[i].title}",
                                         style: TextStyle(
                                           color: Colors.grey,
-                                          fontSize: 20,
+                                          fontSize: 22,
                                         ),
                                       ),
                                     ),
@@ -158,57 +158,3 @@ class _WalletState extends State<Wallet> {
     );
   }
 }
-
-// Expanded(
-//                         child: Container(
-//                           margin: EdgeInsets.symmetric(horizontal: 25),
-//                           decoration: BoxDecoration(
-//                             color: Color.fromRGBO(255, 255, 255, .7),
-//                             borderRadius: BorderRadius.only(
-//                               topRight: Radius.circular(10),
-//                               topLeft: Radius.circular(10),
-//                             ),
-//                           ),
-//                           child: ListView.builder(
-//                             scrollDirection: Axis.horizontal,
-//                             itemCount: wallet.wallet.length,
-//                             itemBuilder: (ctx, i) => InkWell(
-// onTap: () {
-//   Navigator.of(context).push(
-//     MaterialPageRoute(
-//       fullscreenDialog: false,
-//       builder: (ctx) => CardDetails(
-//         wallet.wallet[i],
-//       ),
-//     ),
-//   );
-// },
-//                               child: Container(
-//                                 margin: EdgeInsets.symmetric(
-//                                   horizontal: 50,
-//                                   vertical: 10,
-//                                 ),
-//                                 child: Card(
-//                                   elevation: 5,
-//                                   color: Color.fromRGBO(255, 255, 255, .8),
-//                                   child: ListTile(
-//                                     leading: ClipRRect(
-//                                       borderRadius: BorderRadius.circular(50),
-//                                       child: Image.network(
-//                                         wallet.wallet[i].image,
-//                                         fit: BoxFit.cover,
-//                                       ),
-//                                     ),
-//                                     title: Text(
-//                                       wallet.wallet[i].name,
-//                                       style: TextStyle(fontSize: 25),
-//                                     ),
-//                                     subtitle: Text(wallet.wallet[i].title),
-//                                     trailing: Icon(Icons.keyboard_arrow_right),
-//                                   ),
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                       )
