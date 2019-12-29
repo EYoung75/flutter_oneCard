@@ -109,7 +109,7 @@ class _WalletState extends State<Wallet> {
                                       wallet.wallet[i],
                                     ),
                                   ),
-                                );
+                                ); 
                               },
                               child: Container(
                                 decoration: BoxDecoration(
