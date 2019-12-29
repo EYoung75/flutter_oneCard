@@ -117,7 +117,7 @@ class _WalletState extends State<Wallet> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 width: 250,
-                                child: Column(
+                                child: Column( 
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
