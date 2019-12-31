@@ -113,7 +113,7 @@ class _WalletState extends State<Wallet> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: Colors.white, g
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 width: 250,
