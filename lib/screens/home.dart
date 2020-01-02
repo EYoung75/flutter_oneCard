@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final userInfo = Provider.of<User>(context);
-    return Background(
+    return Background( 
       userInfo.triedFetch == false
           ? Center(
               child: CircularProgressIndicator(),
