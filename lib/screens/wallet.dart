@@ -108,12 +108,12 @@ class _WalletState extends State<Wallet> {
                                     builder: (ctx) => CardDetails(
                                       wallet.wallet[i],
                                     ),
-                                  ),
+                                  )m,
                                 ); 
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white, g
+                                  color: Colors.white, 
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 width: 250,
