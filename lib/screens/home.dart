@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
               child: CircularProgressIndicator(),
             )
           : userInfo.userCard != null
-              ? MainCard() 
+              ? MainCard()
               : userInfo.loading == true
                   ? Center(
                       child: CircularProgressIndicator(),
