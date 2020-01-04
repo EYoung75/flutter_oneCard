@@ -32,7 +32,6 @@ class AuthScreen extends StatelessWidget {
                 ),
                 Divider(
                   color: Color.fromRGBO(255, 255, 255, .5),
-                  endIndent: 50,
                   thickness: 3,
                 ),
                 AuthCard(),

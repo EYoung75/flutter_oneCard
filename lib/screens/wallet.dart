@@ -1,8 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:one_card_revisited/providers/walletProvider.dart';
 import "package:provider/provider.dart";
-import "../widgets/emptyWallet.dart";
-import "../widgets/walletTile.dart";
 import "../screens/cardDetails.dart";
 import "../widgets/background.dart";
 
@@ -87,7 +85,7 @@ class _WalletState extends State<Wallet> {
                     margin: EdgeInsets.only(left: 25),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Collection:",
+                      "Collection:    ${wallet.wallet.length == 0 ? ' ' : wallet.wallet.length.toString()}",
                       style: Theme.of(context).textTheme.subtitle,
                     ),
                   ),
