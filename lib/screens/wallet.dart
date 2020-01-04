@@ -12,6 +12,7 @@ class Wallet extends StatefulWidget {
 }
 
 class _WalletState extends State<Wallet> {
+  dynamic currentWallet;
   bool _loading = true;
   TextEditingController searchController = TextEditingController();
   @override
@@ -20,6 +21,8 @@ class _WalletState extends State<Wallet> {
     Provider.of<WalletProvider>(context, listen: false).fetchWallet().then((_) {
       setState(() {
         _loading = false;
+        currentWallet =
+            Provider.of<WalletProvider>(context, listen: false).wallet;
       });
     });
   }
@@ -51,8 +54,12 @@ class _WalletState extends State<Wallet> {
                       left: 20,
                     ),
                     child: TextFormField(
-                      onChanged: (_) {
-                        wallet.userSearch(searchController.text);
+                      onChanged: (value) {
+                        setState(() {
+                          currentWallet = currentWallet
+                              .where((i) => i.name.contains(value))
+                              .toList();
+                        });
                       },
                       controller: searchController,
                       decoration: InputDecoration(
@@ -95,29 +102,29 @@ class _WalletState extends State<Wallet> {
                           textAlign: TextAlign.center,
                         )
                       : Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.white12,
-                                blurRadius: 20,
-                                spreadRadius: 20,
-                                offset: Offset(0, 0),
-                              )
-                            ],
-                          ),
+                          // decoration: BoxDecoration(
+                          //   boxShadow: [
+                          //     BoxShadow(
+                          //       color: Colors.white12,
+                          //       blurRadius: 5,
+                          //       spreadRadius: 5,
+                          //       offset: Offset(0, 0),
+                          //     )
+                          //   ],
+                          // ),
                           height: 550,
                           padding: EdgeInsets.symmetric(vertical: 50),
                           child: ListView.builder(
                             padding: EdgeInsets.only(left: 75),
                             scrollDirection: Axis.horizontal,
-                            itemCount: wallet.wallet.length,
+                            itemCount: currentWallet.length,
                             itemBuilder: (ctx, i) => InkWell(
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     fullscreenDialog: false,
                                     builder: (ctx) => CardDetails(
-                                      wallet.wallet[i],
+                                      currentWallet[i],
                                     ),
                                   ),
                                 );
@@ -134,11 +141,11 @@ class _WalletState extends State<Wallet> {
                                   children: <Widget>[
                                     ListTile(
                                       title: Text(
-                                        wallet.wallet[i].name,
+                                        currentWallet[i].name,
                                         style: TextStyle(fontSize: 24),
                                       ),
                                       subtitle: Text(
-                                        "      ${wallet.wallet[i].title}",
+                                        "      ${currentWallet[i].title}",
                                         style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 22,
@@ -153,7 +160,7 @@ class _WalletState extends State<Wallet> {
                                           bottomLeft: Radius.circular(10),
                                           bottomRight: Radius.circular(10),
                                         ),
-                                        child: wallet.wallet[i].image,
+                                        child: currentWallet[i].image,
                                       ),
                                     )
                                   ],
