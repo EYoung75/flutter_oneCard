@@ -13,6 +13,7 @@ class Wallet extends StatefulWidget {
 
 class _WalletState extends State<Wallet> {
   bool _loading = true;
+  TextEditingController searchController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -21,6 +22,12 @@ class _WalletState extends State<Wallet> {
         _loading = false;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,6 +51,10 @@ class _WalletState extends State<Wallet> {
                       left: 20,
                     ),
                     child: TextFormField(
+                      onChanged: (_) {
+                        wallet.userSearch(searchController.text);
+                      },
+                      controller: searchController,
                       decoration: InputDecoration(
                         icon: Icon(
                           Icons.search,
@@ -109,15 +120,15 @@ class _WalletState extends State<Wallet> {
                                       wallet.wallet[i],
                                     ),
                                   ),
-                                ); 
+                                );
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white, 
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 width: 250,
-                                child: Column( 
+                                child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[

@@ -118,7 +118,7 @@ class WalletProvider extends ChangeNotifier {
   }
 
   Future<void> userSearch(String value) async {
-    wallet.where((i) => i.name.contains(value)).toList();
+    wallet = wallet.where((i) => i.name.contains(value)).toList();
     notifyListeners();
   }
 
