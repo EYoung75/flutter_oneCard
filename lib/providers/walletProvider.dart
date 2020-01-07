@@ -62,7 +62,7 @@ class WalletProvider extends ChangeNotifier {
     );
   }
 
-  Future<void> fetchUser() async { 
+  Future<void> fetchUser() async {
     final url =
         "https://onecard-a0072.firebaseio.com/users/$_result/card.json?auth=$authToken";
     final res = await http.get(url);
@@ -117,9 +117,8 @@ class WalletProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> userSearch(String value) async {
-    wallet = wallet.where((i) => i.name.contains(value)).toList();
-    notifyListeners();
+  Future userSearch(String value) async {
+    return wallet.where((i) => i.name.contains(value)).toList();
   }
 
   Future<void> deleteUser(String id) async {

@@ -66,7 +66,7 @@ class User with ChangeNotifier {
       http.delete(dbUrl).then((_) {
         final authUrl =
             "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=$apiKey";
-        ;
+        
         http.delete(authUrl);
       });
     });
@@ -75,7 +75,7 @@ class User with ChangeNotifier {
   }
 
   Future<void> createUserProfile(
-      String name, String title, dynamic image) async {
+    String name, String title, dynamic image) async {
     if (loading == false) {
       loading = true;
       notifyListeners();
@@ -106,7 +106,6 @@ class User with ChangeNotifier {
           "userId": userId,
           "name": newCard.name,
           "title": newCard.title,
-          "userEmail": email,
           "image": "$userId/$fileName"
         }),
       );

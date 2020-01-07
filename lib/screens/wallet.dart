@@ -30,6 +30,7 @@ class _WalletState extends State<Wallet> {
     searchController.dispose();
     super.dispose();
   }
+  
 
   @override
   Widget build(BuildContext context) {
