@@ -86,7 +86,7 @@ class _WalletState extends State<Wallet> {
                     margin: EdgeInsets.only(left: 25),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Collection:    ${wallet.wallet.length == 0 ? ' ' : wallet.wallet.length.toString()}",
+                      "Collection:    ${currentWallet == null ? "0" : currentWallet.length.toString()}",
                       style: Theme.of(context).textTheme.subtitle,
                     ),
                   ),
@@ -95,7 +95,7 @@ class _WalletState extends State<Wallet> {
                     color: Color.fromRGBO(255, 255, 255, .5),
                     indent: 50,
                   ),
-                  wallet.wallet == null
+                  currentWallet == null 
                       ? Text(
                           "Start scanning cards to add to your wallet!",
                           textAlign: TextAlign.center,
