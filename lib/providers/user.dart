@@ -66,7 +66,7 @@ class User with ChangeNotifier {
       http.delete(dbUrl).then((_) {
         final authUrl =
             "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=$apiKey";
-
+        
         http.delete(authUrl);
       });
     });
@@ -75,7 +75,7 @@ class User with ChangeNotifier {
   }
 
   Future<void> createUserProfile(
-      String name, String title, dynamic image) async {
+    String name, String title, dynamic image) async {
     if (loading == false) {
       loading = true;
       notifyListeners();
@@ -89,7 +89,6 @@ class User with ChangeNotifier {
       imageUploaded = true;
     });
     if (imageUploaded == true) {
-      print("OPKAY");
       final storedImage = await imageReference.getDownloadURL();
       final VirtualCard newCard = VirtualCard(
         userId,
@@ -98,6 +97,7 @@ class User with ChangeNotifier {
         title,
         email,
       );
+
       final url =
           "https://onecard-a0072.firebaseio.com/users/$userId/card.json?auth=$authToken";
       final res = await http.put(
@@ -106,7 +106,6 @@ class User with ChangeNotifier {
           "userId": userId,
           "name": newCard.name,
           "title": newCard.title,
-          "userEmail": email,
           "image": "$userId/$fileName"
         }),
       );
