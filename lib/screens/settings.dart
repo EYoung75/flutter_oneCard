@@ -23,7 +23,9 @@ class _SettingsState extends State<Settings> {
     final userInfo = Provider.of<User>(context).userCard;
     _name = userInfo.name;
     _title = userInfo.title;
-    _pickedImage = userInfo.image;
+    if (_pickedImage == null) {
+      _pickedImage = userInfo.image;
+    }
   }
 
   Future<void> _selectImage() async {
@@ -35,7 +37,7 @@ class _SettingsState extends State<Settings> {
     // final filePath = await path.absolute(appDir.toString(), fileName);
     // print("FILE PATH: $filePath");
     setState(() {
-      _pickedImage = FileImage(imageFile);
+      _pickedImage = Image.file(imageFile, fit: BoxFit.cover,);
       _updateImage = true;
     });
   }

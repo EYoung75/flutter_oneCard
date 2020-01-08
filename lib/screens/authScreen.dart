@@ -14,29 +14,27 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Background(
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 50,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  "OneCard",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "BenchNine",
-                    fontSize: 50,
-                    color: Colors.white,
-                  ),
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                "OneCard",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "BenchNine",
+                  fontSize: 50,
+                  color: Colors.white,
                 ),
-                Divider(
-                  color: Color.fromRGBO(255, 255, 255, .5),
-                  thickness: 3,
-                ),
-                AuthCard(),
-              ],
-            ),
+              ),
+              Divider(
+                color: Color.fromRGBO(255, 255, 255, .5),
+                thickness: 3,
+              ),
+              AuthCard(),
+            ],
           ),
         ),
       ),
@@ -135,7 +133,7 @@ class _AuthCardState extends State<AuthCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 50, right: 50, top: 50),
+      padding: EdgeInsets.only(left: 50, right: 50, top: 25),
       child: Form(
         key: _formKey,
         child: Column(
@@ -187,7 +185,7 @@ class _AuthCardState extends State<AuthCard> {
                     backgroundColor: Colors.blueGrey,
                   )
                 : SizedBox(
-                    height: 100,
+                    height: 50,
                   ),
             Container(
               height: 50,

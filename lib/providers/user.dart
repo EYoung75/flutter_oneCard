@@ -125,8 +125,9 @@ class User with ChangeNotifier {
     }
     if (updateImage == true) {
       bool imageUploaded = false;
+      print(path.basename(image.path));
       String fileName = path.basename(image.path);
-      print("TWO");
+      print("TWO: $fileName");
       StorageReference imageReference =
           FirebaseStorage.instance.ref().child("$userId/$fileName");
       StorageUploadTask uploadTask = imageReference.putFile(image);
