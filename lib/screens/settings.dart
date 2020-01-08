@@ -23,9 +23,7 @@ class _SettingsState extends State<Settings> {
     final userInfo = Provider.of<User>(context).userCard;
     _name = userInfo.name;
     _title = userInfo.title;
-    if (_pickedImage == null) {
-      _pickedImage = userInfo.image;
-    }
+    _pickedImage = userInfo.image;
   }
 
   Future<void> _selectImage() async {
@@ -37,7 +35,8 @@ class _SettingsState extends State<Settings> {
     // final filePath = await path.absolute(appDir.toString(), fileName);
     // print("FILE PATH: $filePath");
     setState(() {
-      _pickedImage = Image.file(imageFile, fit: BoxFit.cover,);
+      _pickedImage = imageFile;
+
       _updateImage = true;
     });
   }
@@ -88,12 +87,17 @@ class _SettingsState extends State<Settings> {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(10),
                                   ),
-                                  child: _pickedImage != null
-                                      ? _pickedImage
-                                      : Image.network(
+                                  child: _pickedImage == null
+                                      ? Image.network(
                                           "https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png",
                                           fit: BoxFit.cover,
                                         )
+                                      : _updateImage == false
+                                          ? _pickedImage
+                                          : Image.file(
+                                              _pickedImage,
+                                              fit: BoxFit.cover,
+                                            )
                                   // : Image.asset(
                                   //     "assets/images/blankprofile.png",
                                   //     fit: BoxFit.cover,

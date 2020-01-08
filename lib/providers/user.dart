@@ -124,8 +124,8 @@ class User with ChangeNotifier {
       notifyListeners();
     }
     if (updateImage == true) {
+      print("YOOO$image.toString()");
       bool imageUploaded = false;
-      print(path.basename(image.path));
       String fileName = path.basename(image.path);
       print("TWO: $fileName");
       StorageReference imageReference =
