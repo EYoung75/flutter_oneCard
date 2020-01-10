@@ -24,6 +24,7 @@ class _SettingsState extends State<Settings> {
     _name = userInfo.name;
     _title = userInfo.title;
     _pickedImage = userInfo.image;
+    _updateImage = false;
   }
 
   Future<void> _selectImage() async {
@@ -36,7 +37,6 @@ class _SettingsState extends State<Settings> {
     // print("FILE PATH: $filePath");
     setState(() {
       _pickedImage = imageFile;
-
       _updateImage = true;
     });
   }
