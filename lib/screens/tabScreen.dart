@@ -7,6 +7,7 @@ import "package:provider/provider.dart";
 import "../providers/auth.dart";
 import "../providers/walletProvider.dart";
 import "./ScanScreen.dart";
+import "./searchScreen.dart";
 
 class TabScreen extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class TabScreen extends StatefulWidget {
 class _TabScreenState extends State<TabScreen> {
   List<Map<String, Object>> _pages;
 
-  int _selectedPageIndex = 0;
+  int _selectedPageIndex = 1;
 
   @override
   void initState() {
@@ -24,6 +25,7 @@ class _TabScreenState extends State<TabScreen> {
     Provider.of<User>(context, listen: false).fetchUserProfile();
     _pages = [
       // {"page": Network(), "title": "Network"},
+      {"page": SearchScreen(), "title": "Search"},
       {"page": Home(), "title": "OneCard"},
       {"page": Wallet(), "title": "Wallet"},
     ];
@@ -157,13 +159,13 @@ class _TabScreenState extends State<TabScreen> {
         onTap: _setPage,
         currentIndex: _selectedPageIndex,
         items: [
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.near_me),
-          //   title: Text(
-          //     "Network",
-          //     style: Theme.of(context).textTheme.display1,
-          //   ),
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text(
+              "Search",
+              style: Theme.of(context).textTheme.display1,
+            ),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.portrait),
             title: Text(

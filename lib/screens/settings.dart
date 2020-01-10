@@ -196,17 +196,17 @@ class _SettingsState extends State<Settings> {
                           onPressed: () async {
                             await user.editProfile(
                                 _name, _title, _pickedImage, _updateImage);
-                            // Scaffold.of(context).showSnackBar(
-                            //   SnackBar(
-                            //     backgroundColor: Colors.green,
-                            //     content: Text(
-                            //       "Your card has been updated!",
-                            //       style: Theme.of(context).textTheme.body1,
-                            //     ),
-                            //     elevation: 5,
-                            //     duration: Duration(seconds: 2),
-                            //   ),
-                            // );
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                  "Your card has been updated!",
+                                  style: Theme.of(context).textTheme.body1,
+                                ),
+                                elevation: 5,
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
                           },
                         ),
                         RaisedButton(
