@@ -50,7 +50,7 @@ class MainCard extends StatelessWidget {
                     //   fit: BoxFit.cover,
                     // ),
                     ),
-              ),
+              ), 
               Container(
                 height: 85,
                 decoration: BoxDecoration(
