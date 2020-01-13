@@ -17,6 +17,7 @@ class WalletProvider extends ChangeNotifier {
   VirtualCard scannedCard;
   List<dynamic> wallet;
   bool loading = true;
+  List filteredUsers;
 
   Future scanQR() async {
     try {
@@ -117,12 +118,37 @@ class WalletProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future userSearch() async {
-    String url = "https://onecard-a0072.firebaseio.com/users.json?orderBy='card/name&startAt=a&auth=$authToken";
+  Future userSearch(searchTerm) async {
+    String url =
+        "https://onecard-a0072.firebaseio.com/users.json?&auth=$authToken";
     final res = await http.get(url);
     final resData = json.decode(res.body);
-    print("SEARCH: $resData");
-    
+    List allUsers = [];
+    if (resData != null) {
+      resData.forEach((key, value) => {
+            allUsers.add(
+              resData[key]
+            )
+            // if(resData[key]["card"]["name"].contains(searchTerm)) {
+            //   filteredUsers.
+            // }
+          });
+      // if (resData[key]["name"] == searchTerm) {
+      //   VirtualCard userCard = VirtualCard(
+      //     resData[key]["userId"],
+      //     resData[key]["name"],
+      //     Image.network(
+      //       resData[key]["image"],
+      //       fit: BoxFit.cover,
+      //     ),
+      //     resData[key]["title"],
+      //   );
+      //   filteredUsers.add(userCard);
+      // }
+    }
+    filteredUsers = allUsers.where((i) => i.name.contains(searchTerm)).toList();
+    notifyListeners();
+    print("SEARCH: $allUsers");
   }
 
   Future<void> deleteUser(String id) async {

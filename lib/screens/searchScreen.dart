@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:one_card_revisited/providers/user.dart';
+import 'package:one_card_revisited/screens/wallet.dart';
 import "../widgets/background.dart";
 import "../providers/walletProvider.dart";
 import "package:provider/provider.dart";
@@ -10,14 +12,13 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   bool _loading = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    Provider.of<WalletProvider>(context).userSearch();
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  // }
   @override
   Widget build(BuildContext context) {
+    var filteredUsers = Provider.of<WalletProvider>(context).filteredUsers;
     return Background(
       _loading == true
           ? Center(
@@ -34,7 +35,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     left: 20,
                   ),
                   child: TextFormField(
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<WalletProvider>(context).userSearch(value);
+                    },
                     decoration: InputDecoration(
                       icon: Icon(
                         Icons.search,
@@ -53,6 +56,18 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ),
+                Container(
+                    height: 350,
+                    width: double.infinity,
+                    child: filteredUsers != null
+                        ? ListView.builder(
+                            itemCount: filteredUsers.length,
+                            itemBuilder: (ctx, i) => ListTile(
+                                  title: Text(
+                                    filteredUsers[i].name,
+                                  ),
+                                ))
+                        : Container())
               ],
             ),
     );
