@@ -21,11 +21,7 @@ class _HomeState extends State<Home> {
             )
           : userInfo.userCard != null
               ? MainCard()
-              : userInfo.loading == true
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : CreateCardScreen(),
+              : CreateCardScreen()
     );
   }
 }
