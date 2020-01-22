@@ -5,7 +5,7 @@ import "../widgets/background.dart";
 import "../providers/walletProvider.dart";
 import "package:provider/provider.dart";
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatefulWidget { 
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
