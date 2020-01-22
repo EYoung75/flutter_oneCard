@@ -12,7 +12,8 @@ class CardDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(selectedUser.name, style: Theme.of(context).textTheme.title),
+        title:
+            Text(selectedUser.name, style: Theme.of(context).textTheme.title),
       ),
       body: Background(
         Column(
@@ -31,15 +32,22 @@ class CardDetails extends StatelessWidget {
                 ],
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(
-                    30,
+                    10,
                   ),
                   bottomRight: Radius.circular(
-                    30,
+                    10,
                   ),
                 ),
               ),
-              height: 250,
-              child: selectedUser.image,
+              height: 350,
+              width: 300,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+                child: selectedUser.image,
+              ),
             ),
             Text(selectedUser.name),
             Text(selectedUser.title),

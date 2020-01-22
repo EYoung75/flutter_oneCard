@@ -1,11 +1,10 @@
 import "package:flutter/material.dart";
-
 import "dart:io";
 import 'package:image_picker/image_picker.dart';
 import "package:provider/provider.dart";
 import "../providers/user.dart";
 import "../widgets/background.dart";
-// import 'package:image_cropper/image_cropper.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class CreateCardScreen extends StatefulWidget {
   @override
@@ -20,9 +19,9 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
 
   Future<void> _selectImage() async {
     final imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    // File cropped = await ImageCropper.cropImage(sourcePath: imageFile.path, iosUiSettings: IOSUiSettings(hidesNavigationBar: false, ));
+    File cropped = await ImageCropper.cropImage(sourcePath: imageFile.path, iosUiSettings: IOSUiSettings(hidesNavigationBar: false, ));
     setState(() {
-      _pickedImage = imageFile;
+      _pickedImage = cropped;
     });
   }
 

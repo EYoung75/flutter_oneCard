@@ -1,10 +1,11 @@
-import 'dart:io';
 import "package:flutter/material.dart";
 import 'package:image_picker/image_picker.dart';
-import "../widgets/mainCard.dart";
 import "package:provider/provider.dart";
 import "../providers/user.dart";
 import "../widgets/background.dart";
+import 'package:image_cropper/image_cropper.dart';
+import "dart:io";
+
 
 class Settings extends StatefulWidget {
   @override
@@ -29,14 +30,14 @@ class _SettingsState extends State<Settings> {
 
   Future<void> _selectImage() async {
     final imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    // File cropped = await ImageCropper.cropImage(sourcePath: imageFile.path, iosUiSettings: IOSUiSettings(hidesNavigationBar: false, ));
+    File cropped = await ImageCropper.cropImage(sourcePath: imageFile.path, iosUiSettings: IOSUiSettings(hidesNavigationBar: false, ),aspectRatio: CropAspectRatio(ratioX: 12, ratioY: 16));
     // final appDir = await syspaths.getApplicationDocumentsDirectory();
     // final fileName = path.basename(imageFile.path);
     // // final savedImage = await imageFile.copy("${appDir.path}/${fileName}");
     // final filePath = await path.absolute(appDir.toString(), fileName);
     // print("FILE PATH: $filePath");
     setState(() {
-      _pickedImage = imageFile;
+      _pickedImage = cropped;
       _updateImage = true;
     });
   }
