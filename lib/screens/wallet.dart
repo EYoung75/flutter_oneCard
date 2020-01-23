@@ -30,7 +30,6 @@ class _WalletState extends State<Wallet> {
     searchController.dispose();
     super.dispose();
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +94,7 @@ class _WalletState extends State<Wallet> {
                     color: Color.fromRGBO(255, 255, 255, .5),
                     indent: 50,
                   ),
-                  currentWallet == null 
+                  currentWallet == null
                       ? Text(
                           "Start scanning cards to add to your wallet!",
                           textAlign: TextAlign.center,
@@ -111,11 +110,12 @@ class _WalletState extends State<Wallet> {
                           //     )
                           //   ],
                           // ),
-                          height: 550,
+                          height: 450,
                           padding: EdgeInsets.symmetric(vertical: 50),
                           child: ListView.builder(
                             padding: EdgeInsets.only(left: 75),
                             scrollDirection: Axis.horizontal,
+                            // itemCount: 10,
                             itemCount: currentWallet.length,
                             itemBuilder: (ctx, i) => InkWell(
                               onTap: () {
@@ -139,6 +139,7 @@ class _WalletState extends State<Wallet> {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     ListTile(
+                                      trailing: Icon(Icons.arrow_forward_ios),
                                       title: Text(
                                         currentWallet[i].name,
                                         style: TextStyle(fontSize: 24),
@@ -152,8 +153,6 @@ class _WalletState extends State<Wallet> {
                                       ),
                                     ),
                                     Container(
-                                      height: 350,
-                                      width: double.infinity,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.only(
                                           bottomLeft: Radius.circular(10),
@@ -161,6 +160,9 @@ class _WalletState extends State<Wallet> {
                                         ),
                                         child: currentWallet[i].image,
                                       ),
+                                      constraints:
+                                          BoxConstraints.tightFor(height: 250),
+                                      width: 250,
                                     )
                                   ],
                                 ),

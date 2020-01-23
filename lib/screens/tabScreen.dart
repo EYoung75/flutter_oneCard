@@ -150,7 +150,7 @@ class _TabScreenState extends State<TabScreen> {
           : ScanScreen(),
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: BottomNavigationBar(
-        elevation: 10,
+        elevation: 7,
         backgroundColor: Theme.of(context).primaryColor,
         selectedIconTheme: IconThemeData(size: 30),
         unselectedIconTheme: IconThemeData(size: 22),

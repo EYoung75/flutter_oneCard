@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "../providers/user.dart";
-import "../widgets/cardTemplate.dart";
 import "../widgets/background.dart";
 
 class CardDetails extends StatelessWidget {
@@ -52,21 +51,11 @@ class CardDetails extends StatelessWidget {
             Text(selectedUser.name),
             Text(selectedUser.title),
             Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                RaisedButton.icon(
-                  color: Colors.redAccent,
-                  label: Text("Delete"),
-                  onPressed: () {},
-                  icon: Icon(Icons.delete),
-                ),
-                RaisedButton.icon(
-                  icon: Icon(Icons.share),
-                  onPressed: () {},
-                  label: Text("Share"),
-                )
-              ],
+            RaisedButton.icon(
+              icon: Icon(Icons.delete),
+              onPressed: () {},
+              color: Colors.red,
+              label: Text("Delete"),
             ),
             SizedBox(height: 100)
           ],
