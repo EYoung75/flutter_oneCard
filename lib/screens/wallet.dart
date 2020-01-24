@@ -14,16 +14,21 @@ class _WalletState extends State<Wallet> {
   bool _loading = true;
   TextEditingController searchController = TextEditingController();
   @override
-  void initState() {
-    super.initState();
-    Provider.of<WalletProvider>(context, listen: false).fetchWallet().then((_) {
+  void didChangeDependencies() {
+     Provider.of<WalletProvider>(context, listen: false).fetchWallet().then((_) {
       setState(() {
         _loading = false;
         currentWallet =
             Provider.of<WalletProvider>(context, listen: false).wallet;
       });
     });
+    super.didChangeDependencies();
   }
+  // @override
+  // void initState() {
+  //   super.initState();
+   
+  // }
 
   @override
   void dispose() {

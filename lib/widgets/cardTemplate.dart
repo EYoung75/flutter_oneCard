@@ -1,21 +1,12 @@
 import "package:flutter/material.dart";
+import "../providers/user.dart";
 
 class CardTemplate extends StatelessWidget {
-  String name;
-  String title;
-  dynamic image;
-  String userId;
-
-  CardTemplate(
-    this.name,
-    this.title,
-    this.image,
-    this.userId,
-  );
+  final VirtualCard selectedCard;
+  CardTemplate(this.selectedCard);
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 100),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -28,6 +19,8 @@ class CardTemplate extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white70,
       ),
+      height: 450,
+      width: 350,
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: <Widget>[
@@ -38,7 +31,16 @@ class CardTemplate extends StatelessWidget {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
-                child: Text("")
+                child: selectedCard.image
+                // child: Image.network(
+                //   selectedCard.image,
+                //   fit: BoxFit.cover,
+                // )
+
+                // child: Image.network(
+                //   "https://lh3.googleusercontent.com/YxnIsRXL_n-wP8DOB3_-3JiolhkGCzAGFQIJIRtzbWwZQNrdn-IsPoDveYYX23oWoKz3b5BPsXRBB22SN1RLKW5mxHUThBl0Ydtm5RHl9L-PZJilAIf4YaZzYcXaJt6mgrEeWvLahA=w2400",
+                //   fit: BoxFit.cover,
+                // ),
                 ),
           ),
           Container(
@@ -48,7 +50,7 @@ class CardTemplate extends StatelessWidget {
                 bottomRight: Radius.circular(12),
                 bottomLeft: Radius.circular(12),
               ),
-              color: Color.fromRGBO(255, 255, 255, .7),
+              color: Color.fromRGBO(255, 255, 255, .9),
             ),
             width: double.infinity,
             // margin: EdgeInsets.all(25),
@@ -56,11 +58,11 @@ class CardTemplate extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  name,
+                  selectedCard.name,
                   style: Theme.of(context).textTheme.subtitle,
                 ),
                 Text(
-                  title,
+                  selectedCard.title,
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ],

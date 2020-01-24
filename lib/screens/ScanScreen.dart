@@ -77,6 +77,8 @@ class ScanScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               RaisedButton.icon(
+                color: Colors.green[500],
+                textColor: Colors.white,
                 icon: Icon(Icons.add),
                 onPressed: () {
                   wallet.addUser();
@@ -95,8 +97,20 @@ class ScanScreen extends StatelessWidget {
                 label: Text("Add"),
               ),
               RaisedButton.icon(
+                color: Colors.grey,
                 icon: Icon(Icons.delete),
                 onPressed: () {
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(
+                        "User not added to your wallet",
+                        style: Theme.of(context).textTheme.body1,
+                      ),
+                      elevation: 5,
+                      duration: Duration(seconds: 1),
+                    ),
+                  );
                   wallet.cancel();
                 },
                 label: Text("Delete"),

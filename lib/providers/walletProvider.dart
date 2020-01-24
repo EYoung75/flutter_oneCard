@@ -20,6 +20,7 @@ class WalletProvider extends ChangeNotifier {
   List filteredUsers;
 
   Future scanQR() async {
+    loading = true;
     try {
       String qrResult = await BarcodeScanner.scan();
       _result = qrResult;
@@ -36,6 +37,7 @@ class WalletProvider extends ChangeNotifier {
     } catch (ex) {
       _result = "Unknown error code: $ex";
     }
+    loading = false;
     notifyListeners();
     print(_result.toString());
   }
@@ -64,6 +66,7 @@ class WalletProvider extends ChangeNotifier {
   }
 
   Future<void> fetchUser() async {
+    loading = true;
     final url =
         "https://onecard-a0072.firebaseio.com/users/$_result/card.json?auth=$authToken";
     final res = await http.get(url);
@@ -122,41 +125,12 @@ class WalletProvider extends ChangeNotifier {
     String url =
         "https://onecard-a0072.firebaseio.com/users.json?&auth=$authToken";
     final res = await http.get(url);
-    final resData = json.decode(res.body);
-    List allUsers = [];
-    if (resData != null) {
-      resData.forEach((key, value) => {
-            allUsers.add(
-              resData[key]
-            )
-            // if(resData[key]["card"]["name"].contains(searchTerm)) {
-            //   filteredUsers.
-            // }
-          });
-      // if (resData[key]["name"] == searchTerm) {
-      //   VirtualCard userCard = VirtualCard(
-      //     resData[key]["userId"],
-      //     resData[key]["name"],
-      //     Image.network(
-      //       resData[key]["image"],
-      //       fit: BoxFit.cover,
-      //     ),
-      //     resData[key]["title"],
-      //   );
-      //   filteredUsers.add(userCard);
-      // }
-    }
-    filteredUsers = allUsers.where((i) => i.name.contains(searchTerm)).toList();
-    notifyListeners();
-    print("SEARCH: $allUsers");
+
   }
 
   Future<void> deleteUser(String id) async {
-    final url = "";
-    final res = await http.delete(url);
-    // wallet.removeWhere();
-    _result = "";
-    showScan = false;
+    final url = 'https://onecard-a0072.firebaseio.com/users/$userId/wallet/$id.json?auth=$authToken';
+    await http.delete(url);
     notifyListeners();
   }
 }
