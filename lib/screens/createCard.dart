@@ -19,7 +19,12 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
 
   Future<void> _selectImage() async {
     final imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    File cropped = await ImageCropper.cropImage(sourcePath: imageFile.path, iosUiSettings: IOSUiSettings(hidesNavigationBar: false, ));
+    File cropped = await ImageCropper.cropImage(
+        sourcePath: imageFile.path,
+        iosUiSettings: IOSUiSettings(
+          hidesNavigationBar: false,
+        ),
+        aspectRatio: CropAspectRatio(ratioX: 12, ratioY: 16));
     setState(() {
       _pickedImage = cropped;
     });
@@ -91,8 +96,7 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                                     : Image.network(
                                         "https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png",
                                         fit: BoxFit.cover,
-                                      )
-                                ),
+                                      )),
                           ),
                           Container(
                             height: 85,

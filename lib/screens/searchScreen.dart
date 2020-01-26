@@ -5,7 +5,7 @@ import "../widgets/background.dart";
 import "../providers/walletProvider.dart";
 import "package:provider/provider.dart";
 
-class SearchScreen extends StatefulWidget { 
+class SearchScreen extends StatefulWidget {
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
@@ -57,17 +57,18 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
                 Container(
-                    height: 350,
-                    width: double.infinity,
-                    child: filteredUsers != null
-                        ? ListView.builder(
-                            itemCount: filteredUsers.length,
-                            itemBuilder: (ctx, i) => ListTile(
-                                  title: Text(
-                                    filteredUsers[i].name,
-                                  ),
-                                ))
-                        : Container())
+                  height: 350,
+                  width: double.infinity,
+                  child: filteredUsers != null
+                      ? ListView.builder(
+                          itemCount: filteredUsers.length,
+                          itemBuilder: (ctx, i) => ListTile(
+                                title: Text(
+                                  filteredUsers[i].name,
+                                ),
+                              ))
+                      : Container(),
+                )
               ],
             ),
     );
