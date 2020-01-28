@@ -11,4 +11,4 @@ I am currently working on a way to further the user search functionality and pla
 
 
 ![](onecardfirst.gif)
-![](onecardtwo.gif)
+![](onecardtwo.gif) 
