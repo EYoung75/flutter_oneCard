@@ -75,14 +75,14 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDq3eUVrAasnKOnS2hIpfxDNRC3evYJSYk";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=APIKEY";
 
     return _authenicate(email, password, url);
   }
 
   Future<void> signUp(String email, String password) async {
     final url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDq3eUVrAasnKOnS2hIpfxDNRC3evYJSYk";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=APIKEY";
 
     await _authenicate(email, password, url);
 

@@ -16,10 +16,9 @@ class User with ChangeNotifier {
   VirtualCard userCard;
   bool triedFetch = false;
   File pickedImage;
-  String apiKey;
   bool loading = false;
 
-  User(this.email, this.userId, this.authToken, this.apiKey);
+  User(this.email, this.userId, this.authToken);
 
   Future<void> fetchUserProfile() async {
     // if(loading == false) {
@@ -65,7 +64,7 @@ class User with ChangeNotifier {
     await imageReference.delete().then((_) {
       http.delete(dbUrl).then((_) {
         final authUrl =
-            "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=$apiKey";
+            "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=APIKEY";
 
         http.delete(authUrl);
       });
