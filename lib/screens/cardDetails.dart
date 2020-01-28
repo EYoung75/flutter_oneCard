@@ -63,18 +63,18 @@ class CardDetails extends StatelessWidget {
                     size: 30,
                   ),
                   title: Text(
-                    "evanjosephyoung.com",
+                    "jimbucktoo.com",
                     style: TextStyle(fontSize: 22),
                   ),
                 ),
                 ListTile(
                   leading: Icon(
-                    AntDesign.facebook_square,
+                    Icons.alternate_email,
                     color: Colors.white,
                     size: 30,
                   ),
                   title: Text(
-                    "evan-young3064",
+                    "j.liang3@gmail.com",
                     style: TextStyle(fontSize: 22),
                   ),
                 ),
@@ -85,7 +85,7 @@ class CardDetails extends StatelessWidget {
                     size: 30,
                   ),
                   title: Text(
-                    "/evan-young4",
+                    "jimmy-liang",
                     style: TextStyle(fontSize: 22),
                   ),
                 ),
@@ -96,7 +96,7 @@ class CardDetails extends StatelessWidget {
                     size: 30,
                   ),
                   title: Text(
-                    "EYoung75",
+                    "jimbucktoo",
                     style: TextStyle(fontSize: 22),
                   ),
                 ),
@@ -121,8 +121,8 @@ class CardDetails extends StatelessWidget {
                         color: Colors.black,
                       ),
                       Text(
-                        "lorem impsum this is filler text. Oh god this is just text that im typing without thinking. I hope no one reads this, that would be awkward, but hey questo e italiano. parla l'italiano? Nessuno io capiscanno. Vorrei un persone che posso parlare en tutto ma, non e possible.",
-                        style: TextStyle(
+                        "Full Stack Software Developer capable of developing elegant applications in multiple front-end frameworks and both relational and non-relational databases.",
+                      style: TextStyle(
                           color: Colors.black,
                         ),
                         textAlign: TextAlign.center,

@@ -135,7 +135,7 @@ class _WalletState extends State<Wallet> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: Color.fromRGBO(255, 255, 255, .9),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 width: 250,
@@ -152,7 +152,7 @@ class _WalletState extends State<Wallet> {
                                       subtitle: Text(
                                         "      ${currentWallet[i].title}",
                                         style: TextStyle(
-                                          color: Colors.grey,
+                                          color: Colors.black,
                                           fontSize: 22,
                                         ),
                                       ),
