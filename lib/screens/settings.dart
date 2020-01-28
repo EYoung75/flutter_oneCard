@@ -196,25 +196,25 @@ class _SettingsState extends State<Settings> {
             //         Row(
             //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             //           children: <Widget>[
-            //             RaisedButton(
-            //               elevation: 6,
-            //               child: Text("Save"),
-            //               onPressed: () async {
-            //                 await user.editProfile(
-            //                     _name, _title, _pickedImage, _updateImage);
-            //                 Scaffold.of(context).showSnackBar(
-            //                   SnackBar(
-            //                     backgroundColor: Colors.green,
-            //                     content: Text(
-            //                       "Your card has been updated!",
-            //                       style: Theme.of(context).textTheme.body1,
-            //                     ),
-            //                     elevation: 5,
-            //                     duration: Duration(seconds: 2),
-            //                   ),
-            //                 );
-            //               },
-            //             ),
+            // RaisedButton(
+            //   elevation: 6,
+            //   child: Text("Save"),
+            //   onPressed: () async {
+            //     await user.editProfile(
+            //         _name, _title, _pickedImage, _updateImage);
+            //     Scaffold.of(context).showSnackBar(
+            //       SnackBar(
+            //         backgroundColor: Colors.green,
+            //         content: Text(
+            //           "Your card has been updated!",
+            //           style: Theme.of(context).textTheme.body1,
+            //         ),
+            //         elevation: 5,
+            //         duration: Duration(seconds: 2),
+            //       ),
+            //     );
+            //   },
+            // ),
             //             RaisedButton(
             //               elevation: 6,
             //               color: Theme.of(context).accentColor,
@@ -274,7 +274,7 @@ class _SettingsState extends State<Settings> {
                               ],
                             ),
                             Container(
-                              width: 200,
+                              width: 150,
                               height: 150,
                               child: Column(
                                 children: <Widget>[
@@ -403,9 +403,30 @@ class _SettingsState extends State<Settings> {
                               //   ),
                               //   textAlign: TextAlign.center,
                               // ),
-                              FlatButton.icon(icon: Icon(Icons.edit), label: Text("Add bio"), onPressed: () {},)
+                              FlatButton.icon(
+                                icon: Icon(Icons.edit),
+                                label: Text("Add bio"),
+                                onPressed: () {},
+                              )
                             ],
                           ),
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                        FlatButton.icon(
+                          icon: Icon(
+                            Icons.save,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            "Save",
+                            style: Theme.of(context).textTheme.body1,
+                          ),
+                          onPressed: () async {
+                            await user.editProfile(
+                                _name, _title, _pickedImage, _updateImage);
+                          },
                         ),
                       ],
                     ),

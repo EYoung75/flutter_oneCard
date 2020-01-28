@@ -1,17 +1,14 @@
-# one_card_revisited
+# OneCard Revisited
+This is an iteration of my capstone project for Galvanize Immersive Coding Program. The initial capstone challenge was to build out an application using a technology entirely new to me in a week's time. The repository for the original oneCard can be found amongst my other repositories, and I decided to keep the orginal mostly untouched after the capstone showcase as a bookmark for first experience learning a new technology in such a short period of time. 
 
-A new Flutter project.
+This app was conceived to serve as a virtual business card sharing application. Users can create a personal card with all relevant information pertaining to their business and social profiles to be kept in one place and shared via the scanning of a QR code or searching for users by name. Virtual cards are collected and stored in a user's wallet for viewing. 
 
-## Getting Started
+## Technologies Used:
+This app was created using Flutter and utilizes multiple services provided through Firebase, i.e. Firebase Auth API and Realtime Database.
 
-This project is a starting point for a Flutter application.
+## Ongoing Work
+I am currently working on a way to further the user search functionality and plan on implementing a network tab that will utilize Google's Maps and Places APIs to allow users to check into a location and the ability to see the other users currently checked into that same location. 
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# flutter_oneCard
+![](onecardfirst.gif)
+![](onecardsecond.gif)

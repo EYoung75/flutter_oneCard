@@ -20,11 +20,14 @@ class CardDetails extends StatelessWidget {
       ),
       body: Background(
         Container(
-          padding: EdgeInsets.only(top: 25, left: 25, right: 25),
+          padding: EdgeInsets.symmetric(horizontal: 25),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
+                SizedBox(
+                  height: 25,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -42,11 +45,11 @@ class CardDetails extends StatelessWidget {
                           Text(
                             selectedUser.name,
                             textAlign: TextAlign.left,
-                            style: Theme.of(context).textTheme.title,
+                            style: Theme.of(context).textTheme.body1,
                           ),
                           Text(
                             selectedUser.title,
-                            style: TextStyle(fontSize: 28),
+                            style: TextStyle(fontSize: 24),
                           ),
                         ],
                       ),
@@ -102,7 +105,7 @@ class CardDetails extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                  margin: EdgeInsets.only(top: 30),
+                  margin: EdgeInsets.only(top: 30, bottom: 30),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
@@ -122,7 +125,7 @@ class CardDetails extends StatelessWidget {
                       ),
                       Text(
                         "Full Stack Software Developer capable of developing elegant applications in multiple front-end frameworks and both relational and non-relational databases.",
-                      style: TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
                         ),
                         textAlign: TextAlign.center,
